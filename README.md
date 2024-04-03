@@ -25,7 +25,7 @@ Frontend site is refreshing realtime, you don't need to restart it after changes
 ## Branches naming and rules
 
 main is default branch on the project, but it has protection that don't allow force pushes or directly plain pushes into it.
-You need to create an another branch, then made a pull request to merge your changes into it.
+You need to create an another branch, then made a pull request into dev, then from dev to main to merge your changes into it.
 Branch name should have one from the following prefixes:
 
 ```
