@@ -1,0 +1,35 @@
+:root {
+  --clr-white: #fff;
+  --clr-neutral-50: #fafafa;
+  --clr-neutral-100: #f4f4f5;
+  --clr-neutral-200: #e4e4e7;
+  --clr-neutral-300: #d4d4d8;
+  --clr-neutral-400: #a3a3a3;
+  --clr-neutral-500: #737373;
+  --clr-neutral-550: #575757;
+  --clr-neutral-600: #525252;
+  --clr-neutral-700: #404040;
+  --clr-neutral-750: #303030;
+  --clr-neutral-800: #262626;
+  --clr-neutral-900: #171717;
+  --clr-neutral-950: #0a0a0a;
+  --clr-black: #000;
+  --clr-red-300: #fca5a5;
+  --clr-red-400: #f87171;
+  --clr-red-450: #fa5d58;
+  --clr-red-500: #ef4444;
+  --clr-red-550: #c24844;
+  --clr-red-600: #dc2626;
+}
+
+.fs-7 {
+  font-size: 0.8rem;
+}
+
+.opacity-100-hover {
+  transition: all 0.1s ease-in-out;
+}
+
+.opacity-100-hover:hover {
+  opacity: 1 !important;
+}
