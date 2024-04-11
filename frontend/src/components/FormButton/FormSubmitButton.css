@@ -1,0 +1,47 @@
+.wp-button-primary {
+  --bgColor: var(--clr-red-450);
+  --bgColorHover: var(--clr-red-400);
+  --borderBottomLine: var(--clr-red-550);
+  --borderBottomLineHover: #b85454;
+  --innerBoxShadow: rgba(196, 71, 67, 0.25);
+  --outlineBoxShadow: rgba(222, 80, 75, 0.2);
+  --buttonTextShadow: rgba(0, 0, 0, 0.3);
+}
+
+.wp-button-component {
+  --borderHeight: 0.4rem;
+  --buttonBoxShadow: 0 0 0.8rem transparent, 0 0 1.6rem transparent,
+    inset 0 -0.8rem 2.4rem transparent,
+    inset 0 calc(var(--borderHeight, 0.1rem) * -1) 0 0 var(--borderBottomLine);
+  --buttonBoxShadowHover: 0 0 0.8rem var(--outlineBoxShadow),
+    0 0 1.6rem var(--outlineBoxShadow),
+    inset 0 -0.8rem 2.4rem var(--innerBoxShadow),
+    inset 0 calc(var(--borderHeight, 0.1rem) * -1) 0 0
+      var(--borderBottomLineHover);
+  background-color: var(--bgColor);
+  border: 0;
+  box-shadow: var(--buttonBoxShadow);
+  text-shadow: 0 2px var(--buttonTextShadow);
+  touch-action: manipulation;
+  transition-duration: 0.2s;
+  transition-property: box-shadow, background-color, color;
+  transition-timing-function: ease-out;
+  word-break: break-word;
+}
+
+.wp-button-component:hover {
+  background-color: var(--bgColorHover);
+  box-shadow: var(--buttonBoxShadowHover);
+}
+
+.wp-button-component:active {
+  background-color: var(--bgColorHover) !important;
+  box-shadow: var(--buttonBoxShadowHover) !important;
+  opacity: 0.9 !important;
+}
+
+.wp-button-component:focus-visible {
+  background-color: var(--bgColorHover) !important;
+  box-shadow: var(--buttonBoxShadowHover) !important;
+  opacity: 0.9 !important;
+}
