@@ -1,6 +1,6 @@
 import React from "react";
 import { Button } from "react-bootstrap";
-import "./Screen_after_login_Styles.css";
+import "./ScreenAfterLoginStyles.css";
 import {Container, Row, Col } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import handshakeSvg from "../assets/handshake.svg";
