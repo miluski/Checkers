@@ -14,7 +14,7 @@ import archiveSvg from "../assets/archive.svg";
 import redPng from "../assets/read-king-pawn.png";
 import bluePng from "../assets/blue-king-pawn.png";
 
-function Screen_after_login() {
+function ScreenAfterLogin() {
   return (
     <div className="background">
       <div className="header">
@@ -233,4 +233,4 @@ function Screen_after_login() {
   );
 }
 
-export default Screen_after_login;
+export default ScreenAfterLogin;
