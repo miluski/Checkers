@@ -30,7 +30,7 @@ export default function RegisterView() {
   return (
     <main className="background-theme ">
       <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100">
-        <Logo />
+        <Logo size={"big"} className={"ms-4"} />
         <Formik
           validationSchema={schema}
           onSubmit={(values) => console.log(values)}
@@ -53,7 +53,7 @@ export default function RegisterView() {
             <Form
               noValidate
               onSubmit={handleSubmit}
-              className="form-container rounded-4 container p-4"
+              className="form-container rounded-4  p-4"
             >
               <FormInput
                 label="Nickname:"
@@ -96,7 +96,11 @@ export default function RegisterView() {
                 linkText="warunki użytkowania"
                 link="#"
               />
-              <CustomButton text="Zarejestruj się" type="submit" />
+              <CustomButton
+                text="Zarejestruj się"
+                type="submit"
+                className="w-100 py-3 mb-4 fs-4"
+              />
               <FormTextSecondary
                 text="Masz już konto? - "
                 linkText="Zaloguj się!"

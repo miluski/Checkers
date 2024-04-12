@@ -3,30 +3,26 @@ import "./CustomButton.css";
 export default function CustomButton({
   text,
   type,
-  href,
   variant = "primary",
+  className,
+  onClick,
 }: {
   text: string;
   type: "submit" | "button" | "reset";
-  href?: string;
   variant?: "primary" | "secondary";
+  className?: string;
+  onClick?: any;
 }) {
-  return href ? (
-    <a href={href} className="button-link">
-      <button
-        className={
-          " text-white w-100 py-3 fs-4 fw-bold mb-4 rounded-3 wp-button-component cc-button-xx-large wp-button-" +
-          variant
-        }
-        type={type}
-      >
-        {text}
-      </button>
-    </a>
-  ) : (
+  return (
     <button
-      className="text-white w-100 py-3 fs-4 fw-bold mb-4 rounded-3 wp-button-component wp-button-primary cc-button-xx-large"
+      className={
+        " text-white fw-bold rounded-3 wp-button-component wp-button-" +
+        variant +
+        " " +
+        className
+      }
       type={type}
+      onClick={onClick}
     >
       {text}
     </button>

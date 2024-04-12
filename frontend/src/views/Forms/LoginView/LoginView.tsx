@@ -7,11 +7,17 @@ import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSec
 import CustomButton from "../../../components/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
 import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
+import { useNavigate } from "react-router-dom";
 import * as formik from "formik";
 import * as yup from "yup";
 
 export default function LoginView() {
   const { Formik } = formik;
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    navigate("/screenAfterLogin");
+  };
 
   const schema = yup.object().shape({
     email: yup
@@ -23,11 +29,12 @@ export default function LoginView() {
 
   return (
     <main className="background-theme ">
-      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100">
-        <Logo />
+      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100 ">
+        <Logo size={"big"} className={"ms-4"} />
+
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleLogin}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -77,7 +84,11 @@ export default function LoginView() {
                 link="forgotPassword"
                 textAlign="text-left"
               />
-              <CustomButton text="Zaloguj się" type="submit" />
+              <CustomButton
+                text="Zaloguj się"
+                type="submit"
+                className="w-100 py-3 mb-4 fs-4"
+              />
               <FormTextSecondary
                 text="Jesteś nowy? - "
                 linkText="Zarejestruj się!"

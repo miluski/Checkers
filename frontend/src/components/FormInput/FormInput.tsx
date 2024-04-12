@@ -66,7 +66,9 @@ export default function FormInput({
         )}
       </div>
       {isInvalid && (
-        <p className="mt-1 mb-0 ms-1 error-message fs-7">{errorMessage}</p>
+        <p className="mt-1 mb-0 ms-1 error-message fs-7 fw-bold">
+          {errorMessage}
+        </p>
       )}
     </Form.Group>
   );

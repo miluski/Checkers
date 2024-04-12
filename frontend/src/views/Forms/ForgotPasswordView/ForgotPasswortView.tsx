@@ -8,9 +8,12 @@ import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList
 import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
 import * as formik from "formik";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 export default function ForgotPasswordView() {
   const { Formik } = formik;
+
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup
@@ -22,7 +25,7 @@ export default function ForgotPasswordView() {
   return (
     <main className="background-theme ">
       <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100">
-        <Logo />
+        <Logo size={"big"} className={"ms-4"} />
         <Formik
           validationSchema={schema}
           onSubmit={(values) => console.log(values)}
@@ -43,7 +46,7 @@ export default function ForgotPasswordView() {
             <Form
               noValidate
               onSubmit={handleSubmit}
-              className="form-container rounded-4 container p-4"
+              className="form-container rounded-4  p-4"
             >
               <FormInput
                 label="Email:"
@@ -57,7 +60,11 @@ export default function ForgotPasswordView() {
                 isValid={touched.email && !errors.email}
                 errorMessage={errors.email}
               />
-              <CustomButton text="Wyślij" type="submit" />
+              <CustomButton
+                text="Wyślij"
+                type="submit"
+                className="w-100 py-3 mb-4 fs-4"
+              />
               <div className="d-flex align-items-center justify-content-center mb-3 text-white">
                 <hr className="w-50 d-inline-block me-4 border-3 border-white rounded-3" />
                 lub
@@ -66,8 +73,9 @@ export default function ForgotPasswordView() {
               <CustomButton
                 text="Zaloguj się"
                 type="button"
-                href="login"
+                onClick={() => navigate("/login")}
                 variant="secondary"
+                className="w-100 py-3 mb-4 fs-4"
               />
               <SocialMediaList />
             </Form>
