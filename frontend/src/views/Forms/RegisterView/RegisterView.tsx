@@ -7,6 +7,7 @@ import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSec
 import CustomButton from "../../../components/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
 import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
+import { RegisterUser } from "./RegisterUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
 
@@ -33,7 +34,7 @@ export default function RegisterView() {
         <Logo size={"big"} className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) => RegisterUser(values)}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{

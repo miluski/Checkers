@@ -7,17 +7,15 @@ import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSec
 import CustomButton from "../../../components/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
 import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
-import { useNavigate } from "react-router-dom";
+import { LoginUser } from "./LoginUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
+import { useNavigate } from "react-router-dom";
 
 export default function LoginView() {
   const { Formik } = formik;
-  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    navigate("/screenAfterLogin");
-  };
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup
@@ -31,10 +29,9 @@ export default function LoginView() {
     <main className="background-theme ">
       <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100 ">
         <Logo size={"big"} className={"ms-4"} />
-
         <Formik
           validationSchema={schema}
-          onSubmit={handleLogin}
+          onSubmit={(values) => LoginUser(values, navigate)}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
