@@ -1,6 +1,10 @@
 import { User } from "../../../utils/User.ts";
 
-export async function LoginUser(user: User, navigate: Function): Promise<void> {
+export async function LoginUser(
+  user: User,
+  navigate: Function,
+  handleShow: Function,
+): Promise<void> {
   const handleLogin = () => {
     navigate("/screenAfterLogin");
   };
@@ -14,9 +18,7 @@ export async function LoginUser(user: User, navigate: Function): Promise<void> {
       },
       body: JSON.stringify(user),
     });
-    response.status === 200
-      ? handleLogin()
-      : alert("Wystąpił błąd przy logowaniu!");
+    response.status === 200 ? handleLogin() : handleShow();
   } catch (error) {
     console.error(error);
   }

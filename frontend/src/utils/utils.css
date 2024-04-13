@@ -173,6 +173,7 @@
   --color-transparent-black-30: rgba(0, 0, 0, 0.3);
   --color-transparent-black-65: rgba(0, 0, 0, 0.65);
   --color-transparent-black-77: rgba(0, 0, 0, 0.77);
+  --color-decision: #d97706;
 }
 
 .fs-7 {

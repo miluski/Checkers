@@ -11,9 +11,26 @@ import "./NavList.css";
 import CustomButton from "../../CustomButton/CustomButton.tsx";
 import NavListItem from "./NavListItem/NavListItem.tsx";
 import { useNavigate } from "react-router-dom";
+import AlertModal from "../../AlertModal/AlertModal.tsx";
+import { useState } from "react";
+import { Button } from "react-bootstrap";
 
 export default function NavList() {
   const navigate = useNavigate();
+
+  const [showLogout, setShowLogout] = useState(false);
+  const handleCloseLogout = () => setShowLogout(false);
+  const handleShowLogout = () => setShowLogout(true);
+
+  const [showHelp, setShowHelp] = useState(false);
+  const handleSendHelp = () => {
+    setShowHelp(false);
+    window.open("mailto:karolprzygodastudia@gmail.com", "_blank");
+  };
+  const handleCloseHelp = () => {
+    setShowHelp(false);
+  };
+  const handleShowHelp = () => setShowHelp(true);
 
   const handleLogout = () => {
     navigate("/login");
@@ -44,16 +61,41 @@ export default function NavList() {
             text={"Wyloguj się"}
             type={"button"}
             className="w-100 py-2 "
-            onClick={handleLogout}
+            onClick={handleShowLogout}
           />
         </li>
       </ul>
-      <a
-        className="d-flex align-items-center align-self-center text-decoration-none fw-bold text-secondary help-link"
-        href=""
+      <Button
+        variant="link"
+        className="d-flex align-items-center align-self-center text-decoration-none fw-bold text-secondary help-link "
+        onClick={handleShowHelp}
       >
         <i className="bi fs-2 bi-question-circle-fill me-3"></i> Pomoc
-      </a>
+      </Button>
+      <AlertModal
+        show={showLogout}
+        onProceed={handleLogout}
+        onDismiss={handleCloseLogout}
+        icon="bi-question-lg"
+        title="Wyloguj się"
+        text="Czy napewno chcesz się wylogować"
+        color="var(--color-decision)"
+        onProceedButtonVariant="secondary"
+        onDismissButtonVariant="primary"
+        onProceedButtonText="Wyloguj"
+        onDismissButtonText="Anuluj"
+      />
+      <AlertModal
+        show={showHelp}
+        onProceed={handleSendHelp}
+        icon="bi-info-lg"
+        title="Masz problem?"
+        color="var(--clr-sky-250)"
+        onProceedButtonVariant="secondary"
+        onProceedButtonText="Wyślij wiadomość"
+        backdrop={true}
+        onHide={handleCloseHelp}
+      />
     </div>
   );
 }

@@ -9,9 +9,14 @@ import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
 import * as formik from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import AlertModal from "../../../components/AlertModal/AlertModal.tsx";
 
 export default function ForgotPasswordView() {
   const { Formik } = formik;
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const navigate = useNavigate();
 
@@ -28,7 +33,7 @@ export default function ForgotPasswordView() {
         <Logo size={"big"} className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={handleShow}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -83,6 +88,16 @@ export default function ForgotPasswordView() {
         </Formik>
         <CopyRight />
       </div>
+      <AlertModal
+        show={show}
+        onProceed={handleClose}
+        icon="bi-check-lg"
+        title="Udało się"
+        text="Na twój adres mailowy przesłany został formularz przypomnienia hasła"
+        color="var(--color-green-300)"
+        onProceedButtonVariant="success"
+        onProceedButtonText="OK"
+      />
     </main>
   );
 }

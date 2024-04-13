@@ -14,6 +14,15 @@
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 
+.wp-button-success {
+  --bgColor: var(--color-green-300);
+  --bgColorHover: #a3d160;
+  --borderBottomLine: var(--color-green-500);
+  --borderBottomLineHover: var(--color-green-400);
+  --innerBoxShadow: rgba(69, 117, 60, 0.5);
+  --buttonTextShadow: rgba(0, 0, 0, 0.3);
+}
+
 .wp-button-component {
   --borderHeight: 0.4rem;
   background-color: var(--bgColor);

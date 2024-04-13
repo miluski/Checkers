@@ -66,7 +66,10 @@ export default function FormInput({
         )}
       </div>
       {isInvalid && (
-        <p className="mt-1 mb-0 ms-1 error-message fs-7 fw-bold">
+        <p
+          className="mt-1 mb-0 ms-1 error-message fs-7 fw-bold"
+          style={{ whiteSpace: "pre-wrap" }}
+        >
           {errorMessage}
         </p>
       )}

@@ -10,9 +10,15 @@ import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
 import { RegisterUser } from "./RegisterUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
+import AlertModal from "../../../components/AlertModal/AlertModal.tsx";
+import { useState } from "react";
 
 export default function RegisterView() {
   const { Formik } = formik;
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const schema = yup.object().shape({
     nickname: yup.string().required("Pole jest wymagane"),
@@ -25,7 +31,12 @@ export default function RegisterView() {
       .required("Pole jest wymagane")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Hasło musi zawierać co najmniej 8 znaków, Jeden Duża Litera, Jedna Mała Litera, Jedna Cyfra, Jeden Znak Specjalny",
+        "Hasło musi zawierać:\n" +
+          "- Co najmniej 8 znaków\n" +
+          "- Przynajmniej jedną dużą literę\n" +
+          "- Przynajmniej jedną małą literę\n" +
+          "- Przynajmniej jedną cyfrę\n" +
+          "- Przynajmniej jeden znak specjalny",
       ),
   });
   return (
@@ -34,7 +45,7 @@ export default function RegisterView() {
         <Logo size={"big"} className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => RegisterUser(values)}
+          onSubmit={(values) => RegisterUser(values, handleShow)}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -113,6 +124,15 @@ export default function RegisterView() {
         </Formik>
         <CopyRight />
       </div>
+      <AlertModal
+        show={show}
+        onProceed={handleClose}
+        icon="bi-x-lg"
+        title="Błąd"
+        text="Użytkownik o podanym adresie email już jest zarejestrowany"
+        color="var(--clr-red-450)"
+        onProceedButtonText={"OK"}
+      />
     </main>
   );
 }

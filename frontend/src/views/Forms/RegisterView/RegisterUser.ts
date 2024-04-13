@@ -1,6 +1,9 @@
 import { User } from "../../../utils/User";
 
-export async function RegisterUser(user: User): Promise<void> {
+export async function RegisterUser(
+  user: User,
+  handleShow: Function,
+): Promise<void> {
   try {
     const endpoint = "http://localhost:3000/api/user/auth/register";
     const response = await fetch(endpoint, {
@@ -10,9 +13,7 @@ export async function RegisterUser(user: User): Promise<void> {
       },
       body: JSON.stringify(user),
     });
-    response.status === 200
-      ? alert("Pomyślnie zarejestrowano!")
-      : alert("Wystąpił błąd przy rejestracji!");
+    response.status === 200 ? alert("Pomyślnie zarejestrowano!") : handleShow();
   } catch (error) {
     console.error(error);
   }

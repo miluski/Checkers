@@ -1,4 +1,5 @@
 import "./CustomButton.css";
+import React from "react";
 
 export default function CustomButton({
   text,
@@ -6,12 +7,14 @@ export default function CustomButton({
   variant = "primary",
   className,
   onClick,
+  style,
 }: {
   text: string;
   type: "submit" | "button" | "reset";
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "success";
   className?: string;
   onClick?: any;
+  style?: React.CSSProperties;
 }) {
   return (
     <button
@@ -21,6 +24,7 @@ export default function CustomButton({
         " " +
         className
       }
+      style={style}
       type={type}
       onClick={onClick}
     >
