@@ -11,7 +11,7 @@ export default function CustomButton({
 }: {
   text: string;
   type: "submit" | "button" | "reset";
-  variant?: "primary" | "secondary" | "success";
+  variant?: "primary" | "secondary" | "success" | "neutral";
   className?: string;
   onClick?: any;
   style?: React.CSSProperties;

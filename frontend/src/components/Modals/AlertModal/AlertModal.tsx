@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import CustomButton from "../CustomButton/CustomButton.tsx";
+import CustomButton from "../../CustomButton/CustomButton.tsx";
 
 export default function AlertModal({
   show,
@@ -23,8 +23,8 @@ export default function AlertModal({
   color: string;
   onProceed: any;
   onDismiss?: any;
-  onProceedButtonVariant?: "primary" | "secondary" | "success";
-  onDismissButtonVariant?: "primary" | "secondary" | "success";
+  onProceedButtonVariant?: "primary" | "secondary" | "success" | "neutral";
+  onDismissButtonVariant?: "primary" | "secondary" | "success" | "neutral";
   onProceedButtonText?: string;
   onDismissButtonText?: string;
   backdrop?: "static" | true;

@@ -2,7 +2,8 @@ import { User } from "../../../utils/User";
 
 export async function RegisterUser(
   user: User,
-  handleShow: Function,
+  handleShowError: Function,
+  handleShowSuccess: Function,
 ): Promise<void> {
   try {
     const endpoint = "http://localhost:3000/api/user/auth/register";
@@ -13,7 +14,7 @@ export async function RegisterUser(
       },
       body: JSON.stringify(user),
     });
-    response.status === 200 ? alert("Pomyślnie zarejestrowano!") : handleShow();
+    response.status === 200 ? handleShowSuccess() : handleShowError();
   } catch (error) {
     console.error(error);
   }

@@ -176,7 +176,7 @@
   --color-decision: #d97706;
 }
 
-.fs-7 {
+.fs-8 {
   font-size: 0.8rem;
 }
 
@@ -186,4 +186,28 @@
 
 .opacity-100-hover:hover {
   opacity: 1 !important;
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .fs-md-7 {
+    font-size: 0.95rem !important;
+  }
+}
+
+@media screen and (min-width: 375px) and (max-width: 767px) {
+  .fs-sm-8 {
+    font-size: 0.8rem !important;
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 375px) {
+  .fs-xsm-9 {
+    font-size: 0.7rem !important;
+  }
+}
+
+@media screen and (min-width: 0px) and (max-width: 320px) {
+  .fs-xxs-10 {
+    font-size: 0.6rem !important;
+  }
 }
