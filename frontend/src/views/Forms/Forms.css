@@ -17,6 +17,6 @@
 
 .form-container {
   background-color: var(--clr-neutral-550);
-  width: 26rem;
-  max-width: 100%;
+  width: 26rem !important;
+  max-width: 100% !important;
 }

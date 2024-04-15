@@ -1,32 +1,32 @@
 import "./CustomButton.css";
+import React from "react";
 
 export default function CustomButton({
   text,
   type,
-  href,
   variant = "primary",
+  className,
+  onClick,
+  style,
 }: {
   text: string;
   type: "submit" | "button" | "reset";
-  href?: string;
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "success" | "neutral";
+  className?: string;
+  onClick?: any;
+  style?: React.CSSProperties;
 }) {
-  return href ? (
-    <a href={href} className="button-link">
-      <button
-        className={
-          " text-white w-100 py-3 fs-4 fw-bold mb-4 rounded-3 wp-button-component cc-button-xx-large wp-button-" +
-          variant
-        }
-        type={type}
-      >
-        {text}
-      </button>
-    </a>
-  ) : (
+  return (
     <button
-      className="text-white w-100 py-3 fs-4 fw-bold mb-4 rounded-3 wp-button-component wp-button-primary cc-button-xx-large"
+      className={
+        " text-white fw-bold rounded-3 wp-button-component wp-button-" +
+        variant +
+        " " +
+        className
+      }
+      style={style}
       type={type}
+      onClick={onClick}
     >
       {text}
     </button>

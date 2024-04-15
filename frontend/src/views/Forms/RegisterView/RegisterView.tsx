@@ -7,11 +7,32 @@ import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSec
 import CustomButton from "../../../components/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
 import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
+import { RegisterUser } from "./RegisterUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
+import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterView() {
   const { Formik } = formik;
+
+  const navigate = useNavigate();
+
+  const [showError, setShowError] = useState(false);
+  const handleCloseError = () => setShowError(false);
+  const handleShowError = () => {
+    setShowError(true);
+  };
+
+  const [showSuccess, setShowSuccess] = useState(false);
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+    navigate("/screenAfterLogin");
+  };
+  const handleShowSuccess = () => {
+    setShowSuccess(true);
+  };
 
   const schema = yup.object().shape({
     nickname: yup.string().required("Pole jest wymagane"),
@@ -24,16 +45,23 @@ export default function RegisterView() {
       .required("Pole jest wymagane")
       .matches(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-        "Hasło musi zawierać co najmniej 8 znaków, Jeden Duża Litera, Jedna Mała Litera, Jedna Cyfra, Jeden Znak Specjalny",
+        "Hasło musi zawierać:\n" +
+          "- Co najmniej 8 znaków\n" +
+          "- Przynajmniej jedną dużą literę\n" +
+          "- Przynajmniej jedną małą literę\n" +
+          "- Przynajmniej jedną cyfrę\n" +
+          "- Przynajmniej jeden znak specjalny",
       ),
   });
   return (
     <main className="background-theme ">
       <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100">
-        <Logo />
+        <Logo size={"big"} className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => console.log(values)}
+          onSubmit={(values) =>
+            RegisterUser(values, handleShowError, handleShowSuccess)
+          }
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -53,7 +81,7 @@ export default function RegisterView() {
             <Form
               noValidate
               onSubmit={handleSubmit}
-              className="form-container rounded-4 container p-4"
+              className="form-container rounded-4  p-4"
             >
               <FormInput
                 label="Nickname:"
@@ -96,7 +124,11 @@ export default function RegisterView() {
                 linkText="warunki użytkowania"
                 link="#"
               />
-              <CustomButton text="Zarejestruj się" type="submit" />
+              <CustomButton
+                text="Zarejestruj się"
+                type="submit"
+                className="w-100 py-3 mb-4 fs-4"
+              />
               <FormTextSecondary
                 text="Masz już konto? - "
                 linkText="Zaloguj się!"
@@ -108,6 +140,25 @@ export default function RegisterView() {
         </Formik>
         <CopyRight />
       </div>
+      <AlertModal
+        show={showError}
+        onProceed={handleCloseError}
+        icon="bi-x-lg"
+        title="Błąd"
+        text="Użytkownik o podanym adresie email już jest zarejestrowany"
+        color="var(--clr-red-450)"
+        onProceedButtonText={"OK"}
+      />
+      <AlertModal
+        show={showSuccess}
+        onProceed={handleCloseSuccess}
+        icon="bi-check-lg"
+        title="Udało się!"
+        text="Twoje konto zostało zarejestrowane"
+        color="var(--color-green-300)"
+        onProceedButtonVariant="success"
+        onProceedButtonText={"OK"}
+      />
     </main>
   );
 }

@@ -14,6 +14,22 @@
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 
+.wp-button-success {
+  --bgColor: var(--color-green-300);
+  --bgColorHover: #a3d160;
+  --borderBottomLine: var(--color-green-500);
+  --borderBottomLineHover: var(--color-green-400);
+  --buttonTextShadow: rgba(0, 0, 0, 0.3);
+}
+
+.wp-button-neutral {
+  --bgColor: var(--clr-neutral-500);
+  --bgColorHover: var(--clr-neutral-400);
+  --borderBottomLine: var(--clr-neutral-550);
+  --borderBottomLineHover: var(--clr-neutral-500);
+  --buttonTextShadow: rgba(0, 0, 0, 0.3);
+}
+
 .wp-button-component {
   --borderHeight: 0.4rem;
   background-color: var(--bgColor);
