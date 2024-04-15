@@ -10,15 +10,29 @@ import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
 import { RegisterUser } from "./RegisterUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
-import AlertModal from "../../../components/AlertModal/AlertModal.tsx";
+import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function RegisterView() {
   const { Formik } = formik;
 
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const navigate = useNavigate();
+
+  const [showError, setShowError] = useState(false);
+  const handleCloseError = () => setShowError(false);
+  const handleShowError = () => {
+    setShowError(true);
+  };
+
+  const [showSuccess, setShowSuccess] = useState(false);
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+    navigate("/screenAfterLogin");
+  };
+  const handleShowSuccess = () => {
+    setShowSuccess(true);
+  };
 
   const schema = yup.object().shape({
     nickname: yup.string().required("Pole jest wymagane"),
@@ -45,7 +59,9 @@ export default function RegisterView() {
         <Logo size={"big"} className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => RegisterUser(values, handleShow)}
+          onSubmit={(values) =>
+            RegisterUser(values, handleShowError, handleShowSuccess)
+          }
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -125,12 +141,22 @@ export default function RegisterView() {
         <CopyRight />
       </div>
       <AlertModal
-        show={show}
-        onProceed={handleClose}
+        show={showError}
+        onProceed={handleCloseError}
         icon="bi-x-lg"
         title="Błąd"
         text="Użytkownik o podanym adresie email już jest zarejestrowany"
         color="var(--clr-red-450)"
+        onProceedButtonText={"OK"}
+      />
+      <AlertModal
+        show={showSuccess}
+        onProceed={handleCloseSuccess}
+        icon="bi-check-lg"
+        title="Udało się!"
+        text="Twoje konto zostało zarejestrowane"
+        color="var(--color-green-300)"
+        onProceedButtonVariant="success"
         onProceedButtonText={"OK"}
       />
     </main>

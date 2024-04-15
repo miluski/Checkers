@@ -19,7 +19,14 @@
   --bgColorHover: #a3d160;
   --borderBottomLine: var(--color-green-500);
   --borderBottomLineHover: var(--color-green-400);
-  --innerBoxShadow: rgba(69, 117, 60, 0.5);
+  --buttonTextShadow: rgba(0, 0, 0, 0.3);
+}
+
+.wp-button-neutral {
+  --bgColor: var(--clr-neutral-500);
+  --bgColorHover: var(--clr-neutral-400);
+  --borderBottomLine: var(--clr-neutral-550);
+  --borderBottomLineHover: var(--clr-neutral-500);
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 

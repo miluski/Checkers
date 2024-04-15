@@ -12,7 +12,7 @@ import * as formik from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import AlertModal from "../../../components/AlertModal/AlertModal.tsx";
+import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
 
 export default function LoginView() {
   const { Formik } = formik;

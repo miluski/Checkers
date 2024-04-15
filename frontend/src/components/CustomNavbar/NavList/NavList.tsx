@@ -11,9 +11,10 @@ import "./NavList.css";
 import CustomButton from "../../CustomButton/CustomButton.tsx";
 import NavListItem from "./NavListItem/NavListItem.tsx";
 import { useNavigate } from "react-router-dom";
-import AlertModal from "../../AlertModal/AlertModal.tsx";
+import AlertModal from "../../Modals/AlertModal/AlertModal.tsx";
 import { useState } from "react";
 import { Button } from "react-bootstrap";
+import SettingsModal from "../../Modals/SettingsModal/SettingsModal.tsx";
 
 export default function NavList() {
   const navigate = useNavigate();
@@ -21,6 +22,11 @@ export default function NavList() {
   const [showLogout, setShowLogout] = useState(false);
   const handleCloseLogout = () => setShowLogout(false);
   const handleShowLogout = () => setShowLogout(true);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const [showHelp, setShowHelp] = useState(false);
   const handleSendHelp = () => {
@@ -55,7 +61,7 @@ export default function NavList() {
         <NavListItem icon={archiveSvg} text={"Wczytaj grę"} link={"#"} />
         <NavListItem icon={accountSvg} text={"Twoje konto"} link={"#"} />
         <NavListItem icon={friendsSvg} text={"Znajomi"} link={"#"} />
-        <NavListItem icon={gearSvg} text={"Ustawienia"} link={"#"} />
+        <NavListItem icon={gearSvg} text={"Ustawienia"} onClick={handleShow} />
         <li className="mb-2 px-3 mt-3">
           <CustomButton
             text={"Wyloguj się"}
@@ -80,8 +86,8 @@ export default function NavList() {
         title="Wyloguj się"
         text="Czy napewno chcesz się wylogować"
         color="var(--color-decision)"
-        onProceedButtonVariant="secondary"
-        onDismissButtonVariant="primary"
+        onProceedButtonVariant="primary"
+        onDismissButtonVariant="neutral"
         onProceedButtonText="Wyloguj"
         onDismissButtonText="Anuluj"
       />
@@ -96,6 +102,7 @@ export default function NavList() {
         backdrop={true}
         onHide={handleCloseHelp}
       />
+      <SettingsModal show={show} handleClose={handleClose} />
     </div>
   );
 }
