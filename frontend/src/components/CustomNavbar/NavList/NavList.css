@@ -1,0 +1,7 @@
+.help-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.help-link:hover {
+  color: white !important;
+}
