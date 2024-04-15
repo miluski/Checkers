@@ -10,13 +10,13 @@ export default function Logo() {
             className="z-1"
             src={redKing}
             style={{ width: "60px" }}
-            alt="xd"
+            alt="red-king-pawn"
           />
           <img
             className="position-absolute start-50 z-n1"
             src={bluePawn}
             style={{ width: "60px" }}
-            alt="xd"
+            alt="blue-pawn"
           />
         </div>
         <h1 className="mb-0 d-inline fw-bolder text-white">Warcaby.pl</h1>
