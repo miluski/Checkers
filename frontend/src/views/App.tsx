@@ -1,24 +1,20 @@
-import { Route, Routes } from "react-router";
-import RegisterView from "./RegisterView/RegisterView";
-import ScreenAfterLogin from "./ScreenAfterLogin";
-import { legacy_createStore } from "redux";
-import { appReducer } from "../utils/appReducer";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
-import "./App.css"
+import "./App.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LoginView from "./Forms/LoginView/LoginView.tsx";
+import RegisterView from "./Forms/RegisterView/RegisterView.tsx";
+import ForgotPasswordView from "./Forms/ForgotPasswordView/ForgotPasswortView.tsx";
+import ScreenAfterLoginView from "./ScreenAfterLoginView/ScreenAfterLoginView.tsx";
 
-function App() {
-	const store = legacy_createStore(appReducer);
-	return (
-		<Provider store={store}>
-			<BrowserRouter>
-				<Routes>
-					<Route path='/' element={<RegisterView />} />
-					<Route path='/guide' element={<ScreenAfterLogin />} />
-				</Routes>
-			</BrowserRouter>
-		</Provider>
-	);
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<LoginView />} />
+        <Route path="/register" element={<RegisterView />} />
+        <Route path="/login" element={<LoginView />} />
+        <Route path="/forgotPassword" element={<ForgotPasswordView />} />
+        <Route path="/screenAfterLogin" element={<ScreenAfterLoginView />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App;
