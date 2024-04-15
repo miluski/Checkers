@@ -10,10 +10,10 @@ export default function App() {
     <BrowserRouter>
       <Routes>
         <Route index element={<LoginView />} />
-        <Route path="register" element={<RegisterView />} />
-        <Route path="login" element={<LoginView />} />
-        <Route path="forgotPassword" element={<ForgotPasswordView />} />
-        <Route path="screenAfterLogin" element={<ScreenAfterLoginView />} />
+        <Route path="/register" element={<RegisterView />} />
+        <Route path="/login" element={<LoginView />} />
+        <Route path="/forgotPassword" element={<ForgotPasswordView />} />
+        <Route path="/screenAfterLogin" element={<ScreenAfterLoginView />} />
       </Routes>
     </BrowserRouter>
   );
