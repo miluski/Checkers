@@ -8,7 +8,7 @@ import accountSvg from "../../../assets/account.svg";
 import friendsSvg from "../../../assets/friends.svg";
 import gearSvg from "../../../assets/gear-fill.svg";
 import "./NavList.css";
-import CustomButton from "../../CustomButton/CustomButton.tsx";
+import CustomButton from "../../Buttons/CustomButton/CustomButton.tsx";
 import NavListItem from "./NavListItem/NavListItem.tsx";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "../../Modals/AlertModal/AlertModal.tsx";
@@ -44,14 +44,18 @@ export default function NavList() {
 
   return (
     <div className="d-flex flex-column justify-content-between h-100">
-      <ul className="list-unstyled d-flex flex-column mt-xl-5 ">
+      <ul className="list-unstyled d-flex flex-column mt-xl-5 text-nowrap align-items-lg-center align-items-xl-start">
         <NavListItem
           icon={handshakeSvg}
           text={"Graj ze znajomymi"}
           link={"#"}
         />
         <NavListItem icon={quickPlaySvg} text={"Szybka gra"} link={"#"} />
-        <NavListItem icon={computerSvg} text={"Zagraj z botem"} link={"#"} />
+        <NavListItem
+          icon={computerSvg}
+          text={"Zagraj z botem"}
+          link={"./gameAgainstBotView"}
+        />
         <NavListItem
           icon={leaderboardSvg}
           text={"Tablica wyników"}
@@ -62,11 +66,19 @@ export default function NavList() {
         <NavListItem icon={accountSvg} text={"Twoje konto"} link={"#"} />
         <NavListItem icon={friendsSvg} text={"Znajomi"} link={"#"} />
         <NavListItem icon={gearSvg} text={"Ustawienia"} onClick={handleShow} />
-        <li className="mb-2 px-3 mt-3">
+        <li className="mb-2 px-3 mt-3 d-lg-none d-xl-block w-100">
           <CustomButton
             text={"Wyloguj się"}
             type={"button"}
             className="w-100 py-2 "
+            onClick={handleShowLogout}
+          />
+        </li>
+        <li className="mb-2 px-3 mt-3 d-none d-lg-block d-xl-none">
+          <CustomButton
+            text={<i className="bi bi-box-arrow-right fs-5"></i>}
+            type={"button"}
+            className="p-2 px-3 "
             onClick={handleShowLogout}
           />
         </li>
@@ -76,7 +88,8 @@ export default function NavList() {
         className="d-flex align-items-center align-self-center text-decoration-none fw-bold text-secondary help-link "
         onClick={handleShowHelp}
       >
-        <i className="bi fs-2 bi-question-circle-fill me-3"></i> Pomoc
+        <i className="bi fs-2 bi-question-circle-fill me-3"></i>
+        <span className="d-lg-none d-xl-block">Pomoc</span>
       </Button>
       <AlertModal
         show={showLogout}

@@ -4,4 +4,5 @@
 
 .list-item:hover {
   background-color: var(--clr-neutral-800);
+  cursor: pointer;
 }

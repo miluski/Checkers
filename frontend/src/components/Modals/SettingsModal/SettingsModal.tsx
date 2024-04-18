@@ -1,5 +1,5 @@
 import { Form, Modal } from "react-bootstrap";
-import CustomButton from "../../CustomButton/CustomButton.tsx";
+import CustomButton from "../../Buttons/CustomButton/CustomButton.tsx";
 import "./SettingsModal.css";
 import "../../../utils/utils.css";
 
