@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import CustomButton from "../../CustomButton/CustomButton.tsx";
+import CustomButton from "../../Buttons/CustomButton/CustomButton.tsx";
 
 export default function AlertModal({
   show,

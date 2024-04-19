@@ -14,7 +14,7 @@ function ScreenAfterLoginView() {
   return (
     <Container
       fluid
-      className="min-vh-100 d-flex flex-column flex-xl-row p-0"
+      className="min-vh-100 d-flex flex-column flex-lg-row p-0"
       style={{ backgroundColor: "var(--clr-neutral-750)" }}
     >
       <CustomNavbar />
@@ -28,50 +28,50 @@ function ScreenAfterLoginView() {
         />
         <CustomCard
           icon={quickPlaySvg}
-          title="Zagraj ze znajomym"
-          text="Zaproś znajomego do wspólnej gry"
+          title="Szybka gra"
+          text="Wyszukaj gracza o podobnym poziomie umiejętności"
           color="var(--color-gold-75)"
           link="#"
         />
         <CustomCard
           icon={computerSvg}
-          title="Zagraj ze znajomym"
-          text="Zaproś znajomego do wspólnej gry"
+          title="Zagraj z komputerem"
+          text="Przetestuj swoje umiejętności w potyczcne z AI"
           color="var(--color-slate-400)"
-          link="#"
+          link="./gameAgainstBotView"
         />
         <CustomCard
           icon={leaderboardSvg}
-          title="Zagraj ze znajomym"
-          text="Zaproś znajomego do wspólnej gry"
+          title="Ranking"
+          text="Sprawdź swoją pozycję w rankingu"
           color="var(--color-brown-500)"
           link="#"
         />
         <CustomCard
           icon={lessonsSvg}
-          title="Zagraj ze znajomym"
-          text="Zaproś znajomego do wspólnej gry"
+          title="Jak grać w warcaby?"
+          text="Zobacz zasady gry"
           color="var(--color-blue-100)"
           link="#"
         />
         <CustomCard
           icon={archiveSvg}
-          title="Zagraj ze znajomym"
-          text="Zaproś znajomego do wspólnej gry"
+          title="Wczytaj grę"
+          text="Wczytaj swoją poprzednią grę i przeanalizuj jej przebieg"
           color="var(--color-brown-700)"
           link="#"
         />
         <CustomCard
           icon={accountSvg}
-          title="Zagraj ze znajomym"
-          text="Zaproś znajomego do wspólnej gry"
+          title="Twoje konto"
+          text="Zarządzaj swoim kontem oraz danymi"
           color="var(--color-slate-500)"
           link="#"
         />
         <CustomCard
           icon={friendsSvg}
-          title="Zagraj ze znajomym"
-          text="Zaproś znajomego do wspólnej gry"
+          title="Znajomi"
+          text="Znajdź i dodawaj znajomych"
           color="var(--color-skin-300)"
           link="#"
         />

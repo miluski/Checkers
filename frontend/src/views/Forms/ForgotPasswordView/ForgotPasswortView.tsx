@@ -3,7 +3,7 @@ import "../Forms.css";
 import { Form } from "react-bootstrap";
 import Logo from "../../../components/Logo/Logo.tsx";
 import FormInput from "../../../components/FormInput/FormInput.tsx";
-import CustomButton from "../../../components/CustomButton/CustomButton.tsx";
+import CustomButton from "../../../components/Buttons/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
 import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
 import * as formik from "formik";

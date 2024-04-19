@@ -9,7 +9,7 @@ export default function CustomButton({
   onClick,
   style,
 }: {
-  text: string;
+  text: any;
   type: "submit" | "button" | "reset";
   variant?: "primary" | "secondary" | "success" | "neutral";
   className?: string;
