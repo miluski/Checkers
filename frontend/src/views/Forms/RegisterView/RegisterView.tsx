@@ -1,12 +1,10 @@
-import "../../../utils/utils.css";
-import "../Forms.css";
+import "../Forms.module.css";
 import { Form } from "react-bootstrap";
 import Logo from "../../../components/Logo/Logo.tsx";
-import FormInput from "../../../components/FormInput/FormInput.tsx";
+import CustomFormInput from "../../../components/CustomFormInput/CustomFormInput.tsx";
 import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSecondary.tsx";
 import CustomButton from "../../../components/Buttons/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
-import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
 import { RegisterUser } from "./RegisterUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
@@ -55,8 +53,8 @@ export default function RegisterView() {
   });
   return (
     <main className="background-theme ">
-      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100">
-        <Logo size={"big"} className={"ms-4"} />
+      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center justify-content-center base-container py-4">
+        <Logo className={"ms-4"} />
         <Formik
           validationSchema={schema}
           onSubmit={(values) =>
@@ -83,7 +81,7 @@ export default function RegisterView() {
               onSubmit={handleSubmit}
               className="form-container rounded-4  p-4"
             >
-              <FormInput
+              <CustomFormInput
                 label="Nickname:"
                 type="text"
                 placeholder="Twoja nazwa użytkownika"
@@ -91,11 +89,11 @@ export default function RegisterView() {
                 value={values.nickname}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.nickname && !!errors.nickname}
-                isValid={touched.nickname && !errors.nickname}
-                errorMessage={errors.nickname}
+                isInvalid={touched.nickname! && !!errors.nickname}
+                isValid={touched.nickname! && !errors.nickname}
+                errorMessage={errors.nickname!}
               />
-              <FormInput
+              <CustomFormInput
                 label="Email:"
                 type="email"
                 placeholder="Twój adres email"
@@ -103,11 +101,11 @@ export default function RegisterView() {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.email && !!errors.email}
-                isValid={touched.email && !errors.email}
-                errorMessage={errors.email}
+                isInvalid={touched.email! && !!errors.email}
+                isValid={touched.email! && !errors.email}
+                errorMessage={errors.email!}
               />
-              <FormInput
+              <CustomFormInput
                 label="Hasło:"
                 type="password"
                 placeholder="Twoje hasło"
@@ -115,9 +113,9 @@ export default function RegisterView() {
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.password && !!errors.password}
-                isValid={touched.password && !errors.password}
-                errorMessage={errors.password}
+                isInvalid={touched.password! && !!errors.password}
+                isValid={touched.password! && !errors.password}
+                errorMessage={errors.password!}
               />
               <FormTextSecondary
                 text="Rejestrująć się akceptujesz "
@@ -138,7 +136,6 @@ export default function RegisterView() {
             </Form>
           )}
         </Formik>
-        <CopyRight />
       </div>
       <AlertModal
         show={showError}

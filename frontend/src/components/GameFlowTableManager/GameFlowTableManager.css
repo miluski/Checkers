@@ -1,0 +1,33 @@
+.game-against-bot-aside {
+  background-color: var(--clr-neutral-700);
+}
+
+.game-against-bot-aside-table-container {
+  min-width: 300px;
+  max-width: 380px;
+  min-height: 27.5rem;
+  height: 38dvw;
+}
+
+.table-dark {
+  --bs-table-bg: var(--clr-neutral-750) !important;
+  --bs-table-striped-bg: var(--clr-neutral-700);
+}
+
+.table-column {
+  width: 21.331%;
+}
+
+.table-game-action-container {
+  background-color: var(--clr-neutral-800);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ccc !important;
+}
+
+@media screen and (min-width: 0) and (max-width: 991px) {
+  .game-against-bot-aside-table-container {
+    min-height: 75dvh;
+  }
+}

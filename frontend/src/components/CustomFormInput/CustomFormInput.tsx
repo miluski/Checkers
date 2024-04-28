@@ -1,9 +1,8 @@
 import { Form } from "react-bootstrap";
-import "./FormInput.css";
-import { useState } from "react";
-import "../../utils/utils.css";
+import "./CustomFormInput.css";
+import { ChangeEventHandler, FocusEventHandler, useState } from "react";
 
-export default function FormInput({
+export default function CustomFormInput({
   label,
   type,
   placeholder,
@@ -20,11 +19,11 @@ export default function FormInput({
   placeholder: string;
   name: string;
   value: string;
-  onChange: any;
-  onBlur: any;
-  isInvalid: boolean | undefined;
-  isValid: boolean | undefined;
-  errorMessage: any;
+  onChange: ChangeEventHandler;
+  onBlur: FocusEventHandler;
+  isInvalid: boolean;
+  isValid: boolean;
+  errorMessage: string;
 }) {
   const [showPassword, setShowPassword] = useState(false);
   const togglePasswordVisibility = () => {
@@ -66,10 +65,7 @@ export default function FormInput({
         )}
       </div>
       {isInvalid && (
-        <p
-          className="mt-1 mb-0 ms-1 error-message fs-8 fw-bold"
-          style={{ whiteSpace: "pre-wrap" }}
-        >
+        <p className="mt-1 mb-0 ms-1 error-message fs-8 fw-bold">
           {errorMessage}
         </p>
       )}

@@ -1,0 +1,73 @@
+import "./NavbarListItem.css";
+import { MouseEventHandler, useEffect, useState } from "react";
+import Tooltip from "react-bootstrap/Tooltip";
+import OverlayTrigger from "react-bootstrap/OverlayTrigger";
+export default function NavbarListItem({
+  icon,
+  text,
+  link,
+  onClick,
+}: {
+  icon: string;
+  text: string;
+  link?: string;
+  onClick?: MouseEventHandler;
+}) {
+  const [isLargeScreen, setIsLargeScreen] = useState<boolean>(
+    window.innerWidth >= 992 && window.innerWidth < 1200,
+  );
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsLargeScreen(window.innerWidth >= 992 && window.innerWidth < 1200);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  if (isLargeScreen) {
+    return (
+      <OverlayTrigger
+        placement="right"
+        delay={{ show: 100, hide: 200 }}
+        overlay={<Tooltip className="position-absolute">{text}</Tooltip>}
+      >
+        <li className=" list-item w-100  ">
+          <a className="text-decoration-none" href={link} tabIndex={-1}>
+            <button
+              onClick={onClick}
+              className="d-flex justify-content-lg-center justify-content-xl-start align-items-center py-3 px-3 text-white fw-bold border-0 bg-transparent w-100"
+            >
+              <img
+                className="me-3 me-lg-0 me-xl-3"
+                src={icon}
+                alt={icon.slice(13)}
+              />
+            </button>
+          </a>
+        </li>
+      </OverlayTrigger>
+    );
+  } else {
+    return (
+      <li className=" list-item w-100  ">
+        <a className=" text-decoration-none" href={link} tabIndex={-1}>
+          <button
+            onClick={onClick}
+            className="d-flex justify-content-lg-center justify-content-xl-start align-items-center py-3 px-3 text-decoration-none text-white fw-bold border-0 bg-transparent w-100"
+          >
+            <img
+              className="me-3 me-lg-0 me-xl-3"
+              src={icon}
+              alt={icon.slice(13)}
+            />
+            <span className="d-lg-none d-xl-block">{text}</span>
+          </button>
+        </a>
+      </li>
+    );
+  }
+}

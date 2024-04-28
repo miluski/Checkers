@@ -1,0 +1,4 @@
+.screen-after-login-container {
+  background-color: var(--clr-neutral-750);
+  min-height: 100dvh;
+}
