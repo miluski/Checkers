@@ -1,6 +1,5 @@
 .hexagon {
   aspect-ratio: 1/1;
-  width: 5rem;
   clip-path: polygon(
     98.66025% 45%,
     99.39693% 46.5798%,
@@ -58,10 +57,63 @@
 .hexagon-inner-content-container {
   scale: 80%;
   background-color: var(--color-grid);
+  container-type: inline-size;
+  container-name: hexagon-img-container;
 }
 
-@media screen and (min-width: 0px) and (max-width: 575px) {
+:root {
+  --hexagon-xs: calc(var(--board-xs) * 0.18);
+  --hexagon-s: calc(var(--board-s) * 0.18);
+  --hexagon-l: calc(var(--board-l) * 0.15);
+  --hexagon-xl: calc(var(--board-xl) * 0.125);
+  --hexagon-xxl: calc(var(--board-xl) * 0.15);
+}
+
+@container hexagon-img-container (min-width: 40px ) {
+  .hexagon-inner-content-container > img {
+    padding: 25%;
+  }
+}
+
+@media screen and (min-width: 0) and (max-width: 279px) {
   .hexagon {
-    width: 4rem !important;
+    width: var(--hexagon-xs);
+    height: var(--hexagon-xs);
+  }
+}
+
+@media screen and (max-height: 768px) {
+  .hexagon {
+    width: var(--hexagon-xs) !important;
+    height: var(--hexagon-xs) !important;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 575px),
+  (max-height: 575px) {
+  .hexagon {
+    width: var(--hexagon-s);
+    height: var(--hexagon-s);
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .hexagon {
+    width: var(--hexagon-l);
+    height: var(--hexagon-l);
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1440px) {
+  .hexagon {
+    width: var(--hexagon-xxl);
+    height: var(--hexagon-xxl);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .hexagon {
+    width: var(--hexagon-xl);
+    height: var(--hexagon-xl);
   }
 }

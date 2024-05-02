@@ -1,17 +1,17 @@
 import { Container, Navbar } from "react-bootstrap";
 import Logo from "../Logo/Logo.tsx";
 import Offcanvas from "react-bootstrap/Offcanvas";
-import "./CustomNavbar.css";
+import styles from "./CustomNavbar.module.css";
 import NavbarListItem from "./NavbarListItem/NavbarListItem.tsx";
-import handshakeSvg from "../../assets/handshake.svg";
-import quickPlaySvg from "../../assets/quick-play.svg";
-import computerSvg from "../../assets/computer.svg";
-import leaderboardSvg from "../../assets/leaderboard.svg";
-import lessonsSvg from "../../assets/lessons.svg";
-import archiveSvg from "../../assets/archive.svg";
-import accountSvg from "../../assets/account.svg";
-import friendsSvg from "../../assets/friends.svg";
-import gearSvg from "../../assets/gear-fill.svg";
+import handshakeSvg from "../../assets/icons/handshake.svg";
+import quickPlaySvg from "../../assets/icons/quick-play.svg";
+import computerSvg from "../../assets/icons/computer.svg";
+import leaderboardSvg from "../../assets/icons/leaderboard.svg";
+import lessonsSvg from "../../assets/icons/lessons.svg";
+import archiveSvg from "../../assets/icons/archive.svg";
+import accountSvg from "../../assets/icons/account.svg";
+import friendsSvg from "../../assets/icons/friends.svg";
+import gearSvg from "../../assets/icons/gear-fill.svg";
 import CustomButton from "../Buttons/CustomButton/CustomButton.tsx";
 import { useNavigate } from "react-router-dom";
 import AlertModal from "../Modals/AlertModal/AlertModal.tsx";
@@ -53,8 +53,7 @@ export default function CustomNavbar() {
         key={"lg"}
         expand={"lg"}
         variant={"dark"}
-        sticky="top"
-        className="py-4 custom-navbar"
+        className={`py-4 ${styles.customNavbar} `}
       >
         <Container fluid className="h-100 px-lg-0 flex-lg-column ">
           <Logo navbarLogo className="ms-4 ms-lg-0 ms-xl-2" />
@@ -62,7 +61,7 @@ export default function CustomNavbar() {
           <Navbar.Offcanvas
             aria-labelledby={`offcanvasNavbarLabel-expand-lg`}
             placement="end"
-            className="navbar-content-wrapper"
+            className={styles.offcanvasContnetWrapper}
           >
             <Offcanvas.Header closeVariant={"white"} closeButton>
               <Offcanvas.Title className="text-white">Menu</Offcanvas.Title>
@@ -102,7 +101,7 @@ export default function CustomNavbar() {
                     </Tooltip>
                   }
                 >
-                  <li className="mb-2 mt-3 w-100 button-wrapper">
+                  <li className={`mb-2 mt-3 w-100 ${styles.buttonWrapper}`}>
                     <CustomButton
                       text={
                         <>
@@ -130,7 +129,7 @@ export default function CustomNavbar() {
               >
                 <Button
                   variant="link"
-                  className="d-flex align-items-center align-self-center text-decoration-none fw-bold text-secondary help-link "
+                  className={`d-flex align-items-center align-self-center text-decoration-none fw-bold text-secondary ${styles.helpLink} `}
                   onClick={handleShowHelp}
                 >
                   <i className="bi fs-2 bi-question-circle-fill me-3 me-lg-0 me-xl-3"></i>
@@ -145,10 +144,21 @@ export default function CustomNavbar() {
         show={showLogout}
         onProceed={handleLogout}
         onDismiss={handleCloseLogout}
-        icon="bi-question-lg"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="currentColor"
+            className="bi bi-question-lg"
+            viewBox="0 0 16 16"
+          >
+            <path d="M4.475 5.458c-.284 0-.514-.237-.47-.517C4.28 3.24 5.576 2 7.825 2c2.25 0 3.767 1.36 3.767 3.215 0 1.344-.665 2.288-1.79 2.973-1.1.659-1.414 1.118-1.414 2.01v.03a.5.5 0 0 1-.5.5h-.77a.5.5 0 0 1-.5-.495l-.003-.2c-.043-1.221.477-2.001 1.645-2.712 1.03-.632 1.397-1.135 1.397-2.028 0-.979-.758-1.698-1.926-1.698-1.009 0-1.71.529-1.938 1.402-.066.254-.278.461-.54.461h-.777ZM7.496 14c.622 0 1.095-.474 1.095-1.09 0-.618-.473-1.092-1.095-1.092-.606 0-1.087.474-1.087 1.091S6.89 14 7.496 14" />
+          </svg>
+        }
         title="Wyloguj się"
         text="Czy napewno chcesz się wylogować"
-        color="var(--color-decision)"
+        color="var(--color-orange-300)"
         onProceedButtonVariant="primary"
         onDismissButtonVariant="neutral"
         onProceedButtonText="Wyloguj"
@@ -157,7 +167,18 @@ export default function CustomNavbar() {
       <AlertModal
         show={showHelp}
         onProceed={handleSendHelp}
-        icon="bi-info-lg"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="currentColor"
+            className="bi bi-info-lg"
+            viewBox="0 0 16 16"
+          >
+            <path d="m9.708 6.075-3.024.379-.108.502.595.108c.387.093.464.232.38.619l-.975 4.577c-.255 1.183.14 1.74 1.067 1.74.72 0 1.554-.332 1.933-.789l.116-.549c-.263.232-.65.325-.905.325-.363 0-.494-.255-.402-.704zm.091-2.755a1.32 1.32 0 1 1-2.64 0 1.32 1.32 0 0 1 2.64 0" />
+          </svg>
+        }
         title="Masz problem?"
         color="var(--clr-sky-250)"
         onProceedButtonVariant="secondary"

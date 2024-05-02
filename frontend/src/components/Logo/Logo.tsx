@@ -1,6 +1,6 @@
 import redKing from "../../assets/red-king-pawn.png";
 import bluePawn from "../../assets/blue-pawn.png";
-import "./Logo.css";
+import styles from "./Logo.module.css";
 
 export default function Logo({
   navbarLogo,
@@ -18,9 +18,9 @@ export default function Logo({
       >
         <div
           className={
-            "position-relative d-flex  logo " +
+            `position-relative d-flex  ${styles.logo} ` +
             (navbarLogo
-              ? "me-3 me-lg-0 me-xl-3 ms-lg-3 ms-xl-0 navbar-logo"
+              ? `me-3 me-lg-0 me-xl-3 ms-lg-3 ms-xl-0 ${styles.navbarLogo}`
               : "me-4")
           }
         >

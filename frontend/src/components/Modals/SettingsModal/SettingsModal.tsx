@@ -14,7 +14,7 @@ export default function SettingsModal({
     <Modal
       data-bs-theme="dark"
       size="lg"
-      className="text-white"
+      className="text-white overflow-auto"
       backdrop="static"
       show={show}
       onHide={handleClose}
@@ -31,7 +31,7 @@ export default function SettingsModal({
         <Form>
           <div className="my-4  mx-sm-2 m-md-4 p-3 rounded-2 bg-body-secondary">
             <ul className="list-unstyled d-flex flex-column gap-4">
-              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10">
+              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10 align-items-center">
                 Pokaż koordynaty{" "}
                 <Form.Check
                   type="switch"
@@ -40,7 +40,7 @@ export default function SettingsModal({
                   aria-label="Pokaż koordynaty"
                 />
               </li>
-              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10">
+              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10 align-items-center">
                 Graj Dźwięk{" "}
                 <Form.Check
                   type="switch"
@@ -49,7 +49,7 @@ export default function SettingsModal({
                   aria-label="Graj Dźwięk"
                 />
               </li>
-              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10">
+              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10 align-items-center">
                 Podświetl pionki z dostępnym ruchem{" "}
                 <Form.Check
                   type="switch"
@@ -58,7 +58,7 @@ export default function SettingsModal({
                   aria-label="Podświetl pionki z dostępnym ruchem"
                 />
               </li>
-              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10">
+              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10 align-items-center">
                 Pokaż ostatni ruch{" "}
                 <Form.Check
                   type="switch"
@@ -67,7 +67,7 @@ export default function SettingsModal({
                   aria-label="Pokaż ostatni ruch"
                 />
               </li>
-              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10">
+              <li className="d-flex justify-content-between fs-5 fs-md-7 fs-sm-8 fs-xsm-9 fs-xxs-10 align-items-center">
                 Pokaż dostępne ruchy dla zaznaczonego pionka{" "}
                 <Form.Check
                   type="switch"
@@ -78,7 +78,7 @@ export default function SettingsModal({
               </li>
             </ul>
           </div>
-          <div className="my-4 mx-2 m-md-4  d-flex gap-5 justify-content-end fs-sm-8 fs-xsm-9 fs-xxs-10">
+          <div className="my-4 mx-2 m-md-4  d-flex gap-5 justify-content-end fs-sm-8 fs-xsm-9 fs-xxs-10 align-items-center">
             <CustomButton
               text="Anuluj"
               type="button"

@@ -2,14 +2,19 @@
   background: var(--clr-neutral-750)
     url("../../assets/login-register-background-img.png") repeat-x bottom;
   background-size: contain;
+  min-width: 280px;
+  min-height: 100vh;
 }
 
 .formContainer {
   background-color: var(--clr-neutral-550);
-  width: 26rem !important;
-  max-width: 100% !important;
+  width: 26rem;
+  max-width: 100%;
 }
 
 .baseContainer {
-  min-height: 100svh;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  min-height: 100dvh;
+  min-width: 256px;
 }

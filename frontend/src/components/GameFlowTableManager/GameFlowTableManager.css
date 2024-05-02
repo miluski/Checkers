@@ -3,10 +3,8 @@
 }
 
 .game-against-bot-aside-table-container {
-  min-width: 300px;
-  max-width: 380px;
   min-height: 27.5rem;
-  height: 38dvw;
+  max-width: 350px;
 }
 
 .table-dark {
@@ -26,8 +24,18 @@ tbody tr:nth-child(odd) {
   background-color: #ccc !important;
 }
 
-@media screen and (min-width: 0) and (max-width: 991px) {
-  .game-against-bot-aside-table-container {
-    min-height: 75dvh;
+.container-wrapper {
+  min-height: 850px;
+}
+
+@media screen and (min-width: 992px) {
+  .container-wrapper {
+    height: 100dvh;
+  }
+}
+
+@media screen and (min-width: 0) and (max-width: 310px) {
+  .table-game-action-container {
+    gap: 0.5rem !important;
   }
 }

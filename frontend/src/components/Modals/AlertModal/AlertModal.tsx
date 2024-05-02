@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 import CustomButton from "../../Buttons/CustomButton/CustomButton.tsx";
-import { MouseEventHandler } from "react";
+import { MouseEventHandler, SVGProps } from "react";
 import "./AlertModal.css";
 
 export default function AlertModal({
@@ -19,7 +19,7 @@ export default function AlertModal({
   onHide,
 }: {
   show: boolean;
-  icon: string;
+  icon: SVGProps<SVGSVGElement>;
   title: string;
   text?: string;
   color: string;
@@ -36,19 +36,19 @@ export default function AlertModal({
     <Modal
       data-bs-theme="dark"
       show={show}
-      className="text-white "
+      className="text-white overflow-auto"
       centered
       backdrop={backdrop}
       onHide={onHide}
     >
       <Modal.Header className="position-relative d-flex justify-content-center border-0 p-5 pb-3 pb-md-5">
         <div
-          className="position-absolute  rounded-circle  d-flex align-items-center justify-content-center alert-modal-icon-wrapper"
+          className="position-absolute  rounded-circle  d-flex align-items-center justify-content-center alert-modal-icon-wrapper "
           style={{
             backgroundColor: color,
           }}
         >
-          <i className={"bi " + icon}></i>
+          <>{icon}</>
         </div>
       </Modal.Header>
       <Modal.Body className="my-4">

@@ -16,64 +16,49 @@ export default function PlayerDetails({
   pawnsCollected: number;
   areYou?: boolean;
 }) {
-  if (variant === "red") {
-    return (
-      <div className="d-flex mb-4 w-100 justify-content-between">
-        <div>
-          <div
-            className={
-              " d-flex border border-2 border-secondary p-2 rounded-2  fw-semibold text-red"
-            }
-          >
-            <i className="bi bi-hourglass-top me-3"></i>3:00
-          </div>
-        </div>
-        <div className="d-flex">
-          <div className="mt-1 me-3 mt-sm-2  d-flex flex-column w-100 align-items-end justify-content-between">
-            <span>{nickname}</span>
-            <div className="d-flex justify-content-end align-items-end mb-2">
-              <span className="me-2">x{pawnsCollected}</span>
-              <img
-                className=" pawn-collected"
-                src={pawnCollectedBlue}
-                alt="pawnCollected"
-              />
-            </div>
-          </div>
-          <PlayerIcon color={"red"} icon={icon} />
+  return (
+    <div
+      className={
+        "d-flex w-100 justify-content-between player-details " +
+        (variant === "red" ? "mb-4" : "mt-4")
+      }
+    >
+      <div className={variant === "red" ? "" : "order-last"}>
+        <div
+          className={
+            " d-flex border border-2 border-secondary p-2 rounded-2 timer fw-semibold text-" +
+            variant
+          }
+        >
+          <i className="bi bi-hourglass-top me-3"></i>3:00
         </div>
       </div>
-    );
-  } else {
-    return (
-      <div className="mt-4 d-flex  justify-content-between ">
-        <div className="d-flex">
-          <div className="hexagon hexagon-border-blue">
-            <PlayerIcon color={"blue"} icon={icon} />
-          </div>
-          <div className="mt-1 ms-3 mt-sm-2  d-flex flex-column justify-content-between ">
-            <span className="d-flex">
-              <span className="d-inline-block flex-fill nickname me-2">
-                {nickname}
-              </span>{" "}
-              {areYou ? <span className="text-white-50">(Ty)</span> : ""}
+      <div className="d-flex ">
+        <div
+          className={
+            "  d-flex flex-column w-100  justify-content-evenly  " +
+            (variant === "red"
+              ? " me-3 align-items-end"
+              : "ms-3 order-last align-items-start")
+          }
+        >
+          <span className={"d-flex align-items-center"}>
+            {<span className={"nickname"}>{nickname}</span>}{" "}
+            {areYou ? <span className="text-white-50">(Ty)</span> : ""}
+          </span>
+          <div className="d-flex justify-content-end  align-items-center">
+            <span className={variant === "red" ? "me-2" : "order-last ms-2"}>
+              x{pawnsCollected}
             </span>
-            <div className="d-flex mb-2 align-items-end">
-              <img
-                className="me-2 pawn-collected"
-                src={pawnCollectedRed}
-                alt="pawnCollected"
-              />
-              <span>x{pawnsCollected}</span>
-            </div>
+            <img
+              className=" pawn-collected"
+              src={variant === "red" ? pawnCollectedBlue : pawnCollectedRed}
+              alt="pawnCollected"
+            />
           </div>
         </div>
-        <div>
-          <div className=" d-flex border border-2 border-secondary p-2 rounded-2 text-blue fw-semibold">
-            <i className="bi bi-hourglass-top me-3"></i>3:00
-          </div>
-        </div>
+        <PlayerIcon color={variant} icon={icon} />
       </div>
-    );
-  }
+    </div>
+  );
 }

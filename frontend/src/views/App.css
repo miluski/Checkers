@@ -173,7 +173,6 @@
   --color-transparent-black-30: rgba(0, 0, 0, 0.3);
   --color-transparent-black-65: rgba(0, 0, 0, 0.65);
   --color-transparent-black-77: rgba(0, 0, 0, 0.77);
-  --color-decision: #d97706;
 
   --color-grid: #272727;
   --nth-color: #3e3e3e;
@@ -230,10 +229,4 @@
 
 .text-blue {
   color: var(--clr-sky-250);
-}
-
-@media screen and (min-width: 0px) and (max-width: 425px) {
-  .fs-6-mobile-only {
-    font-size: 1rem !important;
-  }
 }

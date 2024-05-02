@@ -1,4 +1,4 @@
-import "../Forms.module.css";
+import styles from "../Forms.module.css";
 import { Form } from "react-bootstrap";
 import Logo from "../../../components/Logo/Logo.tsx";
 import CustomFormInput from "../../../components/CustomFormInput/CustomFormInput.tsx";
@@ -52,8 +52,10 @@ export default function RegisterView() {
       ),
   });
   return (
-    <main className="background-theme ">
-      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center justify-content-center base-container py-4">
+    <main className={styles.backgroundTheme}>
+      <div
+        className={`container d-flex flex-column gap-4 gap-lg-5 align-items-center justify-content-center py-4 ${styles.baseContainer}`}
+      >
         <Logo className={"ms-4"} />
         <Formik
           validationSchema={schema}
@@ -79,7 +81,7 @@ export default function RegisterView() {
             <Form
               noValidate
               onSubmit={handleSubmit}
-              className="form-container rounded-4  p-4"
+              className={`form-container rounded-4  p-4 ${styles.formContainer}`}
             >
               <CustomFormInput
                 label="Nickname:"
@@ -130,7 +132,7 @@ export default function RegisterView() {
               <FormTextSecondary
                 text="Masz już konto? - "
                 linkText="Zaloguj się!"
-                link="login"
+                link="./login"
               />
               <SocialMediaList />
             </Form>
@@ -140,7 +142,18 @@ export default function RegisterView() {
       <AlertModal
         show={showError}
         onProceed={handleCloseError}
-        icon="bi-x-lg"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="currentColor"
+            className="bi bi-x-lg"
+            viewBox="0 0 16 16"
+          >
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+          </svg>
+        }
         title="Błąd"
         text="Użytkownik o podanym adresie email już jest zarejestrowany"
         color="var(--clr-red-450)"
@@ -149,7 +162,18 @@ export default function RegisterView() {
       <AlertModal
         show={showSuccess}
         onProceed={handleCloseSuccess}
-        icon="bi-check-lg"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="currentColor"
+            className="bi bi-check-lg"
+            viewBox="0 0 16 16"
+          >
+            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+          </svg>
+        }
         title="Udało się!"
         text="Twoje konto zostało zarejestrowane"
         color="var(--color-green-300)"

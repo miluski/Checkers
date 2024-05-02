@@ -8,7 +8,7 @@ export default function ({
 }) {
   return (
     <div className={"hexagon hexagon-border-" + color}>
-      <div className="hexagon p-3 hexagon-inner-content-container">
+      <div className="d-flex hexagon hexagon-inner-content-container justify-content-center align-items-center">
         <img className="img-fluid" src={icon} alt={icon} />
       </div>
     </div>

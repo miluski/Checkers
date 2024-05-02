@@ -1,9 +1,9 @@
-.custom-card-wrapper {
+.customCardWrapper {
   width: 270px;
   height: 350px;
 }
 
-.custom-card {
+.customCard {
   --borderBottomLine: var(--clr-neutral-900);
   --borderBottomLineHover: var(--clr-neutral-950);
   --borderHeight: 0.4rem;
@@ -14,24 +14,24 @@
   box-shadow: 0 7px var(--borderBottomLine);
 }
 
-.custom-card:hover {
+.customCard:hover {
   background-color: var(--bgColorHover);
   box-shadow:
     0 7px var(--borderBottomLineHover),
     0 0 0;
 }
 
-.custom-card:active {
+.customCard:active {
   background-color: var(--bgColorHover) !important;
   box-shadow: none !important;
   opacity: 0.9 !important;
   transform: translateY(7px);
 }
 
-.custom-card-text {
+.customCardText {
   color: var(--color-transparent-white-72);
 }
 
-.custom-card-icon {
+.customCardIcon {
   width: 8rem;
 }
