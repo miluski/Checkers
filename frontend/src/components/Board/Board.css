@@ -1,0 +1,45 @@
+.board-wrapper {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  background-color: var(--color-grid);
+}
+
+.board-wrapper > div {
+  background-color: var(--color-grid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--letter-color);
+  font-weight: bold;
+}
+
+.board-areas-container {
+  grid-column: 2/10;
+  grid-row: 2/10;
+  display: grid !important;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.board-areas-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--nth-color);
+}
+
+.board-areas-container div:nth-child(-n + 8):nth-child(even),
+.board-areas-container div:nth-child(n + 8):nth-child(-n + 16):nth-child(odd),
+.board-areas-container div:nth-child(n + 17):nth-child(-n + 24):nth-child(even),
+.board-areas-container div:nth-child(n + 25):nth-child(-n + 32):nth-child(odd),
+.board-areas-container div:nth-child(n + 33):nth-child(-n + 40):nth-child(even),
+.board-areas-container div:nth-child(n + 41):nth-child(-n + 48):nth-child(odd),
+.board-areas-container div:nth-child(n + 49):nth-child(-n + 56):nth-child(even),
+.board-areas-container div:nth-child(n + 57):nth-child(-n + 64):nth-child(odd) {
+  background-color: var(--color-grid);
+}
+
+.pawn:hover {
+  cursor: pointer;
+}

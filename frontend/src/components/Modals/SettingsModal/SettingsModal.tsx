@@ -1,14 +1,14 @@
 import { Form, Modal } from "react-bootstrap";
-import CustomButton from "../../CustomButton/CustomButton.tsx";
+import CustomButton from "../../Buttons/CustomButton/CustomButton.tsx";
 import "./SettingsModal.css";
-import "../../../utils/utils.css";
+import { MouseEventHandler } from "react";
 
 export default function SettingsModal({
   show,
   handleClose,
 }: {
-  show: any;
-  handleClose: any;
+  show: boolean;
+  handleClose: () => void | MouseEventHandler;
 }) {
   return (
     <Modal
@@ -37,7 +37,6 @@ export default function SettingsModal({
                   type="switch"
                   id="custom-switch"
                   className="d-inline"
-                  style={{ transform: "scale(1.5)" }}
                   aria-label="Pokaż koordynaty"
                 />
               </li>
@@ -47,7 +46,6 @@ export default function SettingsModal({
                   type="switch"
                   id="custom-switch"
                   className="d-inline"
-                  style={{ transform: "scale(1.5)" }}
                   aria-label="Graj Dźwięk"
                 />
               </li>
@@ -57,7 +55,6 @@ export default function SettingsModal({
                   type="switch"
                   id="custom-switch"
                   className="d-inline"
-                  style={{ transform: "scale(1.5)" }}
                   aria-label="Podświetl pionki z dostępnym ruchem"
                 />
               </li>
@@ -67,7 +64,6 @@ export default function SettingsModal({
                   type="switch"
                   id="custom-switch"
                   className="d-inline"
-                  style={{ transform: "scale(1.5)" }}
                   aria-label="Pokaż ostatni ruch"
                 />
               </li>
@@ -77,7 +73,6 @@ export default function SettingsModal({
                   type="switch"
                   id="custom-switch"
                   className="d-inline"
-                  style={{ transform: "scale(1.5)" }}
                   aria-label="Pokaż dostępne ruchy dla zaznaczonego pionka"
                 />
               </li>
@@ -87,16 +82,14 @@ export default function SettingsModal({
             <CustomButton
               text="Anuluj"
               type="button"
-              className="py-2 px-3"
-              style={{ width: "30%" }}
+              className="py-2 px-3 settings-modal-button"
               onClick={handleClose}
               variant="neutral"
             />
             <CustomButton
               text="Zapisz"
               type="submit"
-              className="py-2 px-3"
-              style={{ width: "30%" }}
+              className="py-2 px-3 settings-modal-button"
             />
           </div>
         </Form>

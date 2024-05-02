@@ -1,11 +1,9 @@
-import "../../../utils/utils.css";
-import "../Forms.css";
+import styles from "../Forms.module.css";
 import { Form } from "react-bootstrap";
 import Logo from "../../../components/Logo/Logo.tsx";
-import FormInput from "../../../components/FormInput/FormInput.tsx";
-import CustomButton from "../../../components/CustomButton/CustomButton.tsx";
+import CustomFormInput from "../../../components/CustomFormInput/CustomFormInput.tsx";
+import CustomButton from "../../../components/Buttons/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
-import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
 import * as formik from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -28,9 +26,11 @@ export default function ForgotPasswordView() {
   });
 
   return (
-    <main className="background-theme ">
-      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100">
-        <Logo size={"big"} className={"ms-4"} />
+    <main className={styles.backgroundTheme}>
+      <div
+        className={`container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center ${styles.baseContainer}`}
+      >
+        <Logo className={"ms-4"} />
         <Formik
           validationSchema={schema}
           onSubmit={handleShow}
@@ -51,9 +51,9 @@ export default function ForgotPasswordView() {
             <Form
               noValidate
               onSubmit={handleSubmit}
-              className="form-container rounded-4  p-4"
+              className={`rounded-4 container p-4 ${styles.formContainer}`}
             >
-              <FormInput
+              <CustomFormInput
                 label="Email:"
                 type="email"
                 placeholder="Twój adres email"
@@ -61,9 +61,9 @@ export default function ForgotPasswordView() {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.email && !!errors.email}
-                isValid={touched.email && !errors.email}
-                errorMessage={errors.email}
+                isInvalid={touched.email! && !!errors.email}
+                isValid={touched.email! && !errors.email}
+                errorMessage={errors.email!}
               />
               <CustomButton
                 text="Wyślij"
@@ -80,13 +80,12 @@ export default function ForgotPasswordView() {
                 type="button"
                 onClick={() => navigate("/login")}
                 variant="secondary"
-                className="w-100 py-3 mb-4 fs-4"
+                className="w-100 py-3 mb-5 fs-4"
               />
               <SocialMediaList />
             </Form>
           )}
         </Formik>
-        <CopyRight />
       </div>
       <AlertModal
         show={show}

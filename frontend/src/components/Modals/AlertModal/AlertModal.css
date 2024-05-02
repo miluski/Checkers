@@ -1,0 +1,15 @@
+.alert-modal-icon-wrapper {
+  aspect-ratio: 1/1;
+  width: 45%;
+  top: -10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.alert-modal-icon-wrapper i {
+  font-size: 530%;
+}
+
+.alert-modal-button {
+  width: 40%;
+}

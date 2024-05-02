@@ -1,7 +1,14 @@
 .list-item {
   transition: all 0.2s ease-in-out;
+  padding-left: 0.75rem;
+  padding-right: 0.75rem;
+}
+
+.list-item img {
+  width: 32px;
 }
 
 .list-item:hover {
   background-color: var(--clr-neutral-800);
+  cursor: pointer;
 }

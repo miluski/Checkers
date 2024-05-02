@@ -1,0 +1,26 @@
+.custom-navbar {
+  background-color: var(--clr-neutral-700);
+}
+
+.navbar-expand-lg .offcanvas {
+  height: 100% !important;
+}
+
+.navbar-content-wrapper {
+  background-color: var(--clr-neutral-700);
+  max-width: 101% !important;
+  height: 100dvh !important;
+}
+
+.help-link {
+  transition: all 0.2s ease-in-out;
+}
+
+.help-link:hover {
+  color: white !important;
+}
+
+.button-wrapper {
+  padding-right: 1.75rem;
+  padding-left: 1.75rem;
+}

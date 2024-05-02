@@ -5,29 +5,30 @@ export default function ({
   icon,
   title,
   text,
-  color,
+  headerColor,
   link,
 }: {
   icon: string;
   title: string;
   text: string;
-  color: string;
+  headerColor: string;
   link: string;
 }) {
   return (
-    <a className="text-decoration-none border-0 card-custom " href={link}>
-      <Card text="white" className="w-100 border-0 h-100 card-inner">
+    <a
+      className="text-decoration-none border-0 custom-card-wrapper "
+      href={link}
+    >
+      <Card text="white" className="w-100 border-0 h-100 custom-card">
         <Card.Header
           className="cardHeader text-center border-0 px-4 py-5"
-          style={{ backgroundColor: color }}
+          style={{ backgroundColor: headerColor }}
         >
-          <img src={icon} alt={icon} style={{ width: "8rem" }} />
+          <img src={icon} alt={icon.slice(13)} className="custom-card-icon" />
         </Card.Header>
         <Card.Body className="cardBody p-4 d-flex flex-column ">
           <Card.Title>{title}</Card.Title>
-          <Card.Text style={{ color: "var(--color-transparent-white-72)" }}>
-            {text}
-          </Card.Text>
+          <Card.Text className="custom-card-text">{text}</Card.Text>
         </Card.Body>
       </Card>
     </a>
