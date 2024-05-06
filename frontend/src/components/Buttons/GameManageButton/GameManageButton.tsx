@@ -2,7 +2,7 @@ import Tooltip from "react-bootstrap/Tooltip";
 import { Button } from "react-bootstrap";
 import OverlayTrigger from "react-bootstrap/OverlayTrigger";
 import { MouseEventHandler } from "react";
-import drawIcon from "../../../assets/draw_icon.svg";
+import drawIcon from "../../../assets/icons/draw_icon.svg";
 
 export default function GameManageButton({
   tooltipPlacement,

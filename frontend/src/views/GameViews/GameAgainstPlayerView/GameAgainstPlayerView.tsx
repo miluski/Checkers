@@ -1,20 +1,32 @@
 import CustomNavbar from "../../../components/CustomNavbar/CustomNavbar.tsx";
-import "../GameViews.css";
+import styles from "../GameViews.module.css";
 import Board from "../../../components/Board/Board.tsx";
 import GameFlowTableManager from "../../../components/GameFlowTableManager/GameFlowTableManager.tsx";
-import computerSvg from "../../../assets/computer.svg";
-import playerSvg from "../../../assets/account.svg";
+import playerSvg from "../../../assets/icons/account.svg";
+import PlayerDetails from "../../../components/PlayerDetails/PlayerDetails.tsx";
 
 export default function GameAgainstBotView() {
   return (
-    <div className="d-flex flex-column flex-lg-row justify-content-between base-container ">
+    <div
+      className={`d-flex flex-column flex-lg-row justify-content-between ${styles.baseContainer} `}
+    >
       <CustomNavbar />
-      <Board
-        redPlayerNick="Adrian Nowak"
-        redPlayerIcon={playerSvg}
-        bluePlayerNick="Jan Kowalski"
-        bluePlayerIcon={playerSvg}
-      />
+      <main className="align-self-center d-flex flex-column align-self-center justify-content-center my-4 my-xl-0 text-white  ">
+        <PlayerDetails
+          variant={"red"}
+          icon={playerSvg}
+          nickname={"Adrian Nowak"}
+          pawnsCollected={0}
+        />
+        <Board />
+        <PlayerDetails
+          variant={"blue"}
+          icon={playerSvg}
+          nickname={"Jan Kowalskiiiiiiiiiiii"}
+          pawnsCollected={0}
+          areYou
+        />
+      </main>
       <GameFlowTableManager />
     </div>
   );

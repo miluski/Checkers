@@ -1,5 +1,5 @@
 import { Form } from "react-bootstrap";
-import "./CustomFormInput.css";
+import styles from "./CustomFormInput.module.css";
 import { ChangeEventHandler, FocusEventHandler, useState } from "react";
 
 export default function CustomFormInput({
@@ -36,7 +36,9 @@ export default function CustomFormInput({
       <div className="d-flex align-items-center position-relative ">
         <Form.Control
           className={
-            "form-input py-2 " + (type === "password" ? "no-icon" : "")
+            " py-2 " +
+            `${styles.formInput}` +
+            (type === "password" ? ` ${styles.noIcon}` : "")
           }
           type={type === "password" && showPassword ? "text" : type}
           placeholder={placeholder}
@@ -65,7 +67,7 @@ export default function CustomFormInput({
         )}
       </div>
       {isInvalid && (
-        <p className="mt-1 mb-0 ms-1 error-message fs-8 fw-bold">
+        <p className={`mt-1 mb-0 ms-1 fs-8 fw-bold ${styles.errorMessage}`}>
           {errorMessage}
         </p>
       )}
