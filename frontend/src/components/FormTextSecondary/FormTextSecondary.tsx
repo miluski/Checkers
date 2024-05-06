@@ -2,7 +2,6 @@ export default function FormTextSecondary({
   text,
   linkText,
   link,
-  textAlign = "text-center",
 }: {
   text?: string;
   linkText?: string;
@@ -10,8 +9,12 @@ export default function FormTextSecondary({
   textAlign?: string;
 }) {
   return (
-    <p className={"text-white mb-4 " + textAlign}>
-      <span className={"opacity-75"}>{text} </span>
+    <p
+      className={
+        "text-white mb-4 d-flex flex-wrap text-nowrap justify-content-center"
+      }
+    >
+      <span className={"opacity-75"}>{text}&nbsp;</span>
       {linkText && (
         <a
           className={

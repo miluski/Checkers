@@ -1,0 +1,356 @@
+.board-wrapper {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(10, 1fr);
+  background-color: var(--color-grid);
+}
+
+.board-wrapper > div {
+  background-color: var(--color-grid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--letter-color);
+  font-weight: bold;
+}
+
+.board-areas-container {
+  grid-column: 2/10;
+  grid-row: 2/10;
+  display: grid !important;
+  grid-template-columns: repeat(8, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+}
+
+.board-areas-container div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--nth-color);
+}
+
+.board-areas-container div:nth-child(-n + 8):nth-child(even),
+.board-areas-container div:nth-child(n + 8):nth-child(-n + 16):nth-child(odd),
+.board-areas-container div:nth-child(n + 17):nth-child(-n + 24):nth-child(even),
+.board-areas-container div:nth-child(n + 25):nth-child(-n + 32):nth-child(odd),
+.board-areas-container div:nth-child(n + 33):nth-child(-n + 40):nth-child(even),
+.board-areas-container div:nth-child(n + 41):nth-child(-n + 48):nth-child(odd),
+.board-areas-container div:nth-child(n + 49):nth-child(-n + 56):nth-child(even),
+.board-areas-container div:nth-child(n + 57):nth-child(-n + 64):nth-child(odd) {
+  background-color: var(--color-grid);
+}
+
+:root {
+  --board-xs: 280px;
+  --board-s: min(100lvw, 100lvh);
+  --board-l: min(75lvw, 75lvh);
+  --board-xl: min(37dvw, 75dvh);
+}
+
+.game-main-container {
+  min-width: 280px;
+  min-height: 280px;
+  aspect-ratio: 1/1;
+  container-type: inline-size;
+  container-name: container;
+}
+
+@container container (min-width: 500px) {
+  .game-main-container > div {
+    font-size: 130%;
+  }
+}
+
+@container container (min-width: 930px) {
+  .game-main-container > div {
+    font-size: 170%;
+  }
+}
+
+@media screen and (min-width: 0) and (max-width: 575px) {
+  .game-main-container {
+    width: var(--board-s);
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .game-main-container {
+    width: var(--board-l);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .game-main-container {
+    width: var(--board-xl);
+  }
+}
+
+.pawn {
+  bottom: 0;
+  left: 0;
+  width: 12.5%;
+}
+
+.pawn:hover {
+  cursor: pointer;
+}
+
+.square {
+  transition: all linear 0.3s;
+}
+
+.square-11 {
+  transform: translate(0);
+}
+
+.square-12 {
+  transform: translate(100%, 0);
+}
+
+.square-12 {
+  transform: translate(100%, 0);
+}
+
+.square-13 {
+  transform: translate(200%, 0);
+}
+
+.square-14 {
+  transform: translate(300%, 0);
+}
+
+.square-15 {
+  transform: translate(400%, 0);
+}
+
+.square-16 {
+  transform: translate(500%, 0);
+}
+
+.square-17 {
+  transform: translate(600%, 0);
+}
+
+.square-21 {
+  transform: translate(0, 100%);
+}
+
+.square-22 {
+  transform: translate(100%, -100%);
+}
+
+.square-23 {
+  transform: translate(200%, -100%);
+}
+
+.square-24 {
+  transform: translate(300%, -100%);
+}
+
+.square-25 {
+  transform: translate(400%, -100%);
+}
+
+.square-26 {
+  transform: translate(500%, -100%);
+}
+
+.square-27 {
+  transform: translate(600%, -100%);
+}
+
+.square-28 {
+  transform: translate(700%, -100%);
+}
+
+.square-31 {
+  transform: translate(0, -200%);
+}
+
+.square-32 {
+  transform: translate(100%, -200%);
+}
+
+.square-33 {
+  transform: translate(200%, -200%);
+}
+
+.square-34 {
+  transform: translate(300%, -200%);
+}
+
+.square-35 {
+  transform: translate(400%, -200%);
+}
+
+.square-36 {
+  transform: translate(500%, -200%);
+}
+
+.square-37 {
+  transform: translate(600%, -200%);
+}
+
+.square-38 {
+  transform: translate(700%, -200%);
+}
+
+.square-41 {
+  transform: translate(0, -300%);
+}
+
+.square-42 {
+  transform: translate(100%, -300%);
+}
+
+.square-43 {
+  transform: translate(200%, -300%);
+}
+
+.square-44 {
+  transform: translate(300%, -300%);
+}
+
+.square-45 {
+  transform: translate(400%, -300%);
+}
+
+.square-46 {
+  transform: translate(500%, -300%);
+}
+
+.square-47 {
+  transform: translate(600%, -300%);
+}
+
+.square-48 {
+  transform: translate(700%, -300%);
+}
+
+.square-51 {
+  transform: translate(0, -400%);
+}
+
+.square-52 {
+  transform: translate(100%, -400%);
+}
+
+.square-53 {
+  transform: translate(200%, -400%);
+}
+
+.square-54 {
+  transform: translate(300%, -400%);
+}
+
+.square-55 {
+  transform: translate(400%, -400%);
+}
+
+.square-56 {
+  transform: translate(500%, -400%);
+}
+
+.square-57 {
+  transform: translate(600%, -400%);
+}
+
+.square-58 {
+  transform: translate(700%, -400%);
+}
+
+.square-61 {
+  transform: translate(0, -500%);
+}
+
+.square-62 {
+  transform: translate(100%, -500%);
+}
+
+.square-63 {
+  transform: translate(200%, -500%);
+}
+
+.square-64 {
+  transform: translate(300%, -500%);
+}
+
+.square-65 {
+  transform: translate(400%, -500%);
+}
+
+.square-66 {
+  transform: translate(500%, -500%);
+}
+
+.square-67 {
+  transform: translate(600%, -500%);
+}
+
+.square-68 {
+  transform: translate(700%, -500%);
+}
+
+.square-71 {
+  transform: translate(0, -600%);
+}
+
+.square-72 {
+  transform: translate(100%, -600%);
+}
+
+.square-73 {
+  transform: translate(200%, -600%);
+}
+
+.square-74 {
+  transform: translate(300%, -600%);
+}
+
+.square-75 {
+  transform: translate(400%, -600%);
+}
+
+.square-76 {
+  transform: translate(500%, -600%);
+}
+
+.square-77 {
+  transform: translate(600%, -600%);
+}
+
+.square-78 {
+  transform: translate(700%, -600%);
+}
+
+.square-81 {
+  transform: translate(0, -700%);
+}
+
+.square-82 {
+  transform: translate(100%, -700%);
+}
+
+.square-83 {
+  transform: translate(200%, -700%);
+}
+
+.square-84 {
+  transform: translate(300%, -700%);
+}
+
+.square-85 {
+  transform: translate(400%, -700%);
+}
+
+.square-86 {
+  transform: translate(500%, -700%);
+}
+
+.square-87 {
+  transform: translate(600%, -700%);
+}
+
+.square-88 {
+  transform: translate(700%, -700%);
+}

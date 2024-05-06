@@ -1,17 +1,18 @@
-.form-input {
+.formInput {
   background-color: var(--clr-neutral-750) !important;
   border: 1px solid var(--clr-neutral-400);
 }
 
-.form-control:focus {
+.formInput:focus {
   border-color: #80aed0 !important;
   box-shadow: 0 0 0 0.1rem #abb8c2;
 }
 
-.no-icon {
+.noIcon {
   background-image: none !important;
 }
 
-.error-message {
+.errorMessage {
   color: var(--clr-red-450);
+  white-space: pre-wrap;
 }

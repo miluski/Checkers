@@ -1,5 +1,5 @@
 import "./CustomButton.css";
-import React from "react";
+import React, { MouseEventHandler, ReactElement } from "react";
 
 export default function CustomButton({
   text,
@@ -9,17 +9,17 @@ export default function CustomButton({
   onClick,
   style,
 }: {
-  text: any;
+  text: string | ReactElement;
   type: "submit" | "button" | "reset";
   variant?: "primary" | "secondary" | "success" | "neutral";
   className?: string;
-  onClick?: any;
+  onClick?: MouseEventHandler;
   style?: React.CSSProperties;
 }) {
   return (
     <button
       className={
-        " text-white fw-bold rounded-3 wp-button-component wp-button-" +
+        " text-white fw-bold rounded-3 custom-button-component custom-button-" +
         variant +
         " " +
         className

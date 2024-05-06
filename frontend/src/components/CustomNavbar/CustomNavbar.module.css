@@ -1,0 +1,28 @@
+.customNavbar {
+  background-color: var(--clr-neutral-700);
+}
+
+.offcanvasContnetWrapper {
+  background-color: var(--clr-neutral-700);
+  max-width: 101% !important;
+  height: 100dvh !important;
+}
+
+.helpLink {
+  transition: all 0.2s ease-in-out;
+}
+
+.helpLink:hover {
+  color: white !important;
+}
+
+.buttonWrapper {
+  padding-right: 1.75rem;
+  padding-left: 1.75rem;
+}
+
+@media screen and (max-width: 280px) {
+  .offcanvasContnetWrapper > div > ul {
+    min-width: 280px;
+  }
+}

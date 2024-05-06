@@ -1,0 +1,41 @@
+.game-against-bot-aside {
+  background-color: var(--clr-neutral-700);
+}
+
+.game-against-bot-aside-table-container {
+  min-height: 27.5rem;
+  max-width: 350px;
+}
+
+.table-dark {
+  --bs-table-bg: var(--clr-neutral-750) !important;
+  --bs-table-striped-bg: var(--clr-neutral-700);
+}
+
+.table-column {
+  width: 21.331%;
+}
+
+.table-game-action-container {
+  background-color: var(--clr-neutral-800);
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #ccc !important;
+}
+
+.container-wrapper {
+  min-height: 850px;
+}
+
+@media screen and (min-width: 992px) {
+  .container-wrapper {
+    height: 100dvh;
+  }
+}
+
+@media screen and (min-width: 0) and (max-width: 310px) {
+  .table-game-action-container {
+    gap: 0.5rem !important;
+  }
+}

@@ -1,30 +1,37 @@
-.card-custom {
+.customCardWrapper {
   width: 270px;
   height: 350px;
 }
 
-.card-inner {
+.customCard {
   --borderBottomLine: var(--clr-neutral-900);
   --borderBottomLineHover: var(--clr-neutral-950);
   --borderHeight: 0.4rem;
   --bgColor: var(--bs-dark);
   --bgColorHover: var(--clr-neutral-900);
-
   background-color: var(--bgColor);
   border: 0;
   box-shadow: 0 7px var(--borderBottomLine);
 }
 
-.card-inner:hover {
+.customCard:hover {
   background-color: var(--bgColorHover);
   box-shadow:
     0 7px var(--borderBottomLineHover),
     0 0 0;
 }
 
-.card-inner:active {
+.customCard:active {
   background-color: var(--bgColorHover) !important;
   box-shadow: none !important;
   opacity: 0.9 !important;
   transform: translateY(7px);
+}
+
+.customCardText {
+  color: var(--color-transparent-white-72);
+}
+
+.customCardIcon {
+  width: 8rem;
 }

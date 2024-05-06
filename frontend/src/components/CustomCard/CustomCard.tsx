@@ -1,33 +1,41 @@
 import Card from "react-bootstrap/Card";
-import "./CustomCard.css";
+import styles from "./CustomCard.module.css";
 
 export default function ({
   icon,
   title,
   text,
-  color,
+  headerColor,
   link,
 }: {
   icon: string;
   title: string;
   text: string;
-  color: string;
+  headerColor: string;
   link: string;
 }) {
   return (
-    <a className="text-decoration-none border-0 card-custom " href={link}>
-      <Card text="white" className="w-100 border-0 h-100 card-inner">
+    <a
+      className={`text-decoration-none border-0 ${styles.customCardWrapper} `}
+      href={link}
+    >
+      <Card
+        text="white"
+        className={`w-100 border-0 h-100 ${styles.customCard}`}
+      >
         <Card.Header
           className="cardHeader text-center border-0 px-4 py-5"
-          style={{ backgroundColor: color }}
+          style={{ backgroundColor: headerColor }}
         >
-          <img src={icon} alt={icon} style={{ width: "8rem" }} />
+          <img
+            src={icon}
+            alt={icon.split("/").pop()}
+            className={`${styles.customCardIcon}`}
+          />
         </Card.Header>
         <Card.Body className="cardBody p-4 d-flex flex-column ">
           <Card.Title>{title}</Card.Title>
-          <Card.Text style={{ color: "var(--color-transparent-white-72)" }}>
-            {text}
-          </Card.Text>
+          <Card.Text className={`${styles.customCardText}`}>{text}</Card.Text>
         </Card.Body>
       </Card>
     </a>
