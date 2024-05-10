@@ -85,18 +85,52 @@
   }
 }
 
-.pawn {
-  bottom: 0;
-  left: 0;
-  width: 12.5%;
+.available-move {
+  position: relative;
+  border: 1px solid var(--bs-secondary);
+  background-color: var(--clr-neutral-900) !important;
 }
 
-.pawn:hover {
-  cursor: pointer;
+.available-move::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20%;
+  height: 20%;
+  border-radius: 50%;
+  background-color: var(--bs-secondary);
 }
 
 .square {
-  transition: all linear 0.3s;
+  bottom: 0;
+  left: 0;
+  transition: all ease 0.3s;
+  width: 12.5%;
+  height: 12.5%;
+}
+
+.red-pawn {
+  background-image: url("../../assets/red-pawn.png");
+  background-position: center;
+  background-size: 85%;
+  background-repeat: no-repeat;
+}
+
+.blue-pawn {
+  background-image: url("../../assets/blue-pawn.png");
+  background-position: center;
+  background-size: 85%;
+  background-repeat: no-repeat;
+}
+
+.red-pawn:hover {
+  cursor: pointer;
+}
+
+.blue-pawn:hover {
+  cursor: pointer;
 }
 
 .square-11 {
@@ -131,8 +165,12 @@
   transform: translate(600%, 0);
 }
 
+.square-18 {
+  transform: translate(700%, 0);
+}
+
 .square-21 {
-  transform: translate(0, 100%);
+  transform: translate(0, -100%);
 }
 
 .square-22 {
