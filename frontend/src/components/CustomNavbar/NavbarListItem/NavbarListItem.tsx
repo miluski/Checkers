@@ -37,17 +37,17 @@ export default function NavbarListItem({
         overlay={<Tooltip className="position-absolute">{text}</Tooltip>}
       >
         <li className={` ${styles.listItem} w-100  `}>
-          <a className="text-decoration-none" href={link} tabIndex={-1}>
-            <button
-              onClick={onClick}
-              className="d-flex justify-content-lg-center justify-content-xl-start align-items-center py-3 px-3 text-white fw-bold border-0 bg-transparent w-100"
-            >
-              <img
-                className="me-3 me-lg-0 me-xl-3"
-                src={icon}
-                alt={icon.split("/").pop()}
-              />
-            </button>
+          <a
+            className="text-decoration-none d-flex justify-content-lg-center justify-content-xl-start align-items-center py-3 px-3 text-white fw-bold"
+            onClick={onClick}
+            href={link}
+            tabIndex={0}
+          >
+            <img
+              className="me-3 me-lg-0 me-xl-3"
+              src={icon}
+              alt={icon.split("/").pop()}
+            />
           </a>
         </li>
       </OverlayTrigger>
@@ -55,18 +55,18 @@ export default function NavbarListItem({
   } else {
     return (
       <li className={` ${styles.listItem} w-100  `}>
-        <a className=" text-decoration-none" href={link} tabIndex={-1}>
-          <button
-            onClick={onClick}
-            className="d-flex justify-content-lg-center justify-content-xl-start align-items-center py-3 px-3 text-decoration-none text-white fw-bold border-0 bg-transparent w-100"
-          >
-            <img
-              className="me-3 me-lg-0 me-xl-3"
-              src={icon}
-              alt={icon.split("/").pop()}
-            />
-            <span className="d-lg-none d-xl-block">{text}</span>
-          </button>
+        <a
+          className=" text-decoration-none d-flex justify-content-lg-center justify-content-xl-start align-items-center py-3 px-3 text-decoration-none text-white fw-bold w-100"
+          onClick={onClick}
+          href={link}
+          tabIndex={0}
+        >
+          <img
+            className="me-3 me-lg-0 me-xl-3"
+            src={icon}
+            alt={icon.split("/").pop()}
+          />
+          <span className="d-lg-none d-xl-block">{text}</span>
         </a>
       </li>
     );
