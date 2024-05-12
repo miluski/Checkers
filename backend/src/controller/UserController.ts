@@ -16,6 +16,7 @@ export class UserController {
 		this.handleAcceptFriendRequest();
 		this.handleSendInviteRequest();
 		this.handleRemoveFriendRequest();
+		this.handleGetInvitesListRequest();
 	}
 	private handleLoginRequest(): void {
 		this.app.post(
@@ -71,6 +72,15 @@ export class UserController {
 			async (req: Request, res: Response) => {
 				const user = await this.getUser(req.params.email);
 				user ? res.status(200).send(user.friends) : res.sendStatus(404);
+			}
+		);
+	}
+	private handleGetInvitesListRequest(): void {
+		this.app.get(
+			"/api/user/:email/getInvites",
+			async (req: Request, res: Response) => {
+				const user = await this.getUser(req.params.email);
+				user ? res.status(200).send(user.invites) : res.sendStatus(404);
 			}
 		);
 	}
