@@ -75,7 +75,7 @@ function ScreenAfterLoginView() {
               title="Znajomi"
               text="Znajdź i dodawaj znajomych"
               headerColor="var(--color-skin-300)"
-              link="#"
+              link="./friends"
             />
           </nav>
         </main>
