@@ -1,7 +1,7 @@
 export async function getFriends(): Promise<Object> {
 	const userEmail = localStorage.getItem("loggedUserEmail");
 	if (userEmail !== null && userEmail !== undefined) {
-		const endpoint = `http://localhost:3000/api/user/friends/email/${userEmail}`;
+		const endpoint = `http://192.168.0.11:3000/api/user/friends/email/${userEmail}`;
 		const response = await fetch(endpoint);
         let data = { email: "" };
 		if (response.ok) {

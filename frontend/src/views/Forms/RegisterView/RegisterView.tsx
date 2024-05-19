@@ -10,7 +10,7 @@ import * as yup from "yup";
 import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { registerUser } from "./registerUser.ts";
+import { registerUser } from "./RegisterUser";
 
 export default function RegisterView() {
   const { Formik } = formik;

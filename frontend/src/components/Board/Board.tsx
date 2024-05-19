@@ -127,7 +127,7 @@ export default function Board() {
 						interval = setInterval(async () => {
 							console.log("Interval running");
 							if (localGameId) {
-								const endpoint = `http://localhost:3000/api/game/${localGameId}/credentials`;
+								const endpoint = `http://192.168.0.11:3000/api/game/${localGameId}/credentials`;
 								const response = await fetch(endpoint);
 								const data = await response.json();
 								if (
@@ -153,7 +153,7 @@ export default function Board() {
 						interval = setInterval(async () => {
 							console.log("Interval running");
 							if (gameId) {
-								const endpoint = `http://localhost:3000/api/game/${parsedOnlineGameCredentials.gameId}/credentials`;
+								const endpoint = `http://192.168.0.11:3000/api/game/${parsedOnlineGameCredentials.gameId}/credentials`;
 								const response = await fetch(endpoint);
 								const data = await response.json();
 								dispatch({
