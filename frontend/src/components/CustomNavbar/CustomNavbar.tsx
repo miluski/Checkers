@@ -45,6 +45,7 @@ export default function CustomNavbar() {
 
 	const handleLogout = () => {
 		localStorage.removeItem("loggedUserEmail");
+		localStorage.removeItem("nickname");
 		navigate("/login");
 	};
 
@@ -70,7 +71,7 @@ export default function CustomNavbar() {
 								<NavbarListItem
 									icon={handshakeSvg}
 									text={"Graj ze znajomymi"}
-									link={"./gameAgainstPlayerView"}
+									link={"./gameAgainstFriendView"}
 								/>
 								<NavbarListItem icon={quickPlaySvg} text={"Szybka gra"} />
 								<NavbarListItem
@@ -85,7 +86,7 @@ export default function CustomNavbar() {
 								<NavbarListItem icon={lessonsSvg} text={"Jak grać ?"} />
 								<NavbarListItem icon={archiveSvg} text={"Wczytaj grę"} />
 								<NavbarListItem icon={accountSvg} text={"Twoje konto"} />
-								<NavbarListItem icon={friendsSvg} text={"Znajomi"} link={"#"} />
+								<NavbarListItem icon={friendsSvg} text={"Znajomi"} link={"./friends"} />
 								<NavbarListItem
 									icon={gearSvg}
 									text={"Ustawienia"}

@@ -1,14 +1,19 @@
-import { User } from "../../../utils/User.ts";
+import { CHANGE_NICKNAME } from "../../../utils/ActionTypes";
+import { User } from "../../../utils/User";
 
 export async function loginUser(
 	user: User,
 	navigate: Function,
-	handleShow: Function
+	handleShow: Function,
+	dispatch: Function
 ): Promise<void> {
 	try {
-		const handleLogin = () => {
-			navigate("/screenAfterLogin");
+		const handleLogin = (user: User) => {
+			localStorage.setItem("nickname", user.nickname ?? "");
+			localStorage.setItem("playerColor", "blue");
 			localStorage.setItem("loggedUserEmail", user.email);
+			dispatch({type: CHANGE_NICKNAME, newNickname: user.nickname});
+			navigate("/screenAfterLogin");
 		};
 		const endpoint = "http://localhost:3000/api/user/auth/login";
 		const response = await fetch(endpoint, {
@@ -18,7 +23,8 @@ export async function loginUser(
 			},
 			body: JSON.stringify(user),
 		});
-		response.status === 202 ? handleLogin() : handleShow();
+		const data = await response.json();
+		response.status === 202 ? handleLogin(data) : handleShow();
 	} catch (error) {
 		console.error(error);
 	}

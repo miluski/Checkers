@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
 import { loginUser } from "./loginUser.ts";
+import { useDispatch } from "react-redux";
 
 export default function LoginView() {
   const { Formik } = formik;
@@ -18,7 +19,7 @@ export default function LoginView() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -35,7 +36,7 @@ export default function LoginView() {
         <Logo className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => loginUser(values, navigate, handleShow)}
+          onSubmit={(values) => loginUser(values, navigate, handleShow, dispatch)}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{

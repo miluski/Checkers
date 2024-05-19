@@ -1,9 +1,9 @@
-export async function getFriends(): Promise<Object> {
+export async function getGameInvites(): Promise<Object> {
 	const userEmail = localStorage.getItem("loggedUserEmail");
-	if (userEmail !== null) {
-		const endpoint = `http://localhost:3000/api/user/friends/email/${userEmail}`;
+	if (userEmail !== null && userEmail !== undefined) {
+		const endpoint = `http://localhost:3000/api/user/${userEmail}/getGameInvites`;
 		const response = await fetch(endpoint);
-        let data = { email: "" };
+		let data = {};
 		if (response.ok) {
 			const text = await response.text();
 			if (text) {
@@ -11,5 +11,5 @@ export async function getFriends(): Promise<Object> {
 			}
 		}
 		return data;
-	} else return { email: "" };
+	} else return {};
 }

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { User } from "../../utils/User";
 import { getUsers } from "./getUsers";
 import { Button } from "react-bootstrap";
-import { getFriends } from "./getFriends";
+import { getFriends } from "../../utils/getFriends";
 import { getInvites } from "./getInvites";
 
 export default function FriendsView() {

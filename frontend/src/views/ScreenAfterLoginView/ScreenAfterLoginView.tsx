@@ -26,14 +26,14 @@ function ScreenAfterLoginView() {
               title="Zagraj ze znajomym"
               text="Zaproś znajomego do wspólnej gry"
               headerColor="var(--color-skin-100)"
-              link="./gameAgainstPlayerView"
+              link="./gameAgainstFriendView"
             />
             <CustomCard
               icon={quickPlaySvg}
               title="Szybka gra"
               text="Wyszukaj gracza o podobnym poziomie umiejętności"
               headerColor="var(--color-gold-75)"
-              link="#"
+              link="./gameAgainstPlayerView"
             />
             <CustomCard
               icon={computerSvg}

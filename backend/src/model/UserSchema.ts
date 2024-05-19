@@ -8,5 +8,6 @@ export const userModel = mongoose.model(
 		nickname: String,
 		friends: Object,
 		invites: Object,
+		gameInvites: Object
 	})
 );

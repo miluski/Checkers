@@ -1,6 +1,8 @@
+import { gameModel } from "../model/GameSchema";
 import { User } from "../model/User";
 import { userModel } from "../model/UserSchema";
 import { Express, Request, Response } from "express";
+import { GameController } from "./GameController";
 
 export class UserController {
 	private app: Express;
@@ -17,6 +19,9 @@ export class UserController {
 		this.handleSendInviteRequest();
 		this.handleRemoveFriendRequest();
 		this.handleGetInvitesListRequest();
+		this.handleSendInviteToGameRequest();
+		this.handleAcceptInviteToGameRequest();
+		this.handleGetGameInvitesListRequest();
 	}
 	private handleLoginRequest(): void {
 		this.app.post(
@@ -27,7 +32,12 @@ export class UserController {
 						email: req.body.email,
 						password: req.body.password,
 					});
-					isUserFounded ? res.sendStatus(202) : res.sendStatus(401);
+					isUserFounded
+						? res.status(202).send({
+								nickname: isUserFounded.nickname,
+								email: isUserFounded.email,
+						  })
+						: res.sendStatus(401);
 				} catch (error) {
 					console.log(error);
 					res.sendStatus(500);
@@ -81,6 +91,15 @@ export class UserController {
 			async (req: Request, res: Response) => {
 				const user = await this.getUser(req.params.email);
 				user ? res.status(200).send(user.invites) : res.sendStatus(404);
+			}
+		);
+	}
+	private handleGetGameInvitesListRequest(): void {
+		this.app.get(
+			"/api/user/:email/getGameInvites",
+			async (req: Request, res: Response) => {
+				const user = await this.getUser(req.params.email);
+				user ? res.status(200).send(user.gameInvites) : res.sendStatus(404);
 			}
 		);
 	}
@@ -152,6 +171,69 @@ export class UserController {
 					const isFriendRemoved = await this.removeFriend(removedFriend, user);
 					isFriendRemoved ? res.sendStatus(200) : res.sendStatus(500);
 				} else res.sendStatus(500);
+			}
+		);
+	}
+	private handleSendInviteToGameRequest(): void {
+		this.app.post(
+			"/api/user/gameInvite",
+			async (req: Request, res: Response) => {
+				try {
+					const isInviteExists = await this.getIsGameInviteExists(
+						req.body.friendEmail
+					);
+					const user = await this.getUser(req.body.friendEmail);
+					if (!isInviteExists && user !== null) {
+						await userModel.updateOne(
+							{ _id: user._id },
+							{
+								$push: {
+									gameInvites: {
+										gameId: req.body.gameId,
+										friendEmail: req.body.email,
+									},
+								},
+							}
+						);
+						res.sendStatus(200);
+					} else res.sendStatus(300);
+				} catch (error) {
+					console.log(error);
+					res.sendStatus(500);
+				}
+			}
+		);
+	}
+	private handleAcceptInviteToGameRequest(): void {
+		this.app.post(
+			"/api/user/acceptGameInvite",
+			async (req: Request, res: Response) => {
+				try {
+					const gameController = new GameController(this.app);
+					const isInviteExists = await this.getIsGameInviteExists(
+						req.body.friendEmail
+					);
+					const isGameExists = await gameController.getIsGameExists(
+						req.body.gameId
+					);
+					const user = await this.getUser(req.body.email);
+					if (isInviteExists && isGameExists && user !== null) {
+						const isInviteRemoved = await this.removeGameInvite(
+							user._id,
+							req.body.friendEmail
+						);
+						const isGameObjectUpdated = await gameController.updateGameObject(
+							req,
+							user.nickname ?? ""
+						);
+						isInviteRemoved && isGameObjectUpdated
+							? res.sendStatus(200)
+							: res.sendStatus(500);
+					} else res.sendStatus(500);
+				} catch (error) {
+					console.log(error);
+					res.sendStatus(500);
+				}
 			}
 		);
 	}
@@ -259,6 +341,34 @@ export class UserController {
 			} else return false;
 		} catch (error) {
 			console.error(error);
+			return false;
+		}
+	}
+	private async getIsGameInviteExists(friendEmail: string): Promise<boolean> {
+		try {
+			const game = await userModel.findOne({
+				gameInvites: {
+					$elemMatch: { friendEmail: friendEmail },
+				},
+			});
+			return game !== null;
+		} catch (error) {
+			console.log(error);
+			return false;
+		}
+	}
+	private async removeGameInvite(
+		userId: string,
+		email: string
+	): Promise<boolean> {
+		try {
+			await userModel.updateOne(
+				{ _id: userId },
+				{ $pull: { gameInvites: { friendEmail: email } } }
+			);
+			return true;
+		} catch (error) {
+			console.log(error);
 			return false;
 		}
 	}

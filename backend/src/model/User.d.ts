@@ -5,5 +5,6 @@ export type User = {
 	nickname?: string;
 	friends?: object;
 	invites?: object;
+	gameInvites?: object;
 	findOne: any;
 };
