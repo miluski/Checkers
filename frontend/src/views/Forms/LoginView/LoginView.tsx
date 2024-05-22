@@ -5,12 +5,13 @@ import CustomFormInput from "../../../components/CustomFormInput/CustomFormInput
 import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSecondary.tsx";
 import CustomButton from "../../../components/Buttons/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
-import { LoginUser } from "./LoginUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
+import { loginUser } from "./LoginUser";
+import { useDispatch } from "react-redux";
 
 export default function LoginView() {
   const { Formik } = formik;
@@ -18,7 +19,7 @@ export default function LoginView() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -35,7 +36,7 @@ export default function LoginView() {
         <Logo className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => LoginUser(values, navigate, handleShow)}
+          onSubmit={(values) => loginUser(values, navigate, handleShow, dispatch)}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{

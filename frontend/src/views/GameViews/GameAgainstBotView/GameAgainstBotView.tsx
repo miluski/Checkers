@@ -8,6 +8,8 @@ import PlayerDetails from "../../../components/PlayerDetails/PlayerDetails.tsx";
 import styles from "../GameViews.module.css";
 
 export default function GameAgainstBotView() {
+  const nickname = localStorage.getItem("nickname") ?? "";
+  localStorage.removeItem("onlineGameCredentials");
   return (
     <div
       className={`d-flex flex-column flex-lg-row justify-content-between ${styles.baseContainer} `}
@@ -24,7 +26,7 @@ export default function GameAgainstBotView() {
         <PlayerDetails
           variant={"blue"}
           icon={playerSvg}
-          nickname={"Jan Kowalskiiiiiiiiiiii"}
+          nickname={nickname}
           pawnsCollected={0}
           areYou
         />

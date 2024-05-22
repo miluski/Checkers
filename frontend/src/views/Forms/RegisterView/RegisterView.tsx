@@ -5,12 +5,12 @@ import CustomFormInput from "../../../components/CustomFormInput/CustomFormInput
 import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSecondary.tsx";
 import CustomButton from "../../../components/Buttons/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
-import { RegisterUser } from "./RegisterUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
 import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "./RegisterUser";
 
 export default function RegisterView() {
   const { Formik } = formik;
@@ -60,7 +60,7 @@ export default function RegisterView() {
         <Formik
           validationSchema={schema}
           onSubmit={(values) =>
-            RegisterUser(values, handleShowError, handleShowSuccess)
+            registerUser(values, handleShowError, handleShowSuccess)
           }
           validateOnChange={false}
           validateOnBlur={true}

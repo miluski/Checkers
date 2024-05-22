@@ -1,25 +1,31 @@
-import { User } from "../../../utils/User.ts";
+import { CHANGE_NICKNAME } from "../../../utils/ActionTypes";
+import { User } from "../../../utils/User";
 
-export async function LoginUser(
-  user: User,
-  navigate: Function,
-  handleShow: Function,
+export async function loginUser(
+	user: User,
+	navigate: Function,
+	handleShow: Function,
+	dispatch: Function
 ): Promise<void> {
-  const handleLogin = () => {
-    navigate("/screenAfterLogin");
-  };
-
-  try {
-    const endpoint = "http://localhost:3000/api/user/auth/login";
-    const response = await fetch(endpoint, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    response.status === 200 ? handleLogin() : handleShow();
-  } catch (error) {
-    console.error(error);
-  }
+	try {
+		const handleLogin = (user: User) => {
+			localStorage.setItem("nickname", user.nickname ?? "");
+			localStorage.setItem("playerColor", "blue");
+			localStorage.setItem("loggedUserEmail", user.email);
+			dispatch({type: CHANGE_NICKNAME, newNickname: user.nickname});
+			navigate("/screenAfterLogin");
+		};
+		const endpoint = "http://192.168.0.11:3000/api/user/auth/login";
+		const response = await fetch(endpoint, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify(user),
+		});
+		const data = await response.json();
+		response.status === 202 ? handleLogin(data) : handleShow();
+	} catch (error) {
+		console.error(error);
+	}
 }

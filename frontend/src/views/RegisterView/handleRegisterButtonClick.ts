@@ -2,7 +2,7 @@ import { User } from "../../utils/User";
 
 export async function handleRegisterButtonClick(user: User): Promise<void> {
     try {
-        const endpoint = "http://localhost:3000/api/user/auth/register";
+        const endpoint = "http://192.168.0.11:3000/api/user/auth/register";
         const response = await fetch(endpoint, {
             method: "POST",
             headers: {

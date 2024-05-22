@@ -1,41 +1,30 @@
 import { Action } from "./Action";
-import {
-  CHANGE_EMAIL,
-  CHANGE_NICKNAME,
-  CHANGE_OPERATION,
-  CHANGE_PASSWORD,
-} from "./ActionTypes";
+import { CHANGE_NICKNAME, CHANGE_ENEMY_NICKNAME, CHANGE_PLAYER_COLOR } from "./ActionTypes";
 
 const initialState = {
-  nickname: "",
-  email: "",
-  password: "",
-  operation: "login",
+	nickname: "",
+	enemyNickname: "",
+	playerColor: "blue"
 };
 
-export function appReducer(state = initialState, action: Action) {
-  switch (action.type) {
-    case CHANGE_NICKNAME:
-      return {
-        ...state,
-        nickname: action.newNickname,
-      };
-    case CHANGE_EMAIL:
-      return {
-        ...state,
-        email: action.newEmail,
-      };
-    case CHANGE_PASSWORD:
-      return {
-        ...state,
-        password: action.newPassword,
-      };
-    case CHANGE_OPERATION:
-      return {
-        ...state,
-        operation: action.newOperation,
-      };
-    default:
-      return state;
-  }
+export default function appReducer(state = initialState, action: Action) {
+	switch (action.type) {
+		case CHANGE_NICKNAME:
+			return {
+				...state,
+				nickname: action.newNickname,
+			};
+		case CHANGE_ENEMY_NICKNAME:
+			return {
+				...state,
+				enemyNickname: action.newEnemyNickname,
+			};
+		case CHANGE_PLAYER_COLOR:
+			return {
+				...state,
+				playerColor: action.newPlayerColor
+			}
+		default:
+			return state;
+	}
 }
