@@ -1,10 +1,15 @@
 import { Request, Response, Express } from "express";
 import { gameModel } from "../model/GameSchema";
+import { TimerController } from "./TimeController";
 
 export class GameController {
 	private app: Express;
+	private firstPlayerTimer: TimerController;
+	private secondPlayerTimer: TimerController;
 	constructor(app: Express) {
 		this.app = app;
+		this.firstPlayerTimer = new TimerController();
+		this.secondPlayerTimer = new TimerController();
 		this.handleRequests();
 	}
 	private handleRequests(): void {
@@ -14,6 +19,9 @@ export class GameController {
 		this.handleJoinToGameRequest();
 		this.handleUpdateGameCredentialsRequest();
 		this.handleRemoveGameRequest();
+		this.handleStartTimer();
+		this.handleStopTimer();
+		this.handleGetRemainingTime();
 	}
 	private handleCreateGameRequest(): void {
 		this.app.post("/api/game/create", async (req: Request, res: Response) => {
@@ -57,9 +65,7 @@ export class GameController {
 			"/api/game/:id/credentials",
 			async (req: Request, res: Response) => {
 				try {
-					const game = await gameModel.find(
-						{ _id: req.params.id },
-					);
+					const game = await gameModel.find({ _id: req.params.id });
 					res.send(game);
 				} catch (error) {
 					console.log(error);
@@ -96,7 +102,10 @@ export class GameController {
 				try {
 					const isGameExists = await this.getIsGameExists(req.params.id);
 					if (isGameExists) {
-						const isUpdated = await this.updateGameObject(req, req.body.secondPlayerNickname);
+						const isUpdated = await this.updateGameObject(
+							req,
+							req.body.secondPlayerNickname
+						);
 						isUpdated ? res.sendStatus(200) : res.sendStatus(500);
 					} else res.sendStatus(404);
 				} catch (error) {
@@ -123,6 +132,49 @@ export class GameController {
 			}
 		);
 	}
+	private handleStartTimer(): void {
+		this.app.post("/api/game/startTimer", (req: Request, res: Response) => {
+			try {
+				const timerId = req.body.timerId;
+				timerId === 1
+					? this.firstPlayerTimer.startTimer()
+					: this.secondPlayerTimer.startTimer();
+				res.sendStatus(200);
+			} catch (error) {
+				console.log(error);
+				res.sendStatus(500);
+			}
+		});
+	}
+	private handleStopTimer(): void {
+		this.app.post("/api/game/stopTimer", (req: Request, res: Response) => {
+			try {
+				const timerId = req.body.timerId;
+				timerId === 1
+					? this.firstPlayerTimer.stopTimer()
+					: this.secondPlayerTimer.stopTimer();
+				res.sendStatus(200);
+			} catch (error) {
+				console.log(error);
+				res.sendStatus(500);
+			}
+		});
+	}
+	private handleGetRemainingTime(): void {
+		this.app.get("/api/game/getTime", (req: Request, res: Response) => {
+			try {
+				res
+					.send({
+						firstPlayerTime: this.firstPlayerTimer.getTime(),
+						secondPlayerTime: this.secondPlayerTimer.getTime(),
+					})
+					.status(200);
+			} catch (error) {
+				console.log(error);
+				res.sendStatus(500);
+			}
+		});
+	}
 	public async getIsGameExists(gameId: string): Promise<boolean> {
 		try {
 			const game = await gameModel.findOne({ _id: gameId });
@@ -141,7 +193,10 @@ export class GameController {
 			return false;
 		}
 	}
-	public async updateGameObject(req: Request, secondPlayerNickname: string): Promise<boolean> {
+	public async updateGameObject(
+		req: Request,
+		secondPlayerNickname: string
+	): Promise<boolean> {
 		try {
 			const gameId = req.params.id ?? req.body.gameId;
 			await gameModel.updateOne(
@@ -153,7 +208,8 @@ export class GameController {
 						firstPlayerPoints: req.body.firstPlayerPoints,
 						secondPlayerPoints: req.body.secondPlayerPoints,
 						secondPlayerNickname: secondPlayerNickname,
-						isStarted: req.body.isStarted
+						isStarted: req.body.isStarted,
+						moves: req.body.moves,
 					},
 				}
 			);

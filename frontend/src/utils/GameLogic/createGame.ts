@@ -1,4 +1,4 @@
-import { Game } from "./Game";
+import { Game } from "../types/Game";
 
 export async function createGame(game: Game): Promise<string> {
 	const endpoint = "http://localhost:3000/api/game/create";

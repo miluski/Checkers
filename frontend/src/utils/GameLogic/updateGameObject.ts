@@ -1,7 +1,6 @@
-import { Game } from "./Game"
+import { Game } from "../types/Game"
 
 export async function updateGameObject(game: Game) : Promise<boolean> {
-    console.log(game);
     const endpoint = `http://localhost:3000/api/game/${game.gameId}/updateCredentials`;
     const response = await fetch(endpoint, {
         method: "POST",

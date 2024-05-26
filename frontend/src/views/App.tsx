@@ -13,9 +13,10 @@ import GameAgainstBotView from "./GameViews/GameAgainstBotView/GameAgainstBotVie
 import GameAgainstPlayerView from "./GameViews/GameAgainstPlayerView/GameAgainstPlayerView";
 import FriendsView from "./FriendsView/FriendsView";
 import GameAgainstFriendView from "./GameViews/GameAgainstFriendView/GameAgainstFriendView";
-import { legacy_createStore } from "redux";
-import appReducer from "../utils/appReducer";
+import { combineReducers, legacy_createStore } from "redux";
 import { Provider } from "react-redux";
+import { boardReducer } from "../utils/reducers/boardReducer";
+import gameReducer from "../utils/reducers/gameReducer";
 
 const router = createBrowserRouter(
 	createRoutesFromElements(
@@ -34,7 +35,11 @@ const router = createBrowserRouter(
 );
 
 export default function App() {
-	const store = legacy_createStore(appReducer);
+	const rootReducer = combineReducers({
+		gameReducer,
+		boardReducer
+	})
+	const store = legacy_createStore(rootReducer);
 	return (
 		<Provider store={store}>
 			<RouterProvider router={router} />

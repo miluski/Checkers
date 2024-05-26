@@ -1,5 +1,5 @@
 import { CHANGE_NICKNAME } from "../../../utils/ActionTypes";
-import { User } from "../../../utils/User";
+import { User } from "../../../utils/types/User";
 
 export async function loginUser(
 	user: User,

@@ -5,58 +5,58 @@ import GameFlowTableManager from "../../../components/GameFlowTableManager/GameF
 import playerSvg from "../../../assets/icons/account.svg";
 import PlayerDetails from "../../../components/PlayerDetails/PlayerDetails.tsx";
 import { useSelector } from "react-redux";
-import { State } from "../../../utils/State";
+import { GameState } from "../../../utils/types/State";
+import { getGameCredentials } from "../../../components/Board/getGameCredentials.ts";
 
 export default function GameAgainstPlayerView() {
-	const { nickname, enemyNickname, playerColor } = useSelector(
-		(state: State) => state
+	const {
+		stateNickname,
+		stateEnemyNickname,
+		statePlayerColor,
+		firstPlayerPoints,
+		secondPlayerPoints,
+	} = useSelector((state: GameState) => state.gameReducer);
+	const { nickname, enemyNickname, playerColor } = getGameCredentials(
+		stateNickname,
+		stateEnemyNickname,
+		statePlayerColor
 	);
-	const playerNickname =
-		nickname !== "" ? nickname : localStorage.getItem("nickname") ?? "";
-	const playerEnemyNickname =
-		enemyNickname !== ""
-			? enemyNickname
-			: localStorage.getItem("enemyNickname") ?? "";
-	const finalPlayerColor =
-		playerColor !== "" && playerColor !== null
-			? playerColor
-			: localStorage.getItem("playerColor") ?? "blue";
 	return (
 		<div
 			className={`d-flex flex-column flex-lg-row justify-content-between ${styles.baseContainer} `}>
 			<CustomNavbar />
 			<main className='align-self-center d-flex flex-column align-self-center justify-content-center my-4 my-xl-0 text-white  '>
-				{finalPlayerColor === "red" ? (
+				{playerColor === "red" ? (
 					<PlayerDetails
 						variant={"red"}
 						icon={playerSvg}
-						nickname={playerEnemyNickname}
-						pawnsCollected={0}
-            areYou
+						nickname={enemyNickname}
+						pawnsCollected={secondPlayerPoints}
+						areYou
 					/>
 				) : (
 					<PlayerDetails
 						variant={"red"}
 						icon={playerSvg}
-						nickname={playerEnemyNickname}
-						pawnsCollected={0}
+						nickname={enemyNickname}
+						pawnsCollected={secondPlayerPoints}
 					/>
 				)}
 				<Board />
-				{finalPlayerColor === "blue" ? (
+				{playerColor === "blue" ? (
 					<PlayerDetails
 						variant={"blue"}
 						icon={playerSvg}
-						nickname={playerNickname}
-						pawnsCollected={0}
+						nickname={nickname}
+						pawnsCollected={firstPlayerPoints}
 						areYou
 					/>
 				) : (
 					<PlayerDetails
 						variant={"blue"}
 						icon={playerSvg}
-						nickname={playerNickname}
-						pawnsCollected={0}
+						nickname={nickname}
+						pawnsCollected={firstPlayerPoints}
 					/>
 				)}
 			</main>

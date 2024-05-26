@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { User } from "../../utils/User";
+import { User } from "../../utils/types/User";
 import { getUsers } from "./getUsers";
 import { Button } from "react-bootstrap";
 import { getFriends } from "../../utils/getFriends";

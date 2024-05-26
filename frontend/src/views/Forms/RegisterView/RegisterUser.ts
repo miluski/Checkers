@@ -1,4 +1,4 @@
-import { User } from "../../../utils/User";
+import { User } from "../../../utils/types/User";
 
 export async function registerUser(
   user: User,

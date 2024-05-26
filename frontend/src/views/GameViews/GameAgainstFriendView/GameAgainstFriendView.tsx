@@ -3,7 +3,7 @@ import { Button } from "react-bootstrap";
 import { getFriends } from "../../../utils/getFriends";
 import { getGameInvites } from "../../../utils/GameLogic/getGameInvites";
 import { useNavigate } from "react-router";
-import { ACCEPT_INVITE, SEND_INVITE } from "../../../components/Board/GameActionTypes";
+import { ACCEPT_INVITE, SEND_INVITE } from "../../../utils/ActionTypes";
 
 export default function GameAgainstFriendView() {
 	const navigate = useNavigate();
