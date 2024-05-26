@@ -6,20 +6,20 @@ import { UserController } from "./UserController";
 import { GameController } from "./GameController";
 
 export class ServerController {
-	private app: Express = express();
-	private port = process.env.PORT ?? 3000;
-	constructor() {
-		dotenv.config();
-		this.app.use(express.json());
-		this.app.use(cors());
-		this.app.listen(this.port, () => {
-			console.log(`Server is running at http://localhost:${this.port}`);
-		});
-		mongoose.connect(process.env.DATABASE_URL ?? "");
-		this.setEndpointsHandling();
-	}
-	private setEndpointsHandling() {
-		new UserController(this.app);
-		new GameController(this.app);
-	}
+  private app: Express = express();
+  private port = process.env.PORT ?? 3000;
+  constructor() {
+    dotenv.config();
+    this.app.use(express.json());
+    this.app.use(cors());
+    this.app.listen(Number(this.port), "192.168.0.11", () => {
+      console.log(`Server is running at http://192.168.0.11:${this.port}`);
+    });
+    mongoose.connect(process.env.DATABASE_URL ?? "");
+    this.setEndpointsHandling();
+  }
+  private setEndpointsHandling() {
+    new UserController(this.app);
+    new GameController(this.app);
+  }
 }

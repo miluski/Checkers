@@ -10,7 +10,7 @@ import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
-import { loginUser } from "./loginUser.ts";
+import { loginUser } from "./LoginUser";
 import { useDispatch } from "react-redux";
 
 export default function LoginView() {
