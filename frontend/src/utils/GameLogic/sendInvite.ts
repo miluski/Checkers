@@ -2,7 +2,7 @@ export async function sendInvite(
 	friendEmail: string,
 	gameId: string
 ): Promise<boolean> {
-	const endpoint = "http://192.168.0.11:3000/api/user/gameInvite";
+	const endpoint = "http://192.168.220.148:3000/api/user/gameInvite";
 	const email = localStorage.getItem("loggedUserEmail");
 	if (email) {
 		const response = await fetch(endpoint, {

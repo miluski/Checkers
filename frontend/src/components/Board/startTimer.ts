@@ -1,5 +1,5 @@
 export async function startTimer(timerId: number) {
-	const endpoint = "http://localhost:3000/api/game/startTimer";
+	const endpoint = "http://192.168.220.148:3000/api/game/startTimer";
 	await fetch(endpoint, {
 		method: "POST",
 		headers: {

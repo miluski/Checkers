@@ -21,4 +21,5 @@ export type BoardAction = {
 	newCurrentPlayerColor: "blue" | "red";
 	newIsGameStarted: boolean;
 	newPawnsPositions: Pawn[];
+	newIsGameEnded: boolean;
 };

@@ -15,7 +15,7 @@ export async function loginUser(
 			dispatch({type: CHANGE_NICKNAME, newNickname: user.nickname});
 			navigate("/screenAfterLogin");
 		};
-		const endpoint = "http://192.168.0.11:3000/api/user/auth/login";
+		const endpoint = "http://192.168.220.148:3000/api/user/auth/login";
 		const response = await fetch(endpoint, {
 			method: "POST",
 			headers: {

@@ -22,4 +22,5 @@ export type BoardState = {
 	isGameStarted: boolean;
 	pawnsPositions: Pawn[];
 	boardReducer: any;
+	isGameEnded: boolean;
 };
