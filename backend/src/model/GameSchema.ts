@@ -9,6 +9,7 @@ export const gameModel = mongoose.model(
 		secondPlayerPoints: Number,
         firstPlayerNickname: String,
         secondPlayerNickname: String,
+		moves: Array,
 		isStarted: Boolean
 	})
 );

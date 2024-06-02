@@ -1,7 +1,7 @@
-import { Game } from "./Game";
+import { Game } from "../types/Game";
 
 export async function createGame(game: Game): Promise<string> {
-	const endpoint = "http://192.168.0.11:3000/api/game/create";
+	const endpoint = "http://192.168.220.148:3000/api/game/create";
 	const response = await fetch(endpoint, {
 		method: "POST",
 		headers: {

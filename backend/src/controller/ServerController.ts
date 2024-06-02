@@ -12,8 +12,8 @@ export class ServerController {
     dotenv.config();
     this.app.use(express.json());
     this.app.use(cors());
-    this.app.listen(Number(this.port), "192.168.0.11", () => {
-      console.log(`Server is running at http://192.168.0.11:${this.port}`);
+    this.app.listen(Number(this.port), "192.168.220.148", () => {
+      console.log(`Server is running at http://192.168.220.148:${this.port}`);
     });
     mongoose.connect(process.env.DATABASE_URL ?? "");
     this.setEndpointsHandling();

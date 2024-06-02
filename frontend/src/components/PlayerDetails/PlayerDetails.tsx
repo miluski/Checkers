@@ -1,7 +1,15 @@
+import { useDispatch, useSelector } from "react-redux";
 import pawnCollectedBlue from "../../assets/pawn-colected-blue.png";
 import pawnCollectedRed from "../../assets/pawn-colected-red.png";
 import PlayerIcon from "../PlayerIconContainer/PlayerIcon.tsx";
 import "./PlayerDetails.css";
+import { BoardState, GameState } from "../../utils/types/Types.ts";
+import { useEffect } from "react";
+import {
+  CHANGE_FIRST_PLAYER_TIME,
+  CHANGE_IS_GAME_ENDED,
+  CHANGE_SECOND_PLAYER_TIME,
+} from "../../utils/ActionTypes.ts";
 
 export default function PlayerDetails({
   variant,
@@ -16,6 +24,35 @@ export default function PlayerDetails({
   pawnsCollected: number;
   areYou?: boolean;
 }) {
+  const dispatch = useDispatch();
+  const { currentPlayerColor, isGameStarted, isGameEnded } = useSelector(
+    (state: BoardState) => state.boardReducer
+  );
+  const { firstPlayerTime, secondPlayerTime } = useSelector(
+    (state: GameState) => state.gameReducer
+  );
+  useEffect(() => {
+    const interval = setInterval(async () => {
+      const endpoint = "http://192.168.220.148:3000/api/game/getTime";
+      const response = await fetch(endpoint);
+      const data = await response.json();
+      data.firstPlayerTime &&
+        dispatch({
+          type: CHANGE_FIRST_PLAYER_TIME,
+          newFirstPlayerTime: data.firstPlayerTime,
+        });
+      data.secondPlayerTime &&
+        dispatch({
+          type: CHANGE_SECOND_PLAYER_TIME,
+          newSecondPlayerTime: data.secondPlayerTime,
+        });
+      data.firstPlayerTime === "0:00" || data.secondPlayerTime === "0:00"
+        ? dispatch({ type: CHANGE_IS_GAME_ENDED, newIsGameEnded: true })
+        : null;
+    }, 1005);
+	isGameEnded ? clearInterval(interval) : null;
+    return () => clearInterval(interval);
+  }, [isGameStarted, currentPlayerColor, firstPlayerTime, secondPlayerTime]);
   return (
     <div
       className={
@@ -30,7 +67,8 @@ export default function PlayerDetails({
             variant
           }
         >
-          <i className="bi bi-hourglass-top me-3"></i>3:00
+          <i className="bi bi-hourglass-top me-3"></i>
+          {variant === "blue" ? firstPlayerTime : secondPlayerTime}
         </div>
       </div>
       <div className="d-flex ">

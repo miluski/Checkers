@@ -1,7 +1,7 @@
 export async function getInvites(): Promise<Object> {
 	const userEmail = localStorage.getItem("loggedUserEmail");
 	if (userEmail !== null) {
-		const endpoint = `http://192.168.0.11:3000/api/user/${userEmail}/getInvites`;
+		const endpoint = `http://192.168.220.148:3000/api/user/${userEmail}/getInvites`;
 		const response = await fetch(endpoint);
 		let data = { email: "" };
 		if (response.ok) {

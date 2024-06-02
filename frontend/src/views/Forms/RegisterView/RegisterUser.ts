@@ -1,4 +1,4 @@
-import { User } from "../../../utils/User";
+import { User } from "../../../utils/types/User";
 
 export async function registerUser(
   user: User,
@@ -6,7 +6,7 @@ export async function registerUser(
   handleShowSuccess: Function,
 ): Promise<void> {
   try {
-    const endpoint = "http://192.168.0.11:3000/api/user/auth/register";
+    const endpoint = "http://192.168.220.148:3000/api/user/auth/register";
     const response = await fetch(endpoint, {
       method: "POST",
       headers: {
