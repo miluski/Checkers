@@ -153,7 +153,7 @@ export default function Board() {
             currentPlayerColor,
             playerColor,
             allSquares,
-            isGameStarted
+            isGameStarted,
           );
         }}
         onMouseDown={(e) => {
@@ -173,14 +173,11 @@ export default function Board() {
             turnNumber,
             firstPlayerPoints,
             secondPlayerPoints,
-            allSquares
+            allSquares,
           );
         }}
         className="border border-2 border-secondary board-areas-container w-100 h-100 position-relative"
       >
-        {Array.from({ length: 64 }, (_, index) => (
-          <div key={index} className="w-100 h-100 "></div>
-        ))}
         {pawnsPositions.map((pawn: Pawn) => (
           <div
             tabIndex={pawn.tabIndex}

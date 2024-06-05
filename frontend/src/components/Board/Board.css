@@ -26,18 +26,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: var(--nth-color);
 }
 
-.board-areas-container div:nth-child(-n + 8):nth-child(even),
-.board-areas-container div:nth-child(n + 8):nth-child(-n + 16):nth-child(odd),
-.board-areas-container div:nth-child(n + 17):nth-child(-n + 24):nth-child(even),
-.board-areas-container div:nth-child(n + 25):nth-child(-n + 32):nth-child(odd),
-.board-areas-container div:nth-child(n + 33):nth-child(-n + 40):nth-child(even),
-.board-areas-container div:nth-child(n + 41):nth-child(-n + 48):nth-child(odd),
-.board-areas-container div:nth-child(n + 49):nth-child(-n + 56):nth-child(even),
-.board-areas-container div:nth-child(n + 57):nth-child(-n + 64):nth-child(odd) {
+.bg-checker-secondary {
   background-color: var(--color-grid);
+}
+
+.bg-checker-primary {
+  background-color: var(--nth-color);
 }
 
 :root {
@@ -87,6 +83,7 @@
 
 .available-move {
   position: relative;
+  cursor: pointer;
   border: 1px solid var(--bs-secondary);
   background-color: var(--clr-neutral-900) !important;
 }
@@ -118,8 +115,22 @@
   background-repeat: no-repeat;
 }
 
+.red-pawn-king {
+  background-image: url("../../assets/red-king-pawn.png");
+  background-position: center;
+  background-size: 85%;
+  background-repeat: no-repeat;
+}
+
 .blue-pawn {
   background-image: url("../../assets/blue-pawn.png");
+  background-position: center;
+  background-size: 85%;
+  background-repeat: no-repeat;
+}
+
+.blue-pawn-king {
+  background-image: url("../../assets/blue-king-pawn.png");
   background-position: center;
   background-size: 85%;
   background-repeat: no-repeat;
@@ -129,7 +140,15 @@
   cursor: pointer;
 }
 
+.red-pawn-king:hover {
+  cursor: pointer;
+}
+
 .blue-pawn:hover {
+  cursor: pointer;
+}
+
+.blue-pawn-king:hover {
   cursor: pointer;
 }
 
