@@ -1,12 +1,11 @@
 import { Table } from "react-bootstrap";
 import GameManageButton from "../Buttons/GameManageButton/GameManageButton.tsx";
-import "./GameFlowTableManager.css";
-import { useSelector } from "react-redux";
-import { GameState } from "../../utils/types/State";
-import { Move } from "../../utils/types/Move";
+import "../GameFlowTableManager/GameFlowTableManager.css";
 
-export default function GameFlowTableManager() {
-  const { moves } = useSelector((state: GameState) => state.gameReducer);
+export default function GameFlowTableManager({
+  moves,
+  setOPenResetModal: setOpenResetModal,
+}) {
   return (
     <aside className="px-2 px-sm-4 d-flex justify-content-center game-against-bot-aside  align-items-center py-xl-0">
       <div className="py-5 container-wrapper">
@@ -23,15 +22,16 @@ export default function GameFlowTableManager() {
             </Table>
             <div className="w-100 flex-fill overflow-auto">
               <Table striped className="table-borderless ps-2" variant="dark">
-                <tbody className="text-center 2 border-secondary">
-                  {moves &&
-                    moves.map((move: Move, index: number) => (
-                      <tr key={index}>
-                        <td className="table-column">{move.turnNumber}</td>
-                        <td>{move.blueMove}</td>
-                        <td>{move.redMove}</td>
-                      </tr>
-                    ))}
+                <tbody className="text-center 2  border-secondary ">
+                  {moves.map((move, index) => (
+                    <tr key={index}>
+                      <td className={"table-column"}>
+                        {Math.ceil(index + 1)}.
+                      </td>
+                      <td className={"blue-move"}>{move.blue}</td>
+                      <td>{move.red}</td>
+                    </tr>
+                  ))}
                 </tbody>
               </Table>
             </div>
@@ -41,6 +41,7 @@ export default function GameFlowTableManager() {
               tooltipPlacement="top"
               tooltipText="Nowa gra"
               icon="bi-arrow-clockwise"
+              onClick={() => setOpenResetModal(true)}
             />
             <GameManageButton
               tooltipPlacement="top"
@@ -64,11 +65,13 @@ export default function GameFlowTableManager() {
               tooltipPlacement="bottom"
               tooltipText="Zaproponuj remis"
               icon="bi-draw"
+              disabled
             />
             <GameManageButton
               tooltipPlacement="bottom"
               tooltipText="Poddaj grę"
               icon="bi-flag-fill"
+              disabled
             />
           </div>
         </div>

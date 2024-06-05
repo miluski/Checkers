@@ -16,6 +16,10 @@
   width: 21.331%;
 }
 
+.blue-move {
+  width: 40.39%;
+}
+
 .table-game-action-container {
   background-color: var(--clr-neutral-800);
 }
@@ -25,7 +29,7 @@ tbody tr:nth-child(odd) {
 }
 
 .container-wrapper {
-  min-height: 850px;
+  height: 850px;
 }
 
 @media screen and (min-width: 992px) {
