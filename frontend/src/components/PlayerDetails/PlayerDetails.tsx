@@ -33,7 +33,7 @@ export default function PlayerDetails({
   );
   useEffect(() => {
     const interval = setInterval(async () => {
-      const endpoint = "http://192.168.220.148:3000/api/game/getTime";
+      const endpoint = "http://localhost:3000/api/game/getTime";
       const response = await fetch(endpoint);
       const data = await response.json();
       data.firstPlayerTime &&

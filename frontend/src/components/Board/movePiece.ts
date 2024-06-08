@@ -80,6 +80,32 @@ export function movePiece(
 				newTurnNumber: Number(actualTurn) + Number(1),
 			});
 			selectedPiece.classList.replace(selectedClass!, targetClass!);
+			if (
+				targetClass === "square-81" ||
+				targetClass === "square-82" ||
+				targetClass === "square-83" ||
+				targetClass === "square-84" ||
+				targetClass === "square-85" ||
+				targetClass === "square-86" ||
+				targetClass === "square-87" ||
+				targetClass === "square-88"
+			) {
+				selectedPiece.classList.replace("blue-pawn", "blue-pawn-king");
+				copiedSelectedPiece.classList.replace("blue-pawn", "blue-pawn-king");
+			}
+			else if (
+				targetClass === "square-11" ||
+				targetClass === "square-12" ||
+				targetClass === "square-13" ||
+				targetClass === "square-14" ||
+				targetClass === "square-15" ||
+				targetClass === "square-16" ||
+				targetClass === "square-17" ||
+				targetClass === "square-18"
+			) {
+				selectedPiece.classList.replace("red-pawn", "red-pawn-king");
+				copiedSelectedPiece.classList.replace("red-pawn", "red-pawn-king");
+			}
 			if (pawnToBeat) {
 				currentPlayerColor === "blue"
 					? (finalFirstPlayerPoints = Number(firstPlayerPoints) + Number(1))

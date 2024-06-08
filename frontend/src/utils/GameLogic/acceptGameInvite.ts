@@ -7,7 +7,7 @@ export async function acceptGameInvite(
 	const gameCredentials = await getGameCredentials(gameId);
 	const email = localStorage.getItem("loggedUserEmail");
 	if (email) {
-		const endpoint = "http://192.168.220.148:3000/api/user/acceptGameInvite";
+		const endpoint = "http://localhost:3000/api/user/acceptGameInvite";
 		const response = await fetch(endpoint, {
 			method: "POST",
 			headers: {

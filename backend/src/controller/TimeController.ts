@@ -15,15 +15,18 @@ export class TimerController {
 				newSeconds = 59;
 			}
 			newMinutes < 0
-				? console.log("Timer finished")
+				? this.resetTimer()
 				: (this.time = `${newMinutes}:${
 						newSeconds < 10 ? "0" : ""
 				  }${newSeconds}`);
 		}, 1000);
 	}
 	public stopTimer() {
-		console.log(this.interval);
 		this.interval && clearInterval(this.interval);
+	}
+	public resetTimer() {
+		this.time = "3:00";
+		this.interval = null;
 	}
 	public getTime(): string {
 		return this.time;

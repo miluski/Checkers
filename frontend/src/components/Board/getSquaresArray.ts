@@ -17,7 +17,7 @@ export function getSquaresArray(): Square {
             : cols % 2 === 0
               ? " bg-checker-primary"
               : " bg-checker-secondary") +
-          " position-absolute bg-transparent square ",
+          " position-absolute square ",
       });
     }
   }

@@ -9,7 +9,8 @@ import { initializeGame } from "./initializeGame";
 export function firstPlayerActions(
 	dispatch: Function,
 	nickname: string,
-	gameCredentials: GameCredentials
+	gameCredentials: GameCredentials,
+	isGameStarted: boolean
 ): NodeJS.Timeout | null {
 	let interval: NodeJS.Timeout | null = null;
 	dispatch({
@@ -21,7 +22,8 @@ export function firstPlayerActions(
 		let localGameId = await initializeGame(nickname, gameCredentials);
 		dispatch({ type: CHANGE_GAME_ID, newGameId: localGameId });
 		interval = setInterval(
-			async () => await firstPlayerGameRefresh(dispatch, localGameId),
+			async () =>
+				await firstPlayerGameRefresh(dispatch, localGameId, isGameStarted),
 			100
 		);
 		localStorage.removeItem("onlineGameCredentials");
