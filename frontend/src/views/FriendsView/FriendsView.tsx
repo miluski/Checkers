@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { User } from "../../utils/types/User";
 import { getUsers } from "./getUsers";
-import { Button } from "react-bootstrap";
+import { Button, Col, Container, Row } from "react-bootstrap";
 import { getFriends } from "../../utils/getFriends";
 import { getInvites } from "./getInvites";
 import { sendInvite } from "./sendInvite";
 import { removeFriend } from "./removeFriend";
 import { acceptInvite } from "./acceptInvite";
+import CustomNavbar from "../../components/CustomNavbar/CustomNavbar.tsx";
+import accountSvg from "../../assets/icons/account.svg";
 
 export default function FriendsView() {
 	const [usersList, setUsersLists] = useState<Array<User> | null>(null);
@@ -21,13 +23,24 @@ export default function FriendsView() {
 			setUserInvitesList(await getInvites());
 		})();
 	}, [refreshFlag]);
+	const containerStyle = {
+		backgroundColor: 'var(--bs-body-color)', 
+		borderColor: 'var(--color-skin-300)', 
+		maxWidth: '600px'
+	  };
+	const addButtonStyle = {
+		backgroundColor: 'var(--color-blue-100)',
+		borderColor: 'var(--color-blue-100)', 
+		color: 'white'
+	  };
+
 	return (
 		<>
 			{usersList !== null &&
 			userFriendsList !== null &&
 			userInvitesList !== null ? (
-				<div>
-					<text>Lista graczy:</text>
+				<div style={{backgroundColor: 'var(--clr-neutral-700)'}}>
+					<h1>Lista graczy:</h1>
 					{usersList
 						.filter((user: User, _index: number) => {
 							return (
@@ -49,16 +62,28 @@ export default function FriendsView() {
 								}
 							}
 							return isNotFounded ? (
-								<div key={index}>
-									<text>{user.email}</text>
+								<Container key={index} className="p-3 my-3 border rounded shadow-sm" style={containerStyle}>
+								<Row className="d-flex align-items-center">
+									<Col xs={3}>
+									<img src={accountSvg} alt="account" />
+									</Col>
+									<Col xs={6}>
+									<div className="fw-bold text-white">{user.email}</div>
+									</Col>
+									<Col xs={2}>
 									<Button
+										variant="primary"
+										style={addButtonStyle}
 										onClick={async () => {
 											await sendInvite(user.email);
 											setRefreshFlag(!refreshFlag);
-										}}>
+										}}
+									>
 										Dodaj do znajomych
 									</Button>
-								</div>
+									</Col>
+								</Row>
+								</Container>
 							) : (
 								<div key={index} />
 							);
@@ -67,39 +92,64 @@ export default function FriendsView() {
 					{Object.values(userFriendsList).map(
 						(friendEmail: string, index: number) =>
 							friendEmail !== "" ? (
-								<div key={index}>
-									<text>{friendEmail}</text>
+								<Container key={index} className="p-3 my-3 border rounded shadow-sm" style={containerStyle}>
+								<Row className="d-flex align-items-center">
+									<Col xs={3}>
+									<img src={accountSvg} alt="account" />
+									</Col>
+									<Col xs={6}>
+									<div className="fw-bold text-white">{friendEmail}</div>
+									</Col>
+									<Col xs={2}>
 									<Button
+										variant="primary"
+										style={addButtonStyle}
 										onClick={async () => {
 											await removeFriend(friendEmail);
 											setRefreshFlag(!refreshFlag);
-										}}>
+										}}
+									>
 										Usuń ze znajomych
 									</Button>
-								</div>
+									</Col>
+								</Row>
+								</Container>
 							) : (
 								<></>
 							)
 					)}
-					<text>Zaproszenia do grona znajomych:</text>
+					<h1>Zaproszenia do grona znajomych:</h1>
 					{Object.values(userInvitesList).map(
 						(friendEmail: string, index: number) =>
 							friendEmail !== "" ? (
-								<div key={index}>
-									<text>{friendEmail}</text>
+								<Container key={index} className="p-3 my-3 border rounded shadow-sm" style={containerStyle}>
+								<Row className="d-flex align-items-center">
+									<Col xs={3}>
+									<img src={accountSvg} alt="account" />
+									</Col>
+									<Col xs={6}>
+									<div className="fw-bold text-white">{friendEmail}</div>
+									</Col>
+									<Col xs={2}>
 									<Button
+										variant="primary"
+										style={addButtonStyle}
 										onClick={async () => {
 											await acceptInvite(friendEmail);
 											setRefreshFlag(!refreshFlag);
-										}}>
+										}}
+									>
 										Zaakceptuj zaproszenie
 									</Button>
-								</div>
+									</Col>
+								</Row>
+								</Container>
 							) : (
 								<></>
 							)
 					)}
 				</div>
+				
 			) : (
 				<></>
 			)}
