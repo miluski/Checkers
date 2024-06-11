@@ -1,15 +1,16 @@
 import { Request, Response, Express } from "express";
 import { gameModel } from "../model/GameSchema";
 import { TimerController } from "./TimeController";
+import { randomInt } from "crypto";
 
 export class GameController {
 	private app: Express;
-	private firstPlayerTimer: TimerController;
-	private secondPlayerTimer: TimerController;
+	private timersMap: Map<String, TimerController> = new Map<
+		String,
+		TimerController
+	>();
 	constructor(app: Express) {
 		this.app = app;
-		this.firstPlayerTimer = new TimerController();
-		this.secondPlayerTimer = new TimerController();
 		this.handleRequests();
 	}
 	private handleRequests(): void {
@@ -22,8 +23,15 @@ export class GameController {
 		this.handleStartTimer();
 		this.handleStopTimer();
 		this.handleGetRemainingTime();
+		this.handleResetTimers();
 	}
 	private handleCreateGameRequest(): void {
+		const firstPlayerTimer = new TimerController(1);
+		const secondPlayerTimer = new TimerController(2);
+		const firstTimerId = this.getTimerId();
+		const secondTimerId = this.getTimerId();
+		this.timersMap.set(firstTimerId, firstPlayerTimer);
+		this.timersMap.set(secondTimerId, secondPlayerTimer);
 		this.app.post("/api/game/create", async (req: Request, res: Response) => {
 			try {
 				const isGameExists = await this.getIsGameWithEmailExists(
@@ -39,9 +47,15 @@ export class GameController {
 						firstPlayerNickname: req.body.firstPlayerNickname,
 						secondPlayerNickname: "",
 						isStarted: false,
+						firstTimerId: firstTimerId,
+						secondTimerId: secondTimerId,
 					});
 					await game.save();
-					res.status(200).send({ gameId: game._id });
+					res.status(200).send({
+						gameId: game._id,
+						firstPlayerTimer: firstPlayerTimer,
+						secondPlayerTimer: secondPlayerTimer,
+					});
 				} else res.sendStatus(300);
 			} catch (error) {
 				console.log(error);
@@ -136,9 +150,7 @@ export class GameController {
 		this.app.post("/api/game/startTimer", (req: Request, res: Response) => {
 			try {
 				const timerId = req.body.timerId;
-				timerId === 1
-					? this.firstPlayerTimer.startTimer()
-					: this.secondPlayerTimer.startTimer();
+				this.timersMap.get(timerId)?.startTimer();
 				res.sendStatus(200);
 			} catch (error) {
 				console.log(error);
@@ -150,9 +162,7 @@ export class GameController {
 		this.app.post("/api/game/stopTimer", (req: Request, res: Response) => {
 			try {
 				const timerId = req.body.timerId;
-				timerId === 1
-					? this.firstPlayerTimer.stopTimer()
-					: this.secondPlayerTimer.stopTimer();
+				this.timersMap.get(timerId)?.stopTimer();
 				res.sendStatus(200);
 			} catch (error) {
 				console.log(error);
@@ -160,13 +170,26 @@ export class GameController {
 			}
 		});
 	}
-	private handleGetRemainingTime(): void {
-		this.app.get("/api/game/getTime", (req: Request, res: Response) => {
+	private handleResetTimers(): void {
+		this.app.post("/api/game/resetTimers", (req: Request, res: Response) => {
 			try {
+				this.timersMap.get(req.body.firstTimerId)?.resetTimer();
+				this.timersMap.get(req.body.secondTimerId)?.resetTimer();
+			} catch (error) {
+				console.log(error);
+				res.sendStatus(500);
+			}
+		});
+	}
+	private handleGetRemainingTime(): void {
+		this.app.post("/api/game/getTime", (req: Request, res: Response) => {
+			try {
+				const firstTimerId = req.body.firstTimerId;
+				const secondTimerId = req.body.secondTimerId;
 				res
 					.send({
-						firstPlayerTime: this.firstPlayerTimer.getTime(),
-						secondPlayerTime: this.secondPlayerTimer.getTime(),
+						firstPlayerTime: this.timersMap.get(firstTimerId)?.getTime(),
+						secondPlayerTime: this.timersMap.get(secondTimerId)?.getTime(),
 					})
 					.status(200);
 			} catch (error) {
@@ -218,5 +241,14 @@ export class GameController {
 			console.log(error);
 			return false;
 		}
+	}
+	private getTimerId(): string {
+		const chars = "1234567890";
+		let id = "";
+		for (let i = 0; i < 6; i++) {
+			const position = randomInt(9);
+			id += chars.substring(position, position + 1);
+		}
+		return id;
 	}
 }

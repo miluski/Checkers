@@ -10,7 +10,7 @@ import { startTimer } from "./startTimer";
 export function secondPlayerActions(
 	dispatch: Function,
 	gameCredentials: GameCredentials,
-	isGameStarted: boolean
+	isGameStarted: boolean,
 ): NodeJS.Timeout | null {
 	let interval: NodeJS.Timeout | null = null;
 	dispatch({
@@ -18,7 +18,10 @@ export function secondPlayerActions(
 		newGameId: gameCredentials.gameId,
 	});
 	(async () => {
-		await startTimer(1);
+		const endpoint = `http://localhost:3000/api/game/${gameCredentials.gameId}/credentials`;
+		const response = await fetch(endpoint);
+		const data = await response.json();
+		await startTimer(data[0].firstTimerId);
 		await joinGame(dispatch, gameCredentials);
 	})();
 	interval = setInterval(

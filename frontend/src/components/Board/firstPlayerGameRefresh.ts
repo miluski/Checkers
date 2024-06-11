@@ -7,6 +7,8 @@ import {
 	CHANGE_FIRST_PLAYER_POINTS,
 	CHANGE_SECOND_PLAYER_POINTS,
 	CHANGE_IS_GAME_ENDED,
+	CHANGE_FIRST_TIMER_ID,
+	CHANGE_SECOND_TIMER_ID,
 } from "../../utils/ActionTypes";
 
 export async function firstPlayerGameRefresh(
@@ -23,6 +25,14 @@ export async function firstPlayerGameRefresh(
 			data[0].secondPlayerNickname !== undefined &&
 			data[0].secondPlayerNickname !== ""
 		) {
+			dispatch({
+				type: CHANGE_FIRST_TIMER_ID,
+				newFirstTimerId: data[0].firstTimerId,
+			});
+			dispatch({
+				type: CHANGE_SECOND_TIMER_ID,
+				newSecondTimerId: data[0].secondTimerId,
+			});
 			dispatch({
 				type: CHANGE_ENEMY_NICKNAME,
 				newEnemyNickname: data[0].secondPlayerNickname,

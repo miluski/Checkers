@@ -9,6 +9,8 @@ export type GameState = {
 	secondPlayerPoints: number;
 	firstPlayerTime: string;
 	secondPlayerTime: string;
+	firstTimerId: string;
+	secondTimerId: string;
 	moves: Array<Move>;
 	turnNumber: number;
 	gameReducer: any;

@@ -33,7 +33,9 @@ export function movePiece(
 	actualTurn: number,
 	firstPlayerPoints: number,
 	secondPlayerPoints: number,
-	allSquares: any
+	allSquares: any,
+	firstTimerId: string,
+	secondTimerId: string
 ) {
 	const targetSquare = e.target as HTMLDivElement;
 	let finalFirstPlayerPoints = firstPlayerPoints;
@@ -92,8 +94,7 @@ export function movePiece(
 			) {
 				selectedPiece.classList.replace("blue-pawn", "blue-pawn-king");
 				copiedSelectedPiece.classList.replace("blue-pawn", "blue-pawn-king");
-			}
-			else if (
+			} else if (
 				targetClass === "square-11" ||
 				targetClass === "square-12" ||
 				targetClass === "square-13" ||
@@ -147,8 +148,8 @@ export function movePiece(
 			} else newPawnPositions = getPawnPositions();
 			(async () => {
 				isGameStarted && currentPlayerColor === "blue"
-					? (await stopTimer(1), await startTimer(2))
-					: (await stopTimer(2), await startTimer(1));
+					? (await stopTimer(firstTimerId), await startTimer(secondTimerId))
+					: (await stopTimer(secondTimerId), await startTimer(firstTimerId));
 				isGameStarted
 					? await updateGameObject({
 							gameId: gameId,

@@ -6,10 +6,6 @@ import NavbarListItem from "./NavbarListItem/NavbarListItem.tsx";
 import handshakeSvg from "../../assets/icons/handshake.svg";
 import quickPlaySvg from "../../assets/icons/quick-play.svg";
 import computerSvg from "../../assets/icons/computer.svg";
-import leaderboardSvg from "../../assets/icons/leaderboard.svg";
-import lessonsSvg from "../../assets/icons/lessons.svg";
-import archiveSvg from "../../assets/icons/archive.svg";
-import accountSvg from "../../assets/icons/account.svg";
 import friendsSvg from "../../assets/icons/friends.svg";
 import gearSvg from "../../assets/icons/gear-fill.svg";
 import CustomButton from "../Buttons/CustomButton/CustomButton.tsx";
@@ -81,13 +77,6 @@ export default function CustomNavbar() {
                   text={"Zagraj z botem"}
                   link={"./gameAgainstBotView"}
                 />
-                <NavbarListItem
-                  icon={leaderboardSvg}
-                  text={"Tablica wyników"}
-                />
-                <NavbarListItem icon={lessonsSvg} text={"Jak grać ?"} />
-                <NavbarListItem icon={archiveSvg} text={"Wczytaj grę"} />
-                <NavbarListItem icon={accountSvg} text={"Twoje konto"} />
                 <NavbarListItem
                   icon={friendsSvg}
                   text={"Znajomi"}

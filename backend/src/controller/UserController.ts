@@ -260,7 +260,7 @@ export class UserController {
 			return false;
 		}
 	}
-	private async removeInvite(invitedUser: User, user: User): Promise<boolean> {
+	private async removeInvite(user: User, invitedUser: User): Promise<boolean> {
 		try {
 			await userModel.updateOne(
 				{ _id: invitedUser._id },

@@ -23,6 +23,7 @@ import { firstPlayerActions } from "./firstPlayerActions";
 import { secondPlayerActions } from "./secondPlayerActions";
 import { deleteGame } from "../../utils/GameLogic/deleteGame";
 import { IoAlertCircleOutline } from "react-icons/io5";
+import { resetTimers } from "./resetTimers";
 
 export default function Board() {
 	const navigate = useNavigate();
@@ -37,6 +38,8 @@ export default function Board() {
 		turnNumber,
 		firstPlayerPoints,
 		secondPlayerPoints,
+		firstTimerId,
+		secondTimerId
 	} = useSelector((state: GameState) => state.gameReducer);
 	const {
 		selectedPiece,
@@ -53,6 +56,7 @@ export default function Board() {
 	const handleBeforeUnload = () => {
 		(async () => {
 			dispatch({ type: CHANGE_IS_GAME_ENDED, newIsGameEnded: false });
+			await resetTimers(firstTimerId, secondTimerId);
 			await deleteGame(gameId);
 		})();
 	};
@@ -184,7 +188,9 @@ export default function Board() {
 						turnNumber,
 						firstPlayerPoints,
 						secondPlayerPoints,
-						allSquares
+						allSquares,
+						firstTimerId,
+						secondTimerId
 					);
 				}}
 				className='border border-2 border-secondary board-areas-container w-100 h-100 position-relative'>
@@ -255,7 +261,6 @@ export default function Board() {
 				) : (
 					<></>
 				)}
-
 				{squares.map((square) => (
 					<div key={square.key} className={square.className} />
 				))}
