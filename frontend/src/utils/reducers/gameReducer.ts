@@ -10,6 +10,9 @@ import {
 	CHANGE_TURN_NUMBER,
 	CHANGE_MOVES,
 	CHANGE_CAN_LEAVE,
+	CHANGE_FIRST_TIMER_ID,
+	CHANGE_SECOND_TIMER_ID,
+	CHANGE_LOSER,
 } from "../ActionTypes";
 
 const initialState = {
@@ -23,6 +26,9 @@ const initialState = {
 	moves: [{}],
 	turnNumber: 0,
 	canLeave: false,
+	firstTimerId: "",
+	secondTimerId: "",
+	loser: "",
 };
 
 export default function gameReducer(state = initialState, action: GameAction) {
@@ -76,6 +82,21 @@ export default function gameReducer(state = initialState, action: GameAction) {
 			return {
 				...state,
 				canLeave: !state.canLeave,
+			};
+		case CHANGE_FIRST_TIMER_ID:
+			return {
+				...state,
+				firstTimerId: action.newFirstTimerId,
+			};
+		case CHANGE_SECOND_TIMER_ID:
+			return {
+				...state,
+				secondTimerId: action.newSecondTimerId,
+			};
+		case CHANGE_LOSER:
+			return {
+				...state,
+				loser: action.newLoser,
 			};
 		default:
 			return state;

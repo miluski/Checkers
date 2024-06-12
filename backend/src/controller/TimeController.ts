@@ -1,9 +1,13 @@
+import { randomInt } from "crypto";
+
 export class TimerController {
-	private interval: NodeJS.Timeout | null;
 	private time: string;
-	constructor() {
+	private playerNumber: number;
+	private interval: NodeJS.Timeout | null;
+	constructor(playerNumber: number) {
 		this.interval = null;
 		this.time = "3:00";
+		this.playerNumber = playerNumber;
 	}
 	public startTimer() {
 		this.interval = setInterval(() => {
@@ -15,17 +19,23 @@ export class TimerController {
 				newSeconds = 59;
 			}
 			newMinutes < 0
-				? console.log("Timer finished")
+				? null
 				: (this.time = `${newMinutes}:${
 						newSeconds < 10 ? "0" : ""
 				  }${newSeconds}`);
 		}, 1000);
 	}
 	public stopTimer() {
-		console.log(this.interval);
+		this.interval && clearInterval(this.interval);
+	}
+	public resetTimer() {
+		this.time = "3:00";
 		this.interval && clearInterval(this.interval);
 	}
 	public getTime(): string {
 		return this.time;
+	}
+	public getPlayerNumber(): number {
+		return this.playerNumber;
 	}
 }

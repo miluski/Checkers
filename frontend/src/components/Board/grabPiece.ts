@@ -17,7 +17,11 @@ export function grabPiece(
 			(currentPlayerColor === "blue" &&
 				selectedSquare.classList.contains("blue-pawn")) ||
 			(currentPlayerColor === "red" &&
-				selectedSquare.classList.contains("red-pawn"))
+				selectedSquare.classList.contains("red-pawn")) ||
+			(currentPlayerColor === "blue" &&
+				selectedSquare.classList.contains("blue-pawn-king")) ||
+			(currentPlayerColor === "red" &&
+				selectedSquare.classList.contains("red-pawn-king"))
 		) {
 			allSquares.forEach(
 				(square: { classList: { remove: (arg0: string) => void } }) => {

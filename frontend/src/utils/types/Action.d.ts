@@ -9,8 +9,12 @@ export type GameAction = {
 	newSecondPlayerPoints: number;
 	newFirstPlayerTime: string;
 	newSecondPlayerTime: string;
+	newFirstTimerId: string;
+	newSecondTimerId: string;
 	newMoves: Array<Move>;
 	newTurnNumber: number;
+	newLoser: string;
+	newShowConfirmLeave: boolean;
 };
 
 export type BoardAction = {

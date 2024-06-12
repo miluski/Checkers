@@ -30,6 +30,14 @@
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 
+.custom-button-danger {
+  --bgColor: var(--clr-red-600);
+  --bgColorHover: var(--clr-red-450);
+  --borderBottomLine: rgb(167, 26, 26);
+  --borderBottomLineHover: var(--clr-red-600);
+  --buttonTextShadow: rgba(0, 0, 0, 0.3);
+}
+
 .custom-button-component {
   --borderHeight: 0.4rem;
   background-color: var(--bgColor);

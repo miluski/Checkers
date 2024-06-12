@@ -9,7 +9,11 @@ export const gameModel = mongoose.model(
 		secondPlayerPoints: Number,
         firstPlayerNickname: String,
         secondPlayerNickname: String,
+		firstTimerId: String,
+		secondTimerId: String,
 		moves: Array,
-		isStarted: Boolean
+		isStarted: Boolean,
+		private: Boolean,
+		loser: String
 	})
 );

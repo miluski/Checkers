@@ -33,7 +33,9 @@ export function movePiece(
 	actualTurn: number,
 	firstPlayerPoints: number,
 	secondPlayerPoints: number,
-	allSquares: any
+	allSquares: any,
+	firstTimerId: string,
+	secondTimerId: string
 ) {
 	const targetSquare = e.target as HTMLDivElement;
 	let finalFirstPlayerPoints = firstPlayerPoints;
@@ -80,6 +82,31 @@ export function movePiece(
 				newTurnNumber: Number(actualTurn) + Number(1),
 			});
 			selectedPiece.classList.replace(selectedClass!, targetClass!);
+			if (
+				targetClass === "square-81" ||
+				targetClass === "square-82" ||
+				targetClass === "square-83" ||
+				targetClass === "square-84" ||
+				targetClass === "square-85" ||
+				targetClass === "square-86" ||
+				targetClass === "square-87" ||
+				targetClass === "square-88"
+			) {
+				selectedPiece.classList.replace("blue-pawn", "blue-pawn-king");
+				copiedSelectedPiece.classList.replace("blue-pawn", "blue-pawn-king");
+			} else if (
+				targetClass === "square-11" ||
+				targetClass === "square-12" ||
+				targetClass === "square-13" ||
+				targetClass === "square-14" ||
+				targetClass === "square-15" ||
+				targetClass === "square-16" ||
+				targetClass === "square-17" ||
+				targetClass === "square-18"
+			) {
+				selectedPiece.classList.replace("red-pawn", "red-pawn-king");
+				copiedSelectedPiece.classList.replace("red-pawn", "red-pawn-king");
+			}
 			if (pawnToBeat) {
 				currentPlayerColor === "blue"
 					? (finalFirstPlayerPoints = Number(firstPlayerPoints) + Number(1))
@@ -121,8 +148,8 @@ export function movePiece(
 			} else newPawnPositions = getPawnPositions();
 			(async () => {
 				isGameStarted && currentPlayerColor === "blue"
-					? (await stopTimer(1), await startTimer(2))
-					: (await stopTimer(2), await startTimer(1));
+					? (await stopTimer(firstTimerId), await startTimer(secondTimerId))
+					: (await stopTimer(secondTimerId), await startTimer(firstTimerId));
 				isGameStarted
 					? await updateGameObject({
 							gameId: gameId,
@@ -135,6 +162,12 @@ export function movePiece(
 							secondPlayerNickname: enemyNickname,
 							isStarted: true,
 							moves: moves,
+							loser:
+								finalFirstPlayerPoints === 12
+									? "red"
+									: finalSecondPlayerPoints === 12
+									? "blue"
+									: undefined,
 					  })
 					: null;
 			})();

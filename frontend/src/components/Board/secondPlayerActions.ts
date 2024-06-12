@@ -9,7 +9,8 @@ import { startTimer } from "./startTimer";
 
 export function secondPlayerActions(
 	dispatch: Function,
-	gameCredentials: GameCredentials
+	gameCredentials: GameCredentials,
+	navigate: Function
 ): NodeJS.Timeout | null {
 	let interval: NodeJS.Timeout | null = null;
 	dispatch({
@@ -17,13 +18,21 @@ export function secondPlayerActions(
 		newGameId: gameCredentials.gameId,
 	});
 	(async () => {
-		await startTimer(1);
+		const endpoint = `http://localhost:3000/api/game/${gameCredentials.gameId}/credentials`;
+		const response = await fetch(endpoint);
+		const data = await response.json();
+		await startTimer(data[0].firstTimerId);
 		await joinGame(dispatch, gameCredentials);
 	})();
-	interval = setInterval(
-		async () => await secondPlayerGameRefresh(dispatch, gameCredentials),
-		100
-	);
+	let needToClearInterval = false;
+	interval = setInterval(async () => {
+		needToClearInterval = await secondPlayerGameRefresh(
+			dispatch,
+			gameCredentials
+		);
+		needToClearInterval && interval && clearInterval(interval);
+		needToClearInterval && navigate("/screenAfterLogin");
+	}, 100);
 	dispatch({
 		type: CHANGE_CURRENT_PLAYER_COLOR,
 		newCurrentPlayerColor: "red",

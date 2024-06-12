@@ -29,6 +29,7 @@ export default function AlertModal({
 		| "secondary"
 		| "success"
 		| "neutral"
+		| "danger"
 		| null;
 	onDismissButtonVariant?:
 		| "primary"

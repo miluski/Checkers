@@ -16,6 +16,7 @@ export async function initializeGame(
 		firstPlayerNickname: nickname,
 		secondPlayerNickname: "",
 		moves: [],
+		private: onlineGameCredentials.friendEmail ? true : false
 	});
 	onlineGameCredentials.friendEmail &&
 		(await sendInvite(onlineGameCredentials.friendEmail, gameId));

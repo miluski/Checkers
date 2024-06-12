@@ -217,8 +217,8 @@ export class UserController {
 						req.body.gameId
 					);
 					const user = await this.getUser(req.body.email);
-					if (isInviteExists && isGameExists && user !== null) {
-						const isInviteRemoved = await this.removeGameInvite(
+					if (isGameExists && user !== null) {
+						isInviteExists && await this.removeGameInvite(
 							user._id,
 							req.body.friendEmail
 						);
@@ -226,7 +226,7 @@ export class UserController {
 							req,
 							user.nickname ?? ""
 						);
-						isInviteRemoved && isGameObjectUpdated
+						isGameObjectUpdated
 							? res.sendStatus(200)
 							: res.sendStatus(500);
 					} else res.sendStatus(500);
@@ -260,7 +260,7 @@ export class UserController {
 			return false;
 		}
 	}
-	private async removeInvite(invitedUser: User, user: User): Promise<boolean> {
+	private async removeInvite(user: User, invitedUser: User): Promise<boolean> {
 		try {
 			await userModel.updateOne(
 				{ _id: invitedUser._id },
