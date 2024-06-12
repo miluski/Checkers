@@ -20,32 +20,32 @@ import { getPublicGames } from "../../utils/GameLogic/getPublicGames.ts";
 import { CREATE_GAME, JOIN_GAME } from "../../utils/ActionTypes.ts";
 
 export default function CustomNavbar() {
-	const navigate = useNavigate();
+  const navigate = useNavigate();
 
-	const [showLogout, setShowLogout] = useState(false);
-	const handleCloseLogout = () => setShowLogout(false);
-	const handleShowLogout = () => setShowLogout(true);
+  const [showLogout, setShowLogout] = useState(false);
+  const handleCloseLogout = () => setShowLogout(false);
+  const handleShowLogout = () => setShowLogout(true);
 
-	const [show, setShow] = useState(false);
+  const [show, setShow] = useState(false);
 
-	const handleClose = () => setShow(false);
-	const handleShow = () => setShow(true);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
-	const [showHelp, setShowHelp] = useState(false);
-	const handleSendHelp = () => {
-		setShowHelp(false);
-		window.open("mailto:karolprzygodastudia@gmail.com", "_blank");
-	};
-	const handleCloseHelp = () => {
-		setShowHelp(false);
-	};
-	const handleShowHelp = () => setShowHelp(true);
+  const [showHelp, setShowHelp] = useState(false);
+  const handleSendHelp = () => {
+    setShowHelp(false);
+    window.open("mailto:karolprzygodastudia@gmail.com", "_blank");
+  };
+  const handleCloseHelp = () => {
+    setShowHelp(false);
+  };
+  const handleShowHelp = () => setShowHelp(true);
 
-	const handleLogout = () => {
-		localStorage.removeItem("loggedUserEmail");
-		localStorage.removeItem("nickname");
-		navigate("/login");
-	};
+  const handleLogout = () => {
+    localStorage.removeItem("loggedUserEmail");
+    localStorage.removeItem("nickname");
+    navigate("/login");
+  };
 
 	return (
 		<>
