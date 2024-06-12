@@ -10,7 +10,7 @@ import { startTimer } from "./startTimer";
 export function secondPlayerActions(
 	dispatch: Function,
 	gameCredentials: GameCredentials,
-	isGameStarted: boolean,
+	navigate: Function
 ): NodeJS.Timeout | null {
 	let interval: NodeJS.Timeout | null = null;
 	dispatch({
@@ -24,10 +24,15 @@ export function secondPlayerActions(
 		await startTimer(data[0].firstTimerId);
 		await joinGame(dispatch, gameCredentials);
 	})();
-	interval = setInterval(
-		async () => await secondPlayerGameRefresh(dispatch, gameCredentials, isGameStarted),
-		100
-	);
+	let needToClearInterval = false;
+	interval = setInterval(async () => {
+		needToClearInterval = await secondPlayerGameRefresh(
+			dispatch,
+			gameCredentials
+		);
+		needToClearInterval && interval && clearInterval(interval);
+		needToClearInterval && navigate("/screenAfterLogin");
+	}, 100);
 	dispatch({
 		type: CHANGE_CURRENT_PLAYER_COLOR,
 		newCurrentPlayerColor: "red",

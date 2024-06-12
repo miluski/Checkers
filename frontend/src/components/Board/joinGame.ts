@@ -6,6 +6,7 @@ export async function joinGame(
 	dispatch: Function,
 	onlineGameCredentials: GameCredentials
 ): Promise<void> {
+	console.log(onlineGameCredentials)
 	const isAccepted =
 		onlineGameCredentials.gameId &&
 		onlineGameCredentials.friendEmail &&

@@ -1,7 +1,7 @@
 import { Request, Response, Express } from "express";
 import { gameModel } from "../model/GameSchema";
 import { TimerController } from "./TimeController";
-import { randomInt } from "crypto";
+import crypto from "crypto";
 
 export class GameController {
 	private app: Express;
@@ -19,6 +19,7 @@ export class GameController {
 		this.handleCreateGameRequest();
 		this.handleJoinToGameRequest();
 		this.handleUpdateGameCredentialsRequest();
+		this.handleEndGame();
 		this.handleRemoveGameRequest();
 		this.handleStartTimer();
 		this.handleStopTimer();
@@ -129,6 +130,27 @@ export class GameController {
 			}
 		);
 	}
+	private handleEndGame(): void {
+		this.app.post("/api/game/:id/end", async (req: Request, res: Response) => {
+			try {
+				const isGameExists = await this.getIsGameExists(req.params.id);
+				if (isGameExists) {
+					await gameModel.updateOne(
+						{ _id: req.params.id },
+						{
+							$set: {
+								loser: req.body.loser,
+							},
+						}
+					);
+					res.sendStatus(200);
+				}
+			} catch (error) {
+				console.log(error);
+				res.sendStatus(500);
+			}
+		});
+	}
 	private handleRemoveGameRequest(): void {
 		this.app.delete(
 			"/api/game/:id/delete",
@@ -233,6 +255,7 @@ export class GameController {
 						secondPlayerNickname: secondPlayerNickname,
 						isStarted: req.body.isStarted,
 						moves: req.body.moves,
+						loser: req.body.loser,
 					},
 				}
 			);
@@ -243,12 +266,10 @@ export class GameController {
 		}
 	}
 	private getTimerId(): string {
-		const chars = "1234567890";
-		let id = "";
-		for (let i = 0; i < 6; i++) {
-			const position = randomInt(9);
-			id += chars.substring(position, position + 1);
+		let randomNumber = parseInt(crypto.randomBytes(3).toString("hex"), 16);
+		while (randomNumber > 999999) {
+			randomNumber = parseInt(crypto.randomBytes(3).toString("hex"), 16);
 		}
-		return id;
+		return randomNumber.toString();
 	}
 }

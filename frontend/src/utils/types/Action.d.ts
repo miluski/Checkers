@@ -13,6 +13,8 @@ export type GameAction = {
 	newSecondTimerId: string;
 	newMoves: Array<Move>;
 	newTurnNumber: number;
+	newLoser: string;
+	newShowConfirmLeave: boolean;
 };
 
 export type BoardAction = {

@@ -19,7 +19,7 @@ export class TimerController {
 				newSeconds = 59;
 			}
 			newMinutes < 0
-				? this.resetTimer()
+				? null
 				: (this.time = `${newMinutes}:${
 						newSeconds < 10 ? "0" : ""
 				  }${newSeconds}`);
@@ -30,7 +30,7 @@ export class TimerController {
 	}
 	public resetTimer() {
 		this.time = "3:00";
-		this.interval = null;
+		this.interval && clearInterval(this.interval);
 	}
 	public getTime(): string {
 		return this.time;

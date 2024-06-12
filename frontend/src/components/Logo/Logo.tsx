@@ -10,7 +10,7 @@ export default function Logo({
   className?: string;
 }) {
   return (
-    <a className="text-decoration-none " href="#">
+    <a className="text-decoration-none " href="/screenAfterLogin">
       <div
         className={
           "d-flex align-items-center justify-content-center " + className

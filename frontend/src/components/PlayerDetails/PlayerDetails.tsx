@@ -7,9 +7,10 @@ import { BoardState, GameState } from "../../utils/types/Types.ts";
 import { useEffect } from "react";
 import {
 	CHANGE_FIRST_PLAYER_TIME,
-	CHANGE_IS_GAME_ENDED,
+	CHANGE_LOSER,
 	CHANGE_SECOND_PLAYER_TIME,
 } from "../../utils/ActionTypes.ts";
+import { setGameLoser } from "../../utils/GameLogic/setGameLoser.ts";
 
 export default function PlayerDetails({
 	variant,
@@ -25,14 +26,11 @@ export default function PlayerDetails({
 	areYou?: boolean;
 }) {
 	const dispatch = useDispatch();
-	const { currentPlayerColor, isGameStarted, isGameEnded } = useSelector(
-		(state: BoardState) => state.boardReducer
-	);
-	const { firstPlayerTime, secondPlayerTime, firstTimerId, secondTimerId } = useSelector(
-		(state: GameState) => state.gameReducer
-	);
+	const { currentPlayerColor, isGameStarted, isGameEnded, gameId } =
+		useSelector((state: BoardState) => state.boardReducer);
+	const { firstPlayerTime, secondPlayerTime, firstTimerId, secondTimerId } =
+		useSelector((state: GameState) => state.gameReducer);
 	useEffect(() => {
-		console.log(firstTimerId, secondTimerId)
 		const interval = setInterval(async () => {
 			const endpoint = "http://localhost:3000/api/game/getTime";
 			const response = await fetch(endpoint, {
@@ -56,9 +54,13 @@ export default function PlayerDetails({
 					type: CHANGE_SECOND_PLAYER_TIME,
 					newSecondPlayerTime: data.secondPlayerTime,
 				});
-			data.firstPlayerTime === "0:00" || data.secondPlayerTime === "0:00"
-				? dispatch({ type: CHANGE_IS_GAME_ENDED, newIsGameEnded: true })
-				: null;
+			if (data.firstPlayerTime === "0:00" && (isGameEnded || isGameStarted)) {
+				dispatch({ type: CHANGE_LOSER, newLoser: "blue" });
+				await setGameLoser("blue", gameId);
+			} else if (data.secondPlayerTime === "0:00" && (isGameEnded || isGameStarted)) {
+				dispatch({ type: CHANGE_LOSER, newLoser: "red" });
+				await setGameLoser("red", gameId);
+			}
 		}, 1005);
 		isGameEnded ? clearInterval(interval) : null;
 		return () => clearInterval(interval);

@@ -14,6 +14,8 @@ export type GameState = {
 	moves: Array<Move>;
 	turnNumber: number;
 	gameReducer: any;
+	loser: string;
+	showConfirmLeave: boolean;
 };
 
 export type BoardState = {

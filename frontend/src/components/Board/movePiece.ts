@@ -162,6 +162,12 @@ export function movePiece(
 							secondPlayerNickname: enemyNickname,
 							isStarted: true,
 							moves: moves,
+							loser:
+								finalFirstPlayerPoints === 12
+									? "red"
+									: finalSecondPlayerPoints === 12
+									? "blue"
+									: undefined,
 					  })
 					: null;
 			})();

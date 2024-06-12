@@ -12,6 +12,7 @@ import {
 	CHANGE_CAN_LEAVE,
 	CHANGE_FIRST_TIMER_ID,
 	CHANGE_SECOND_TIMER_ID,
+	CHANGE_LOSER,
 } from "../ActionTypes";
 
 const initialState = {
@@ -27,6 +28,7 @@ const initialState = {
 	canLeave: false,
 	firstTimerId: "",
 	secondTimerId: "",
+	loser: "",
 };
 
 export default function gameReducer(state = initialState, action: GameAction) {
@@ -90,6 +92,11 @@ export default function gameReducer(state = initialState, action: GameAction) {
 			return {
 				...state,
 				secondTimerId: action.newSecondTimerId,
+			};
+		case CHANGE_LOSER:
+			return {
+				...state,
+				loser: action.newLoser,
 			};
 		default:
 			return state;

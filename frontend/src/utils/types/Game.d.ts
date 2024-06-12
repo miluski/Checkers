@@ -13,4 +13,6 @@ export type Game = {
 	moves: Array<Move>;
 	gameId?: string;
 	isStarted?: boolean;
+	loser?: string;
+	private?: boolean;
 };

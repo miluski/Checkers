@@ -2,15 +2,18 @@ import "./Board.css";
 import {
 	ACCEPT_INVITE,
 	CHANGE_CURRENT_PLAYER_COLOR,
+	CHANGE_GAME_ID,
 	CHANGE_IS_GAME_ENDED,
 	CHANGE_IS_GAME_STARTED,
+	CHANGE_LOSER,
+	CHANGE_SHOW_CONFIRM_LEAVE,
 	CREATE_GAME,
 	JOIN_GAME,
 	SEND_INVITE,
 } from "../../utils/ActionTypes";
 import { getSquaresArray } from "./getSquaresArray";
-import { BiSolidHourglassTop } from "react-icons/bi";
-import { useEffect, useState } from "react";
+import { BiCrown, BiSad, BiSolidHourglassTop } from "react-icons/bi";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import AlertModal from "../Modals/AlertModal/AlertModal";
 import { Pawn, BoardState, GameState } from "../../utils/types/Types";
@@ -22,8 +25,9 @@ import { useNavigate } from "react-router-dom";
 import { firstPlayerActions } from "./firstPlayerActions";
 import { secondPlayerActions } from "./secondPlayerActions";
 import { deleteGame } from "../../utils/GameLogic/deleteGame";
-import { IoAlertCircleOutline } from "react-icons/io5";
 import { resetTimers } from "./resetTimers";
+import { stopTimer } from "./stopTimer";
+import { setGameLoser } from "../../utils/GameLogic/setGameLoser";
 
 export default function Board() {
 	const navigate = useNavigate();
@@ -39,7 +43,9 @@ export default function Board() {
 		firstPlayerPoints,
 		secondPlayerPoints,
 		firstTimerId,
-		secondTimerId
+		secondTimerId,
+		loser,
+		showConfirmLeave,
 	} = useSelector((state: GameState) => state.gameReducer);
 	const {
 		selectedPiece,
@@ -47,15 +53,13 @@ export default function Board() {
 		gameId,
 		currentPlayerColor,
 		isGameStarted,
-		pawnsPositions,
 		isGameEnded,
+		pawnsPositions,
 	} = useSelector((state: BoardState) => state.boardReducer);
-	const [showConfirmLeave, setShowConfirmLeave] = useState(false);
 	let { nickname, enemyNickname, playerColor, gameCredentials } =
 		getGameCredentials(stateNickname, stateEnemyNickname, statePlayerColor);
 	const handleBeforeUnload = () => {
 		(async () => {
-			dispatch({ type: CHANGE_IS_GAME_ENDED, newIsGameEnded: false });
 			await resetTimers(firstTimerId, secondTimerId);
 			await deleteGame(gameId);
 		})();
@@ -64,6 +68,11 @@ export default function Board() {
 		window.addEventListener("beforeunload", handleBeforeUnload);
 		setPawnsArray(dispatch);
 		let interval: NodeJS.Timeout | null = null;
+		(async () => {
+			loser !== undefined
+				? (await stopTimer(firstTimerId), await stopTimer(secondTimerId))
+				: null;
+		})();
 		if (gameCredentials) {
 			switch (gameCredentials.actionType) {
 				case SEND_INVITE:
@@ -71,32 +80,24 @@ export default function Board() {
 						dispatch,
 						nickname,
 						gameCredentials,
-						isGameStarted
+						navigate
 					);
 					gameCredentials = null;
 					break;
 				case ACCEPT_INVITE:
-					interval = secondPlayerActions(
-						dispatch,
-						gameCredentials,
-						isGameStarted
-					);
+					interval = secondPlayerActions(dispatch, gameCredentials, navigate);
 					break;
 				case CREATE_GAME:
+					interval = firstPlayerActions(
+						dispatch,
+						nickname,
+						gameCredentials,
+						navigate
+					);
 					gameCredentials = null;
-					dispatch({
-						type: CHANGE_CURRENT_PLAYER_COLOR,
-						newCurrentPlayerColor: "blue",
-					});
-					localStorage.setItem("playerColor", "blue");
 					break;
 				case JOIN_GAME:
-					gameCredentials = null;
-					dispatch({
-						type: CHANGE_CURRENT_PLAYER_COLOR,
-						newCurrentPlayerColor: "red",
-					});
-					localStorage.setItem("playerColor", "red");
+					interval = secondPlayerActions(dispatch, gameCredentials, navigate);
 					break;
 			}
 		} else {
@@ -109,6 +110,10 @@ export default function Board() {
 				newCurrentPlayerColor: "blue",
 			});
 			localStorage.setItem("playerColor", "blue");
+		}
+		if (isGameEnded) {
+			dispatch({ type: CHANGE_IS_GAME_ENDED, newIsGameEnded: false });
+			interval && clearInterval(interval);
 		}
 		return () => {
 			interval ? clearInterval(interval) : null;
@@ -217,7 +222,10 @@ export default function Board() {
 						show={!isGameStarted}
 						title='Oczekiwanie na przeciwnika'
 						color='var(--clr-sky-250)'
-						onProceed={() => {}}
+						onProceed={async () => {
+							await deleteGame(gameId);
+							navigate("/screenAfterLogin");
+						}}
 						icon={<BiSolidHourglassTop size={128} />}
 						onProceedButtonText='Anuluj'
 						onProceedButtonVariant='secondary'
@@ -230,9 +238,21 @@ export default function Board() {
 							title='Uwaga!'
 							text='Czy napewno chcesz poddać mecz?'
 							color='var(--clr-sky-250)'
-							onProceed={() => {}}
+							onProceed={async () => {
+								await resetTimers(firstTimerId, secondTimerId);
+								dispatch({ type: CHANGE_LOSER, newLoser: undefined });
+								dispatch({ type: CHANGE_GAME_ID, newGameId: "" });
+								localStorage.removeItem("playerColor");
+								localStorage.removeItem("enemyNickname");
+								navigate("/screenAfterLogin");
+								await setGameLoser(playerColor, gameId);
+								await deleteGame(gameId);
+							}}
 							onDismiss={() => {
-								setShowConfirmLeave(false);
+								dispatch({
+									type: CHANGE_SHOW_CONFIRM_LEAVE,
+									newShowConfirmLeave: false,
+								});
 							}}
 							icon={<BiSolidHourglassTop size={128} />}
 							onProceedButtonText='Tak'
@@ -241,21 +261,41 @@ export default function Board() {
 							onDismissButtonVariant='neutral'
 						/>
 						<AlertModal
-							show={isGameEnded}
-							title='Koniec gry'
-							color='var(--clr-red-400)'
-							onProceedButtonText='Wróć do menu'
-							icon={<IoAlertCircleOutline size={128} />}
-							onProceed={() => {
-								(async () => {
-									dispatch({
-										type: CHANGE_IS_GAME_ENDED,
-										newIsGameEnded: false,
-									});
-									await deleteGame(gameId);
-								})();
+							show={loser && loser === playerColor}
+							title='Przegrałeś!'
+							text='Następnym razem będzie lepiej!'
+							color='var(--clr-red-600)'
+							onProceed={async () => {
+								dispatch({ type: CHANGE_LOSER, newLoser: undefined });
+								dispatch({ type: CHANGE_GAME_ID, newGameId: "" });
+								localStorage.removeItem("playerColor");
+								localStorage.removeItem("enemyNickname");
+								navigate("/screenAfterLogin");
+								await deleteGame(gameId);
+								await resetTimers(firstTimerId, secondTimerId);
+							}}
+							icon={<BiSad size={128} />}
+							onProceedButtonText='Ok'
+							onProceedButtonVariant='danger'
+						/>
+						<AlertModal
+							show={loser && loser !== playerColor}
+							title='Wygrałeś!'
+							text='Gratulacje!'
+							color='var(--color-green-300)'
+							onProceed={async () => {
+								dispatch({ type: CHANGE_LOSER, newLoser: undefined });
+								dispatch({ type: CHANGE_GAME_ID, newGameId: "" });
+								dispatch({ type: CHANGE_IS_GAME_ENDED, newIsGameEnded: true });
+								localStorage.removeItem("playerColor");
+								localStorage.removeItem("enemyNickname");
+								await deleteGame(gameId);
+								await resetTimers(firstTimerId, secondTimerId);
 								navigate("/screenAfterLogin");
 							}}
+							icon={<BiCrown size={128} />}
+							onProceedButtonText='Ok'
+							onProceedButtonVariant='success'
 						/>
 					</>
 				) : (

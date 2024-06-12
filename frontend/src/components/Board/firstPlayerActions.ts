@@ -10,7 +10,7 @@ export function firstPlayerActions(
 	dispatch: Function,
 	nickname: string,
 	gameCredentials: GameCredentials,
-	isGameStarted: boolean
+	navigate: Function
 ): NodeJS.Timeout | null {
 	let interval: NodeJS.Timeout | null = null;
 	dispatch({
@@ -20,12 +20,13 @@ export function firstPlayerActions(
 	localStorage.setItem("playerColor", "blue");
 	(async () => {
 		let localGameId = await initializeGame(nickname, gameCredentials);
+		let needToClearInterval = false;
 		dispatch({ type: CHANGE_GAME_ID, newGameId: localGameId });
-		interval = setInterval(
-			async () =>
-				await firstPlayerGameRefresh(dispatch, localGameId, isGameStarted),
-			100
-		);
+		interval = setInterval(async () => {
+			needToClearInterval = await firstPlayerGameRefresh(dispatch, localGameId);
+			needToClearInterval && interval && clearInterval(interval);
+			needToClearInterval && navigate("/screenAfterLogin");
+		}, 100);
 		localStorage.removeItem("onlineGameCredentials");
 	})();
 	return interval;
