@@ -1,52 +1,42 @@
 import redKing from "../../assets/red-king-pawn.png";
 import bluePawn from "../../assets/blue-pawn.png";
+import styles from "./Logo.module.css";
 
 export default function Logo({
-  size,
+  navbarLogo,
   className,
 }: {
-  size: "small" | "medium" | "big";
+  navbarLogo?: boolean;
   className?: string;
 }) {
-  let width;
-  let fontSize;
-  let gap;
-
-  switch (size) {
-    case "small":
-      width = "30px";
-      fontSize = "fs-4";
-      gap = "me-2";
-      break;
-    case "medium":
-      width = "40px";
-      fontSize = "fs-3";
-      gap = "me-3";
-      break;
-    case "big":
-      width = "60px";
-      fontSize = "fs-1";
-      gap = "me-4";
-      break;
-  }
-
   return (
-    <a className="text-decoration-none " href="#">
+    <a className="text-decoration-none " href="/screenAfterLogin">
       <div
         className={
           "d-flex align-items-center justify-content-center " + className
         }
       >
-        <div className={"position-relative d-flex  " + gap}>
+        <div
+          className={
+            `position-relative d-flex  ${styles.logo} ` +
+            (navbarLogo
+              ? `me-3 me-lg-0 me-xl-3 ms-lg-3 ms-xl-0 ${styles.navbarLogo}`
+              : "me-4")
+          }
+        >
           <img
             className="position-absolute end-50"
             src={redKing}
-            style={{ width: width }}
             alt="red-king-pawn"
           />
-          <img src={bluePawn} style={{ width: width }} alt="blue-pawn" />
+          <img src={bluePawn} alt="blue-pawn" />
         </div>
-        <h1 className={"mb-0 d-inline fw-bolder text-white " + fontSize}>
+        <h1
+          className={
+            "mb-0 d-inline fw-bolder text-white " +
+            (navbarLogo ? "d-lg-none d-xl-block fs-4" : "fs-1")
+          }
+        >
           Warcaby.pl
         </h1>
       </div>

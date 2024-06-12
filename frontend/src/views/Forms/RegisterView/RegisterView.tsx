@@ -1,18 +1,16 @@
-import "../../../utils/utils.css";
-import "../Forms.css";
+import styles from "../Forms.module.css";
 import { Form } from "react-bootstrap";
 import Logo from "../../../components/Logo/Logo.tsx";
-import FormInput from "../../../components/FormInput/FormInput.tsx";
+import CustomFormInput from "../../../components/CustomFormInput/CustomFormInput.tsx";
 import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSecondary.tsx";
 import CustomButton from "../../../components/Buttons/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
-import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
-import { RegisterUser } from "./RegisterUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
 import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "./RegisterUser";
 
 export default function RegisterView() {
   const { Formik } = formik;
@@ -54,13 +52,15 @@ export default function RegisterView() {
       ),
   });
   return (
-    <main className="background-theme ">
-      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100">
-        <Logo size={"big"} className={"ms-4"} />
+    <main className={styles.backgroundTheme}>
+      <div
+        className={`container d-flex flex-column gap-4 gap-lg-5 align-items-center justify-content-center py-4 ${styles.baseContainer}`}
+      >
+        <Logo className={"ms-4"} />
         <Formik
           validationSchema={schema}
           onSubmit={(values) =>
-            RegisterUser(values, handleShowError, handleShowSuccess)
+            registerUser(values, handleShowError, handleShowSuccess)
           }
           validateOnChange={false}
           validateOnBlur={true}
@@ -81,9 +81,9 @@ export default function RegisterView() {
             <Form
               noValidate
               onSubmit={handleSubmit}
-              className="form-container rounded-4  p-4"
+              className={`form-container rounded-4  p-4 ${styles.formContainer}`}
             >
-              <FormInput
+              <CustomFormInput
                 label="Nickname:"
                 type="text"
                 placeholder="Twoja nazwa użytkownika"
@@ -91,11 +91,11 @@ export default function RegisterView() {
                 value={values.nickname}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.nickname && !!errors.nickname}
-                isValid={touched.nickname && !errors.nickname}
-                errorMessage={errors.nickname}
+                isInvalid={touched.nickname! && !!errors.nickname}
+                isValid={touched.nickname! && !errors.nickname}
+                errorMessage={errors.nickname!}
               />
-              <FormInput
+              <CustomFormInput
                 label="Email:"
                 type="email"
                 placeholder="Twój adres email"
@@ -103,11 +103,11 @@ export default function RegisterView() {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.email && !!errors.email}
-                isValid={touched.email && !errors.email}
-                errorMessage={errors.email}
+                isInvalid={touched.email! && !!errors.email}
+                isValid={touched.email! && !errors.email}
+                errorMessage={errors.email!}
               />
-              <FormInput
+              <CustomFormInput
                 label="Hasło:"
                 type="password"
                 placeholder="Twoje hasło"
@@ -115,9 +115,9 @@ export default function RegisterView() {
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.password && !!errors.password}
-                isValid={touched.password && !errors.password}
-                errorMessage={errors.password}
+                isInvalid={touched.password! && !!errors.password}
+                isValid={touched.password! && !errors.password}
+                errorMessage={errors.password!}
               />
               <FormTextSecondary
                 text="Rejestrująć się akceptujesz "
@@ -132,18 +132,28 @@ export default function RegisterView() {
               <FormTextSecondary
                 text="Masz już konto? - "
                 linkText="Zaloguj się!"
-                link="login"
+                link="./login"
               />
               <SocialMediaList />
             </Form>
           )}
         </Formik>
-        <CopyRight />
       </div>
       <AlertModal
         show={showError}
         onProceed={handleCloseError}
-        icon="bi-x-lg"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="currentColor"
+            className="bi bi-x-lg"
+            viewBox="0 0 16 16"
+          >
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+          </svg>
+        }
         title="Błąd"
         text="Użytkownik o podanym adresie email już jest zarejestrowany"
         color="var(--clr-red-450)"
@@ -152,7 +162,18 @@ export default function RegisterView() {
       <AlertModal
         show={showSuccess}
         onProceed={handleCloseSuccess}
-        icon="bi-check-lg"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="currentColor"
+            className="bi bi-check-lg"
+            viewBox="0 0 16 16"
+          >
+            <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z" />
+          </svg>
+        }
         title="Udało się!"
         text="Twoje konto zostało zarejestrowane"
         color="var(--color-green-300)"

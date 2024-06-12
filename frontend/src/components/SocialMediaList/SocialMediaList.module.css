@@ -1,0 +1,8 @@
+.socialLink {
+  color: var(--clr-neutral-750);
+  transition: all 0.2s ease-in-out;
+}
+
+.socialLink:hover {
+  color: white;
+}

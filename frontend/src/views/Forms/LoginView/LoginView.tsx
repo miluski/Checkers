@@ -1,18 +1,17 @@
-import "../../../utils/utils.css";
-import "../Forms.css";
+import styles from "../Forms.module.css";
 import { Form } from "react-bootstrap";
 import Logo from "../../../components/Logo/Logo.tsx";
-import FormInput from "../../../components/FormInput/FormInput.tsx";
+import CustomFormInput from "../../../components/CustomFormInput/CustomFormInput.tsx";
 import FormTextSecondary from "../../../components/FormTextSecondary/FormTextSecondary.tsx";
 import CustomButton from "../../../components/Buttons/CustomButton/CustomButton.tsx";
 import SocialMediaList from "../../../components/SocialMediaList/SocialMediaList.tsx";
-import CopyRight from "../../../components/CopyRight/CopyRight.tsx";
-import { LoginUser } from "./LoginUser.ts";
 import * as formik from "formik";
 import * as yup from "yup";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import AlertModal from "../../../components/Modals/AlertModal/AlertModal.tsx";
+import { loginUser } from "./LoginUser";
+import { useDispatch } from "react-redux";
 
 export default function LoginView() {
   const { Formik } = formik;
@@ -20,7 +19,7 @@ export default function LoginView() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -30,12 +29,14 @@ export default function LoginView() {
   });
 
   return (
-    <main className="background-theme ">
-      <div className="container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center h-100 ">
-        <Logo size={"big"} className={"ms-4"} />
+    <main className={styles.backgroundTheme}>
+      <div
+        className={`container d-flex flex-column gap-4 gap-lg-5 align-items-center  justify-content-center ${styles.baseContainer}  `}
+      >
+        <Logo className={"ms-4"} />
         <Formik
           validationSchema={schema}
-          onSubmit={(values) => LoginUser(values, navigate, handleShow)}
+          onSubmit={(values) => loginUser(values, navigate, handleShow, dispatch)}
           validateOnChange={false}
           validateOnBlur={true}
           initialValues={{
@@ -54,9 +55,9 @@ export default function LoginView() {
             <Form
               noValidate
               onSubmit={handleSubmit}
-              className="form-container rounded-4 container p-4"
+              className={`rounded-4 container p-4 ${styles.formContainer}`}
             >
-              <FormInput
+              <CustomFormInput
                 label="Email:"
                 type="email"
                 placeholder="Twój adres email"
@@ -64,11 +65,11 @@ export default function LoginView() {
                 value={values.email}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.email && !!errors.email}
-                isValid={touched.email && !errors.email}
-                errorMessage={errors.email}
+                isInvalid={touched.email! && !!errors.email}
+                isValid={touched.email! && !errors.email}
+                errorMessage={errors.email!}
               />
-              <FormInput
+              <CustomFormInput
                 label="Hasło:"
                 type="password"
                 placeholder="Twoje hasło"
@@ -76,9 +77,9 @@ export default function LoginView() {
                 value={values.password}
                 onChange={handleChange}
                 onBlur={handleBlur}
-                isInvalid={touched.password && !!errors.password}
-                isValid={touched.password && !errors.password}
-                errorMessage={errors.password}
+                isInvalid={touched.password! && !!errors.password}
+                isValid={touched.password! && !errors.password}
+                errorMessage={errors.password!}
               />
               <FormTextSecondary
                 linkText="Zapomniałeś hasła?"
@@ -86,7 +87,7 @@ export default function LoginView() {
                 textAlign="text-left"
               />
               <CustomButton
-                text="Zaloguj się"
+                text={"Zaloguj się"}
                 type="submit"
                 className="w-100 py-3 mb-4 fs-4"
               />
@@ -99,12 +100,22 @@ export default function LoginView() {
             </Form>
           )}
         </Formik>
-        <CopyRight />
       </div>
       <AlertModal
         show={show}
         onProceed={handleClose}
-        icon="bi-x-lg"
+        icon={
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="100%"
+            height="100%"
+            fill="currentColor"
+            className="bi bi-x-lg"
+            viewBox="0 0 16 16"
+          >
+            <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+          </svg>
+        }
         title="Błąd"
         text="Wprowadzono nieprawidłowe dane"
         color="var(--clr-red-450)"

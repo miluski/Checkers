@@ -1,0 +1,80 @@
+.nickname {
+  display: inline-block;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 15ch;
+}
+
+@media screen and (min-width: 0px) and (max-width: 279px) {
+  .pawn-collected {
+    height: calc(var(--hexagon-xs) / 3);
+    width: auto;
+  }
+
+  .player-details {
+    font-size: calc(var(--hexagon-xs) / 4);
+  }
+}
+
+@media screen and (max-height: 768px) {
+  .pawn-collected {
+    height: calc(var(--hexagon-xs) / 3) !important;
+    width: auto;
+  }
+
+  .player-details {
+    font-size: calc(var(--hexagon-xs) / 4) !important;
+  }
+}
+
+@media screen and (min-width: 0) and (max-width: 319px) {
+  .nickname {
+    max-width: 10ch;
+  }
+}
+
+@media screen and (min-width: 280px) and (max-width: 575px) {
+  .pawn-collected {
+    height: calc(var(--hexagon-s) / 3);
+    width: auto;
+  }
+
+  .player-details {
+    font-size: calc(var(--hexagon-s) / 4);
+  }
+}
+
+@media screen and (min-width: 576px) and (max-width: 991px) {
+  .pawn-collected {
+    height: calc(var(--hexagon-l) / 3);
+    width: auto;
+  }
+
+  .player-details {
+    font-size: calc(var(--hexagon-l) / 4);
+  }
+}
+
+@media screen and (min-width: 992px) and (max-width: 1440px) {
+  .pawn-collected {
+    height: calc(var(--hexagon-l) / 7);
+    width: auto;
+  }
+
+  .player-details {
+    font-size: calc(var(--hexagon-l) / 8);
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .pawn-collected {
+    height: calc(var(--hexagon-xl) / 4);
+    width: auto;
+  }
+
+  .player-details {
+    font-size: calc(var(--hexagon-xl) / 5);
+  }
+}

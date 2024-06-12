@@ -1,4 +1,4 @@
-.wp-button-primary {
+.custom-button-primary {
   --bgColor: var(--clr-red-450);
   --bgColorHover: var(--clr-red-400);
   --borderBottomLine: var(--clr-red-550);
@@ -6,7 +6,7 @@
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 
-.wp-button-secondary {
+.custom-button-secondary {
   --bgColor: var(--clr-sky-250);
   --bgColorHover: var(--clr-sky-225);
   --borderBottomLine: var(--clr-sky-275);
@@ -14,7 +14,7 @@
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 
-.wp-button-success {
+.custom-button-success {
   --bgColor: var(--color-green-300);
   --bgColorHover: #a3d160;
   --borderBottomLine: var(--color-green-500);
@@ -22,7 +22,7 @@
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 
-.wp-button-neutral {
+.custom-button-neutral {
   --bgColor: var(--clr-neutral-500);
   --bgColorHover: var(--clr-neutral-400);
   --borderBottomLine: var(--clr-neutral-550);
@@ -30,7 +30,15 @@
   --buttonTextShadow: rgba(0, 0, 0, 0.3);
 }
 
-.wp-button-component {
+.custom-button-danger {
+  --bgColor: var(--clr-red-600);
+  --bgColorHover: var(--clr-red-450);
+  --borderBottomLine: rgb(167, 26, 26);
+  --borderBottomLineHover: var(--clr-red-600);
+  --buttonTextShadow: rgba(0, 0, 0, 0.3);
+}
+
+.custom-button-component {
   --borderHeight: 0.4rem;
   background-color: var(--bgColor);
   border: 0;
@@ -42,14 +50,14 @@
   transition-timing-function: ease-out;
 }
 
-.wp-button-component:hover {
+.custom-button-component:hover {
   background-color: var(--bgColorHover);
   box-shadow:
     0 7px var(--borderBottomLineHover),
     0 0 10px var(--borderBottomLineHover);
 }
 
-.wp-button-component:active {
+.custom-button-component:active {
   background-color: var(--bgColorHover) !important;
   box-shadow: none !important;
   opacity: 0.9 !important;

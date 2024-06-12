@@ -1,6 +1,6 @@
-import { User } from "../../../utils/User";
+import { User } from "../../../utils/types/User";
 
-export async function RegisterUser(
+export async function registerUser(
   user: User,
   handleShowError: Function,
   handleShowSuccess: Function,
