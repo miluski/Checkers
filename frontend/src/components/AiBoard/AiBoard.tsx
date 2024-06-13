@@ -27,11 +27,11 @@ export default function AiBoard({
   const [openWinModal, setOpenWindModal] = useState(false);
   const [openLostModal, setOpenLostModal] = useState(false);
 
-  function handleReset(e) {
+  function handleReset() {
     window.location.reload();
   }
 
-  const indexToCoordinate = (index) => {
+  const indexToCoordinate = (index: any) => {
     const tens = Math.floor(index / 10);
     const units = index % 10;
 
@@ -78,11 +78,6 @@ export default function AiBoard({
   }, [selectedPieceByAi]);
 
   function getRandomPawn() {
-    const allSquares = document.querySelectorAll<HTMLDivElement>(".square");
-    allSquares.forEach((square) => {
-      square.classList.remove("available-move");
-    });
-
     const allBotPawns = document.querySelectorAll<HTMLDivElement>(
       ".red-pawn, .red-pawn-king",
     );
@@ -93,10 +88,6 @@ export default function AiBoard({
       randomIndex = Math.floor(Math.random() * allBotPawns.length);
       availableMoves = getAvailableMoves(allBotPawns[randomIndex]);
     }
-
-    availableMoves.forEach((square) => {
-      square.classList.add("available-move");
-    });
 
     setSelectedPieceByAi(allBotPawns[randomIndex]);
   }
@@ -119,8 +110,8 @@ export default function AiBoard({
       const targetClass = targetSquare.classList.item(0);
 
       if (isMoveLegal(selectedPieceByAi, targetSquare)) {
-        const startCoordinate = indexToCoordinate(selectedClass.slice(7));
-        const endCoordinate = indexToCoordinate(targetClass.slice(7));
+        const startCoordinate = indexToCoordinate(selectedClass!.slice(7));
+        const endCoordinate = indexToCoordinate(targetClass!.slice(7));
 
         selectedPieceByAi.classList.replace(selectedClass!, targetClass!);
         if (
@@ -528,8 +519,8 @@ export default function AiBoard({
       const targetClass = targetSquare.classList.item(0);
 
       if (isMoveLegal(selectedPiece, targetSquare)) {
-        const startCoordinate = indexToCoordinate(selectedClass.slice(7));
-        const endCoordinate = indexToCoordinate(targetClass.slice(7));
+        const startCoordinate = indexToCoordinate(selectedClass!.slice(7));
+        const endCoordinate = indexToCoordinate(targetClass!.slice(7));
 
         selectedPiece.classList.replace(selectedClass!, targetClass!);
         if (
