@@ -42,6 +42,7 @@ export default function GameAgainstBotView() {
           icon={computerSvg}
           nickname={"Komputer"}
           pawnsCollected={bluePawnsCollected}
+          botGame
         />
         <AiBoard
           openResetModal={openResetModal}
@@ -56,6 +57,7 @@ export default function GameAgainstBotView() {
           nickname={nickname}
           pawnsCollected={redPawnsCollected}
           areYou
+          botGame
         />
       </main>
       <GameFlowTableManager
