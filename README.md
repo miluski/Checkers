@@ -1,37 +1,72 @@
-### Checkers Game Development Guide
+# Checkers
 
-## Running backend site of the project
+An Fullstack web application which is an web implementation of real checkers game. 
 
-To run backend site of the project, type following command in console from Checkers dir:
+## Tech Stack
 
-```bash
-  cd backend
-  npm run server:start
-```
+**Frontend:** React, Redux, Vite, Bootstrap, React Bootstrap, TypeScript
 
-You need to restart server after every change made directly in code.
+**Backend:** Node, Express, Moongose, TypeScript
 
-## Running frontend
 
-To run frontend site of the project, type following command in console from Checkers dir:
+## Installation
+
+Firstly, you need to go to backend directory:
 
 ```bash
-  cd frontend
-  npm run front:start
-```
 
-Frontend site is refreshing realtime, you don't need to restart it after changes in code.
-
-## Branches naming and rules
-
-main is default branch on the project, but it has protection that don't allow force pushes or directly plain pushes into it.
-You need to create an another branch, then made a pull request into dev, then from dev to main to merge your changes into it.
-Branch name should have one from the following prefixes:
+    cd backend
 
 ```
-  feature/<your-name-here>
-  fix/<your-name-here>
-  test/<your-name-here>
+
+Then, install node packages using node packages manager:
+
+```bash
+
+    npm i
+
 ```
 
-You will need also add a reviewers into pull request before successfully merge on pull request
+Then, go back into root directory of project and continue into frontend directory:
+
+```bash
+
+    cd ..
+    cd frontend
+    npm i
+
+```
+
+Then from backend directory run server:
+
+```bash
+
+    npm run server:start
+
+```
+
+And from frontend directory run frontend part of application:
+
+```bash
+
+    npm run dev
+
+```
+
+## Screenshots
+
+![App Screenshot]()
+![App Screenshot]()
+![App Screenshot]()
+![App Screenshot]()
+![App Screenshot]()
+![App Screenshot]()
+![App Screenshot]()
+![App Screenshot]()
+
+## Authors
+
+- [@miluski](https://www.github.com/miluski)
+- [@JacobJS7](https://www.github.com/JacobJS7)
+- [@TheFilips](https://www.github.com/TheFilips)
+- [@karolprzygoda](https://www.github.com/karolprzygoda)
