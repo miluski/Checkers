@@ -55,14 +55,14 @@ And from frontend directory run frontend part of application:
 
 ## Screenshots
 
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
-![App Screenshot]()
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101737.png)
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101755.png)
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101802.png)
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101810.png)
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101915.png)
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101931.png)
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101940.png)
+![App Screenshot](https://github.com/miluski/Checkers/blob/main/img/Zrzut%20ekranu%202024-08-17%20101949.png)
 
 ## Authors
 
